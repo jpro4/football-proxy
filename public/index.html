@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Football Intelligence</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f0f0f;color:#e8e8e8;min-height:100vh}
+.app{max-width:1200px;margin:0 auto;padding:1.5rem 1rem}
+.hdr{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:1.5rem}
+.hdr h1{font-size:22px;font-weight:600;color:#fff}
+.hdr p{font-size:12px;color:#888;margin-top:3px}
+.status-pill{font-size:11px;padding:3px 10px;border-radius:10px;font-weight:500}
+.sp-green{background:#0a2e1a;color:#4ade80}
+.sp-red{background:#2e0a0a;color:#f87171}
+.sp-gray{background:#1a1a1a;color:#888}
+.req-info{font-size:10px;color:#555;margin-top:2px;text-align:right}
+.date-row{display:flex;gap:6px;margin-bottom:1rem;flex-wrap:wrap;align-items:center}
+.date-btn{padding:5px 14px;border-radius:20px;border:1px solid #2a2a2a;font-size:12px;cursor:pointer;background:transparent;color:#888;transition:all .15s}
+.date-btn.active{background:#fff;color:#000;border-color:#fff}
+.date-btn:hover:not(.active){background:#1a1a1a;color:#ccc}
+.refresh-btn{padding:4px 12px;border-radius:20px;border:1px solid #2a2a2a;background:transparent;color:#666;font-size:11px;cursor:pointer}
+.refresh-btn:hover{background:#1a1a1a;color:#ccc}
+.league-filter{display:flex;gap:5px;margin-bottom:1rem;flex-wrap:wrap}
+.lfbtn{padding:3px 10px;border-radius:20px;border:1px solid #2a2a2a;font-size:11px;cursor:pointer;background:transparent;color:#666;transition:all .15s}
+.lfbtn.active{background:#fff;color:#000;border-color:#fff}
+.lfbtn:hover:not(.active){background:#1a1a1a;color:#ccc}
+.layout{display:grid;grid-template-columns:1fr 300px;gap:14px;align-items:start}
+@media(max-width:700px){.layout{grid-template-columns:1fr}}
+.match-card{background:#161616;border:1px solid #222;border-radius:12px;padding:1rem;margin-bottom:10px;transition:border-color .15s}
+.match-card:hover{border-color:#333}
+.match-card.tracked{border-left:3px solid #1D9E75}
+.mc-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:4px}
+.lbadge{font-size:10px;padding:2px 8px;border-radius:8px;background:#1a1a1a;color:#666}
+.live-dot{width:6px;height:6px;border-radius:50%;background:#ef4444;display:inline-block;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.tracked-badge{font-size:10px;padding:1px 7px;border-radius:8px;background:#0a2e1a;color:#4ade80;font-weight:500}
+.bb-badge{font-size:10px;padding:1px 6px;border-radius:8px;background:#0a1a2e;color:#60a5fa;font-weight:500}
+.teams{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.tlogo{width:28px;height:28px;border-radius:50%;object-fit:contain;flex-shrink:0;background:#1a1a1a}
+.tlogo-fb{width:28px;height:28px;border-radius:50%;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;flex-shrink:0;color:#666}
+.tn{font-size:13px;font-weight:500;color:#e8e8e8;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tn.tracked-team{color:#4ade80}
+.vs{font-size:11px;color:#444;flex-shrink:0}
+.score-b{font-size:14px;font-weight:600;background:#1a1a1a;padding:3px 10px;border-radius:8px;flex-shrink:0;color:#fff}
+.prob-labels{display:flex;justify-content:space-between;font-size:11px;color:#555;margin-bottom:3px}
+.pbar{height:5px;border-radius:3px;display:flex;overflow:hidden;width:100%;gap:2px}
+.ps{height:100%;border-radius:2px}
+.ph{background:#3b82f6}.pd{background:#52525b}.pa{background:#ef4444}
+.mpills{display:flex;gap:5px;margin-top:8px;flex-wrap:wrap}
+.mpill{background:#1a1a1a;border-radius:8px;padding:5px 8px;font-size:11px;flex:1;min-width:60px;text-align:center}
+.mpill.hl{background:#0a2e1a}
+.ml{color:#555;display:block;font-size:10px;margin-bottom:1px}
+.mv{font-weight:600;color:#e8e8e8}
+.mpill.hl .mv{color:#4ade80}
+.fixuri-box{background:#0a2e1a;border-radius:8px;padding:8px 10px;margin-top:8px}
+.fixuri-title{font-size:11px;font-weight:600;color:#4ade80;margin-bottom:5px}
+.fixuri-tags{display:flex;gap:4px;flex-wrap:wrap}
+.ftag{background:#0f3d22;border-radius:6px;padding:2px 8px;font-size:10px;color:#4ade80;font-weight:500}
+.sel-hdr{display:flex;align-items:center;justify-content:space-between;margin-top:10px;margin-bottom:5px}
+.cat-tabs{display:flex;gap:0;border:1px solid #2a2a2a;border-radius:8px;overflow:hidden}
+.ctab{padding:3px 9px;font-size:10px;cursor:pointer;background:transparent;color:#666;border:none;border-right:1px solid #2a2a2a;transition:all .15s}
+.ctab:last-child{border-right:none}
+.ctab.active{background:#1a1a1a;color:#e8e8e8;font-weight:500}
+.sel-grid{display:flex;flex-direction:column;gap:3px}
+.sel-item{display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:8px;border:1px solid #222;cursor:pointer;transition:all .15s}
+.sel-item:hover{border-color:#333;background:#1a1a1a}
+.sel-item.added{border-color:#1D9E75;background:#0a2e1a}
+.sel-item.fix-sel{border-color:#1a3a2a}
+.sel-check{width:15px;height:15px;border-radius:3px;border:1px solid #333;display:flex;align-items:center;justify-content:center;font-size:9px;flex-shrink:0;color:#888}
+.sel-item.added .sel-check{background:#1D9E75;border-color:#1D9E75;color:#fff}
+.sel-name{font-size:11px;color:#ccc;flex:1;line-height:1.3}
+.pb-sm{height:3px;border-radius:2px;background:#1a1a1a;margin-top:2px}
+.pb-fill{height:100%;border-radius:2px}
+.rec-star{font-size:9px;color:#4ade80;font-weight:600}
+.fix-star{font-size:9px;color:#4ade80;font-weight:600}
+.bilet-panel{background:#161616;border:1px solid #222;border-radius:12px;padding:1rem;position:sticky;top:16px}
+.bp-title{font-size:14px;font-weight:600;color:#fff;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
+.bp-cnt{font-size:11px;padding:2px 8px;border-radius:10px;background:#1a1a1a;color:#666}
+.bilet-empty{text-align:center;padding:2rem 1rem;color:#444;font-size:12px;line-height:1.7}
+.bs{padding:6px 0;border-bottom:1px solid #1a1a1a}
+.bs:last-child{border-bottom:none}
+.bs-match{font-size:10px;color:#444;margin-bottom:1px}
+.bs-row{display:flex;align-items:center;gap:5px}
+.bs-name{font-size:11px;color:#ccc;flex:1;line-height:1.3}
+.bs-odd{font-size:12px;font-weight:600;color:#60a5fa;min-width:28px;text-align:right}
+.bs-rm{width:15px;height:15px;border-radius:50%;border:1px solid #2a2a2a;display:flex;align-items:center;justify-content:center;font-size:9px;cursor:pointer;color:#555;flex-shrink:0}
+.bs-rm:hover{background:#2e0a0a;border-color:#ef4444;color:#f87171}
+.divider{height:1px;background:#1a1a1a;margin:10px 0}
+.miza-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.miza-row label{font-size:11px;color:#666;min-width:32px}
+.miza-inp{padding:5px 8px;border-radius:8px;border:1px solid #2a2a2a;background:#0f0f0f;color:#fff;font-size:13px;width:80px;font-family:inherit}
+.miza-btns{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:10px}
+.mbtn{padding:3px 8px;border-radius:8px;border:1px solid #2a2a2a;background:transparent;color:#666;font-size:11px;cursor:pointer}
+.mbtn:hover{background:#1a1a1a;color:#ccc}
+.cota-box{background:#0f0f0f;border-radius:8px;padding:10px 12px;margin-bottom:8px;border:1px solid #1a1a1a}
+.cr{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.cr:last-child{margin-bottom:0}
+.cl{font-size:11px;color:#555}
+.cv{font-size:13px;font-weight:600;color:#e8e8e8}
+.cv.big{font-size:20px;color:#fff}
+.cv.green{color:#4ade80}
+.pz{background:#0f0f0f;border-radius:8px;padding:8px 10px;margin-bottom:10px;border:1px solid #1a1a1a}
+.pz-bar{height:5px;border-radius:3px;background:#1a1a1a;overflow:hidden;margin:4px 0}
+.pz-fill{height:100%;border-radius:3px;transition:width .4s}
+.pz-lbl{display:flex;justify-content:space-between;font-size:10px;color:#444}
+.place-btn{width:100%;padding:10px;border-radius:8px;border:1px solid #2a2a2a;background:transparent;color:#888;font-size:13px;cursor:pointer;font-weight:500;transition:all .15s}
+.place-btn:hover{background:#1a1a1a}
+.place-btn:disabled{opacity:.3;cursor:not-allowed}
+.place-btn.ready{border-color:#1D9E75;color:#4ade80}
+.place-btn.ready:hover{background:#0a2e1a}
+.loading-card{background:#161616;border-radius:12px;padding:2rem;text-align:center;margin-bottom:10px}
+.spin{display:inline-block;width:16px;height:16px;border:2px solid #222;border-top-color:#888;border-radius:50%;animation:spin .7s linear infinite;margin-bottom:8px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.error-card{background:#1a0a0a;border:1px solid #3a1a1a;border-radius:12px;padding:1.25rem;margin-bottom:10px;font-size:12px;color:#f87171;line-height:1.7}
+.empty-state{text-align:center;padding:3rem 1rem;color:#333;font-size:13px}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="hdr">
+    <div>
+      <h1>Football Intelligence</h1>
+      <p>Date live · profil conservator · fixuri urmărite</p>
+    </div>
+    <div style="text-align:right">
+      <span id="statusPill" class="status-pill sp-gray">Se conectează...</span>
+      <div id="reqInfo" class="req-info"></div>
+    </div>
+  </div>
+
+  <div class="date-row">
+    <span style="font-size:11px;color:#555">Data:</span>
+    <button class="date-btn active" onclick="setDate(0,this)">Azi</button>
+    <button class="date-btn" onclick="setDate(1,this)">Mâine</button>
+    <button class="date-btn" onclick="setDate(2,this)">Poimâine</button>
+    <button class="refresh-btn" onclick="loadFixtures()">↻ Refresh</button>
+  </div>
+
+  <div class="league-filter" id="leagueFilter"></div>
+
+  <div class="layout">
+    <div id="matchCol"></div>
+    <div id="biletCol"></div>
+  </div>
+</div>
+
+<script>
+const PROXY = 'https://football-proxy-weld.vercel.app/api/proxy';
+const API_KEY = '28e79815a34a62ca876f166048fe0f68';
+
+const TARGET_LEAGUES = {
+  140:{n:'La Liga',c:'Spania'},39:{n:'Premier League',c:'Anglia'},
+  61:{n:'Ligue 1',c:'Franța'},135:{n:'Serie A',c:'Italia'},
+  78:{n:'Bundesliga',c:'Germania'},144:{n:'Pro League',c:'Belgia'},
+  94:{n:'Primeira Liga',c:'Portugalia'},40:{n:'Championship',c:'Anglia'},
+  283:{n:'Liga 1',c:'România'},2:{n:'UCL',c:'Europa'},3:{n:'EL',c:'Europa'}
+};
+
+const TRACKED = {
+  'Wrexham':           {p:['score','corners','over25'],sr:0.85,ac:8.2,o25:0.72},
+  'Real Madrid':       {p:['score','over25'],sr:0.88,ac:6.8,o25:0.68},
+  'Barcelona':         {p:['score','corners','over25'],sr:0.86,ac:7.4,o25:0.71},
+  'Manchester United': {p:['score'],sr:0.74,ac:5.9,o25:0.58},
+  'Newcastle':         {p:['score','corners'],sr:0.78,ac:7.1,o25:0.62},
+  'Aston Villa':       {p:['score','over25'],sr:0.76,ac:6.4,o25:0.64},
+  'Leeds':             {p:['score','corners'],sr:0.77,ac:7.8,o25:0.65},
+  'Bayern':            {p:['score','over25'],sr:0.91,ac:7.2,o25:0.74},
+  'RB Leipzig':        {p:['score','over25'],sr:0.82,ac:6.6,o25:0.69},
+  'Dortmund':          {p:['score','over25'],sr:0.80,ac:6.9,o25:0.67},
+};
+
+function getTracked(hn,an){
+  for(const [t,d] of Object.entries(TRACKED)){
+    if(hn.includes(t)||an.includes(t)){
+      return {...d,team:t,side:hn.includes(t)?'home':'away'};
+    }
+  }
+  return null;
+}
+
+let dateOffset=0,allFixtures=[],activeLeague='all',bilet=[],miza=50,catFilter={};
+
+function getDate(off){
+  const d=new Date();d.setDate(d.getDate()+off);
+  return d.toISOString().split('T')[0];
+}
+
+async function apiFetch(path,params={}){
+  const qs=new URLSearchParams({path,...params}).toString();
+  const r=await fetch(`${PROXY}?${qs}`,{headers:{'x-apisports-key':API_KEY}});
+  const rem=r.headers.get('x-ratelimit-requests-remaining');
+  if(rem) document.getElementById('reqInfo').textContent=rem+' req. rămase azi';
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  return r.json();
+}
+
+function calcProbs(hf,af){
+  const pts=s=>s?[...s].reduce((a,c)=>a+(c==='W'?3:c==='D'?1:0),0):8;
+  const h=pts(hf),a=pts(af),tot=h+a+5;
+  const ph=Math.max(22,Math.min(68,Math.round((h+2)/tot*100)));
+  const pa=Math.max(15,Math.min(55,Math.round((a+1)/tot*100)));
+  return {h:ph,d:Math.max(15,100-ph-pa),a:pa};
+}
+
+function genSels(fix,prob,tr){
+  const id=fix.fixture.id;
+  const hn=fix.teams.home.name,an=fix.teams.away.name;
+  const hs=hn.split(' ')[0],as=an.split(' ')[0];
+  const live=['1H','2H','HT','ET','P','LIVE'].includes(fix.fixture.status.short);
+  const sels=[];
+  if(!live){
+    const w=prob.h>prob.a?hn:an,wp=prob.h>prob.a?prob.h:prob.a;
+    sels.push({id:`${id}_w`,cat:'1X2',name:`${w} câștigă`,prob:wp,odd:+(100/wp*0.90).toFixed(2),rec:wp>54,fix:false});
+    sels.push({id:`${id}_d`,cat:'1X2',name:'Egal',prob:prob.d,odd:+(100/prob.d*0.88).toFixed(2),rec:false,fix:false});
+    const g15=Math.min(85,52+prob.h*0.28+prob.a*0.22);
+    const g25=Math.round(g15*0.72);
+    sels.push({id:`${id}_g15`,cat:'Goluri',name:'Peste 1.5 goluri',prob:Math.round(g15),odd:+(100/g15*0.88).toFixed(2),rec:g15>68,fix:false});
+    sels.push({id:`${id}_g25`,cat:'Goluri',name:'Peste 2.5 goluri',prob:g25,odd:+(100/g25*0.88).toFixed(2),rec:g25>58,fix:tr&&tr.p.includes('over25')});
+    sels.push({id:`${id}_btts`,cat:'Goluri',name:'Ambele marchează',prob:Math.round(g15*0.80),odd:+(100/(g15*0.80)*0.88).toFixed(2),rec:false,fix:false});
+    if(tr&&tr.p.includes('score')){
+      const tn=tr.side==='home'?hs:as,sp=Math.round(tr.sr*100);
+      sels.push({id:`${id}_ts`,cat:'Goluri',name:`${tn} marchează`,prob:sp,odd:+(100/sp*0.88).toFixed(2),rec:true,fix:true});
+    }
+    sels.push({id:`${id}_c9`,cat:'Cornere',name:'Peste 9.5 cornere total',prob:64,odd:1.50,rec:true,fix:false});
+    sels.push({id:`${id}_ch`,cat:'Cornere',name:`Peste 4.5 cornere ${hs}`,prob:67,odd:1.42,rec:true,fix:false});
+    if(tr&&tr.p.includes('corners')){
+      const tn=tr.side==='home'?hs:as,cp=Math.min(82,Math.round(tr.ac/10*100));
+      sels.push({id:`${id}_tc`,cat:'Cornere',name:`${tn} Peste 3.5 cornere`,prob:cp,odd:+(100/cp*0.88).toFixed(2),rec:true,fix:true});
+    }
+    sels.push({id:`${id}_sh`,cat:'Suturi',name:`Atacant ${hs} — Peste 0.5 suturi`,prob:73,odd:1.30,rec:true,fix:false});
+    sels.push({id:`${id}_sa`,cat:'Suturi',name:`Atacant ${as} — Peste 0.5 suturi`,prob:68,odd:1.38,rec:false,fix:false});
+  } else {
+    sels.push({id:`${id}_lg`,cat:'Goluri',name:'Următor gol',prob:72,odd:1.32,rec:true,fix:false});
+    sels.push({id:`${id}_lc`,cat:'Cornere',name:'Următor corner',prob:66,odd:1.44,rec:true,fix:false});
+  }
+  return sels;
+}
+
+function pc(p){return p>=72?'#4ade80':p>=58?'#fbbf24':'#f87171';}
+
+function getStatus(fix){
+  const s=fix.fixture.status;
+  if(['1H','2H','ET','P','LIVE'].includes(s.short)) return {live:true,txt:`${s.elapsed||'?'}'`};
+  if(s.short==='HT') return {live:true,txt:'Pauză'};
+  if(['FT','AET','PEN'].includes(s.short)) return {live:false,txt:'Final'};
+  return {live:false,txt:new Date(fix.fixture.date).toLocaleTimeString('ro-RO',{hour:'2-digit',minute:'2-digit'})};
+}
+
+function toggleSel(selId,fixId){
+  const fix=allFixtures.find(f=>f.fixture.id===fixId);
+  const tr=getTracked(fix.teams.home.name,fix.teams.away.name);
+  const s=genSels(fix,calcProbs(fix.teams.home.form,fix.teams.away.form),tr).find(x=>x.id===selId);
+  if(!s) return;
+  const idx=bilet.findIndex(b=>b.selId===selId);
+  if(idx>=0) bilet.splice(idx,1);
+  else { if(bilet.length>=8) return; bilet.push({selId,fixId,name:s.name,odd:s.odd,prob:s.prob,matchName:`${fix.teams.home.name} vs ${fix.teams.away.name}`,cat:s.cat}); }
+  render();
+}
+function removeSel(id){bilet=bilet.filter(b=>b.selId!==id);render();}
+function setMiza(v){miza=v;renderBilet();}
+function calcCota(){return bilet.reduce((a,b)=>a*b.odd,1);}
+function calcProbEst(){return bilet.reduce((a,b)=>a*(b.prob/100),1)*100;}
+function profileScore(c){
+  if(c<1.30) return {lbl:'Sub-profil',color:'#fbbf24',pct:18};
+  if(c<1.60) return {lbl:'Conservator',color:'#4ade80',pct:42};
+  if(c<2.50) return {lbl:'Echilibrat',color:'#4ade80',pct:70};
+  if(c<4.00) return {lbl:'Moderat agresiv',color:'#fbbf24',pct:87};
+  return {lbl:'Agresiv',color:'#f87171',pct:100};
+}
+
+async function loadFixtures(){
+  document.getElementById('matchCol').innerHTML='<div class="loading-card"><div class="spin"></div><p style="font-size:12px;color:#555">Se încarcă meciurile...</p></div>';
+  document.getElementById('statusPill').className='status-pill sp-gray';
+  document.getElementById('statusPill').textContent='Se conectează...';
+  allFixtures=[];catFilter={};
+  const date=getDate(dateOffset);
+  try{
+    const res=await Promise.allSettled(Object.keys(TARGET_LEAGUES).map(l=>apiFetch('fixtures',{date,league:l,season:2025})));
+    res.forEach(r=>{if(r.status==='fulfilled'&&r.value?.response)allFixtures.push(...r.value.response);});
+    allFixtures.sort((a,b)=>new Date(a.fixture.date)-new Date(b.fixture.date));
+    const tr=allFixtures.filter(f=>getTracked(f.teams.home.name,f.teams.away.name)).length;
+    document.getElementById('statusPill').className='status-pill sp-green';
+    document.getElementById('statusPill').textContent=`${allFixtures.length} meciuri · ${tr} urmărite`;
+    buildLeagueFilter();render();
+  }catch(e){
+    document.getElementById('statusPill').className='status-pill sp-red';
+    document.getElementById('statusPill').textContent='Eroare';
+    document.getElementById('matchCol').innerHTML=`<div class="error-card"><strong>Eroare conectare</strong><br>${e.message}<br><br>Verifică că proxy-ul e activ.</div>`;
+  }
+}
+
+function buildLeagueFilter(){
+  const lids=[...new Set(allFixtures.map(f=>f.league.id.toString()))].filter(l=>TARGET_LEAGUES[l]);
+  document.getElementById('leagueFilter').innerHTML=
+    `<button class="lfbtn ${activeLeague==='all'?'active':''}" onclick="setLeague('all')">Toate (${allFixtures.length})</button>`+
+    lids.map(l=>{
+      const cnt=allFixtures.filter(f=>f.league.id.toString()===l).length;
+      return `<button class="lfbtn ${activeLeague===l?'active':''}" onclick="setLeague('${l}')">${TARGET_LEAGUES[l].n} (${cnt})</button>`;
+    }).join('');
+}
+
+function setLeague(l){activeLeague=l;buildLeagueFilter();render();}
+function setDate(off,el){
+  dateOffset=off;bilet=[];
+  document.querySelectorAll('.date-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');loadFixtures();
+}
+
+function renderMatchCol(){
+  const filtered=activeLeague==='all'?allFixtures:allFixtures.filter(f=>f.league.id.toString()===activeLeague);
+  if(!filtered.length) return '<div class="empty-state">Niciun meci pentru selecția curentă</div>';
+  return filtered.map(fix=>{
+    const id=fix.fixture.id;
+    const tr=getTracked(fix.teams.home.name,fix.teams.away.name);
+    const prob=calcProbs(fix.teams.home.form,fix.teams.away.form);
+    const sels=genSels(fix,prob,tr);
+    const st=getStatus(fix);
+    const cf=catFilter[id]||null;
+    const cats=[...new Set(sels.map(s=>s.cat))];
+    const vis=cf?sels.filter(s=>s.cat===cf):sels;
+    const added=bilet.filter(b=>b.fixId===id).length;
+    const score=fix.goals.home!==null?`${fix.goals.home}-${fix.goals.away}`:null;
+    return `<div class="match-card ${tr?'tracked':''}">
+      <div class="mc-hdr">
+        <div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap">
+          <span class="lbadge">${fix.league.name}</span>
+          ${st.live?`<span class="live-dot"></span><span style="font-size:10px;color:#ef4444;font-weight:500"> ${st.txt}</span>`:`<span style="font-size:10px;color:#444">${st.txt}</span>`}
+          ${tr?'<span class="tracked-badge">★ urmărit</span>':''}
+          ${added?`<span style="font-size:10px;padding:1px 6px;border-radius:8px;background:#0a2e1a;color:#4ade80;font-weight:500">${added} sel.</span>`:''}
+          ${added>=2?'<span class="bb-badge">BB</span>':''}
+        </div>
+        <span style="font-size:10px;color:#333">${TARGET_LEAGUES[fix.league.id.toString()]?.c||''}</span>
+      </div>
+      <div class="teams">
+        ${fix.teams.home.logo?`<img class="tlogo" src="${fix.teams.home.logo}" onerror="this.outerHTML='<div class=tlogo-fb>${fix.teams.home.name.slice(0,2).toUpperCase()}</div>'">`:`<div class="tlogo-fb">${fix.teams.home.name.slice(0,2).toUpperCase()}</div>`}
+        <span class="tn ${tr&&tr.side==='home'?'tracked-team':''}">${fix.teams.home.name}</span>
+        ${score?`<span class="score-b">${score}</span>`:'<span class="vs">vs</span>'}
+        <span class="tn ${tr&&tr.side==='away'?'tracked-team':''}" style="text-align:right">${fix.teams.away.name}</span>
+        ${fix.teams.away.logo?`<img class="tlogo" src="${fix.teams.away.logo}" onerror="this.outerHTML='<div class=tlogo-fb>${fix.teams.away.name.slice(0,2).toUpperCase()}</div>'">`:`<div class="tlogo-fb">${fix.teams.away.name.slice(0,2).toUpperCase()}</div>`}
+      </div>
+      <div class="prob-labels"><span>1 · ${prob.h}%</span><span>X · ${prob.d}%</span><span>2 · ${prob.a}%</span></div>
+      <div class="pbar"><div class="ps ph" style="width:${prob.h}%"></div><div class="ps pd" style="width:${prob.d}%"></div><div class="ps pa" style="width:${prob.a}%"></div></div>
+      <div class="mpills">
+        <div class="mpill ${tr&&tr.p.includes('over25')?'hl':''}"><span class="ml">Over 2.5</span><span class="mv">${tr?Math.round(tr.o25*100):Math.round(prob.h*0.5+prob.a*0.42+18)}%</span></div>
+        <div class="mpill"><span class="ml">BTTS</span><span class="mv">${Math.round(prob.h*0.44+prob.a*0.46+16)}%</span></div>
+        <div class="mpill ${tr&&tr.p.includes('score')?'hl':''}"><span class="ml">Marchează</span><span class="mv">${tr?Math.round(tr.sr*100):Math.round(prob.h*0.8+10)}%</span></div>
+        <div class="mpill ${tr&&tr.p.includes('corners')?'hl':''}"><span class="ml">Avg cornere</span><span class="mv">${tr?tr.ac.toFixed(1):'6.5'}</span></div>
+      </div>
+      ${tr?`<div class="fixuri-box"><div class="fixuri-title">Fixuri ${tr.team}</div><div class="fixuri-tags">
+        ${tr.p.includes('score')?`<span class="ftag">Marchează ${Math.round(tr.sr*100)}%</span>`:''}
+        ${tr.p.includes('corners')?`<span class="ftag">Avg ${tr.ac} cornere</span>`:''}
+        ${tr.p.includes('over25')?`<span class="ftag">Over 2.5 → ${Math.round(tr.o25*100)}%</span>`:''}
+      </div></div>`:''}
+      <div class="sel-hdr">
+        <span style="font-size:11px;color:#555;font-weight:500">Selecții</span>
+        <div class="cat-tabs">${cats.map(c=>`<button class="ctab ${cf===c?'active':''}" onclick="catFilter[${id}]='${cf===c?'':c}';render()">${c}</button>`).join('')}</div>
+      </div>
+      <div class="sel-grid">${vis.map(s=>{
+        const inB=bilet.some(b=>b.selId===s.id);
+        return `<div class="sel-item ${inB?'added':''} ${s.fix&&!inB?'fix-sel':''}" onclick="toggleSel('${s.id}',${id})">
+          <div class="sel-check">${inB?'✓':''}</div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:4px">
+              <span class="sel-name">${s.name}</span>
+              ${s.fix?'<span class="fix-star">★ fix</span>':s.rec?'<span class="rec-star">★</span>':''}
+            </div>
+            <div class="pb-sm"><div class="pb-fill" style="width:${s.prob}%;background:${pc(s.prob)}"></div></div>
+          </div>
+          <div style="text-align:right;flex-shrink:0">
+            <div style="font-size:10px;font-weight:500;color:${pc(s.prob)}">${s.prob}%</div>
+            <div style="font-size:11px;font-weight:600;color:#60a5fa">${s.odd.toFixed(2)}</div>
+          </div>
+        </div>`;
+      }).join('')}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderBilet(){
+  const cota=calcCota(),prob=calcProbEst();
+  const castig=(miza*cota).toFixed(2),profit=(miza*cota-miza).toFixed(2);
+  const ps=profileScore(cota),ready=bilet.length>=2;
+  let html=`<div class="bilet-panel"><div class="bp-title">Biletul meu <span class="bp-cnt">${bilet.length}/8</span></div>`;
+  if(!bilet.length){
+    html+='<div class="bilet-empty">Adaugă selecții din meciuri pentru a construi biletul</div>';
+  } else {
+    html+=bilet.map(b=>`<div class="bs"><div class="bs-match">${b.matchName}</div><div class="bs-row"><span class="bs-name">${b.name}</span><span class="bs-odd">${b.odd.toFixed(2)}</span><div class="bs-rm" onclick="removeSel('${b.selId}')">✕</div></div></div>`).join('');
+    html+=`<div class="divider"></div>
+    <div class="miza-row"><label>Miză</label><input class="miza-inp" type="number" min="1" value="${miza}" oninput="miza=+this.value;renderBilet()"><span style="font-size:11px;color:#555">RON</span></div>
+    <div class="miza-btns">${[25,50,100,150,200].map(v=>`<button class="mbtn" onclick="setMiza(${v})">${v}</button>`).join('')}</div>
+    <div class="cota-box">
+      <div class="cr"><span class="cl">Cotă totală</span><span class="cv big">${cota.toFixed(2)}</span></div>
+      <div class="cr"><span class="cl">Prob. estimată</span><span class="cv" style="color:${pc(prob)}">${prob.toFixed(1)}%</span></div>
+      <div class="cr"><span class="cl">Câștig potențial</span><span class="cv green">${castig} RON</span></div>
+      <div class="cr"><span class="cl">Profit net</span><span class="cv green">+${profit} RON</span></div>
+    </div>
+    <div class="pz">
+      <div style="font-size:11px;font-weight:500;color:#ccc;margin-bottom:4px">Profil · <span style="color:${ps.color}">${ps.lbl}</span></div>
+      <div class="pz-bar"><div class="pz-fill" style="width:${ps.pct}%;background:${ps.color}"></div></div>
+      <div class="pz-lbl"><span>Conservator</span><span>Agresiv</span></div>
+    </div>`;
+  }
+  html+=`<button class="place-btn ${ready?'ready':''}" ${ready?'':'disabled'}>${bilet.length<2?'Adaugă minim 2 selecții':'✓ Bilet gata · '+cota.toFixed(2)+' · '+castig+' RON'}</button></div>`;
+  document.getElementById('biletCol').innerHTML=html;
+}
+
+function render(){document.getElementById('matchCol').innerHTML=renderMatchCol();renderBilet();}
+loadFixtures();
+</script>
+</body>
+</html>
