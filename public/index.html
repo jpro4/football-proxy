@@ -405,7 +405,7 @@ function renderBilet(){
   html+=`<button class="place-btn ${ready?'ready':''}" ${ready?'':'disabled'}>${bilet.length<2?'Adaugă minim 2 selecții':'✓ Bilet gata · '+cota.toFixed(2)+' · '+castig+' RON'}</button></div>`;
   document.getElementById('biletCol').innerHTML=html;
 }
-
+ 
 function render(){document.getElementById('matchCol').innerHTML=renderMatchCol();renderBilet();}
 loadFixtures();
 </script>
