@@ -12,9 +12,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .hdr h1{font-size:22px;font-weight:600;color:#fff}
 .hdr p{font-size:12px;color:#888;margin-top:3px}
 .status-pill{font-size:11px;padding:3px 10px;border-radius:10px;font-weight:500}
-.sp-green{background:#0a2e1a;color:#4ade80}
-.sp-red{background:#2e0a0a;color:#f87171}
-.sp-gray{background:#1a1a1a;color:#888}
+.sp-green{background:#0a2e1a;color:#4ade80}.sp-red{background:#2e0a0a;color:#f87171}.sp-gray{background:#1a1a1a;color:#888}
 .req-info{font-size:10px;color:#555;margin-top:2px;text-align:right}
 .date-row{display:flex;gap:5px;margin-bottom:1rem;flex-wrap:wrap;align-items:center}
 .date-btn{padding:4px 11px;border-radius:20px;border:1px solid #2a2a2a;font-size:11px;cursor:pointer;background:transparent;color:#888;transition:all .15s;white-space:nowrap}
@@ -32,8 +30,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .mc-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:4px}
 .lbadge{font-size:10px;padding:2px 8px;border-radius:8px;background:#1a1a1a;color:#666}
 .src-badge{font-size:9px;padding:1px 6px;border-radius:6px;font-weight:500}
-.src-fd{background:#1a1a2e;color:#818cf8}
-.src-af{background:#1a2e1a;color:#4ade80}
+.src-fd{background:#1a1a2e;color:#818cf8}.src-af{background:#1a2e1a;color:#4ade80}
 .live-dot{width:6px;height:6px;border-radius:50%;background:#ef4444;display:inline-block;animation:pulse 1.5s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 .tracked-badge{font-size:10px;padding:1px 7px;border-radius:8px;background:#0a2e1a;color:#4ade80;font-weight:500}
@@ -116,13 +113,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 @keyframes spin{to{transform:rotate(360deg)}}
 .error-card{background:#1a0a0a;border:1px solid #3a1a1a;border-radius:12px;padding:1.25rem;margin-bottom:10px;font-size:12px;color:#f87171;line-height:1.7}
 .empty-state{text-align:center;padding:3rem 1rem;color:#333;font-size:13px}
-.key-setup{background:#161616;border:1px solid #2a2a2a;border-radius:12px;padding:1.25rem;margin-bottom:1rem}
-.key-setup h3{font-size:13px;font-weight:600;color:#fff;margin-bottom:8px}
-.key-setup p{font-size:11px;color:#666;margin-bottom:8px;line-height:1.6}
-.key-row{display:flex;gap:8px;align-items:center}
-.key-inp{flex:1;padding:6px 10px;border-radius:8px;border:1px solid #2a2a2a;background:#0f0f0f;color:#fff;font-size:12px;font-family:monospace}
-.key-btn{padding:6px 14px;border-radius:8px;border:1px solid #4ade80;background:transparent;color:#4ade80;font-size:12px;cursor:pointer;white-space:nowrap}
-.key-btn:hover{background:#0a2e1a}
 </style>
 </head>
 <body>
@@ -137,17 +127,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div id="reqInfo" class="req-info"></div>
     </div>
   </div>
-
-  <div id="keySetup" class="key-setup" style="display:none">
-    <h3>&#128273; football-data.org API Key</h3>
-    <p>Pentru meciurile din urmatoarele 7 zile adauga key-ul gratuit de la football-data.org<br>
-    Inregistrare la: <strong>football-data.org/client/register</strong> (email + parola, fara card)</p>
-    <div class="key-row">
-      <input class="key-inp" id="fdKey" type="text" placeholder="Lipeste key-ul aici...">
-      <button class="key-btn" onclick="saveFdKey()">Salveaza</button>
-    </div>
-  </div>
-
   <div class="date-row" id="dateRow"></div>
   <div class="league-filter" id="leagueFilter"></div>
   <div class="layout">
@@ -155,304 +134,177 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div id="biletCol"></div>
   </div>
 </div>
-
 <script>
-var AF_PROXY = 'https://football-proxy-weld.vercel.app/api/proxy';
-var AF_KEY = '28e79815a34a62ca876f166048fe0f68';
-var FD_BASE = 'https://api.football-data.org/v4';
-var FD_KEY = localStorage.getItem('538d91285b1f4206bb4aab6b3bdee31b') || '';
+var AF_PROXY='https://football-proxy-weld.vercel.app/api/proxy';
+var FD_PROXY='https://football-proxy-weld.vercel.app/api/fd';
+var AF_KEY='28e79815a34a62ca876f166048fe0f68';
 
-var FD_COMPETITIONS = {
-  'PL':  {n:'Premier League', c:'Anglia'},
-  'PD':  {n:'La Liga', c:'Spania'},
-  'BL1': {n:'Bundesliga', c:'Germania'},
-  'SA':  {n:'Serie A', c:'Italia'},
-  'FL1': {n:'Ligue 1', c:'Franta'},
-  'PPL': {n:'Primeira Liga', c:'Portugalia'},
-  'CL':  {n:'UCL', c:'Europa'},
-  'EL':  {n:'Europa League', c:'Europa'},
-  'EC':  {n:'Championship', c:'Anglia'}
-};
+var FD_COMPS=['PL','PD','BL1','SA','FL1','PPL','CL','EL','EC'];
+var FD_INFO={PL:{n:'Premier League',c:'Anglia'},PD:{n:'La Liga',c:'Spania'},BL1:{n:'Bundesliga',c:'Germania'},SA:{n:'Serie A',c:'Italia'},FL1:{n:'Ligue 1',c:'Franta'},PPL:{n:'Primeira Liga',c:'Portugalia'},CL:{n:'UCL',c:'Europa'},EL:{n:'Europa League',c:'Europa'},EC:{n:'Championship',c:'Anglia'}};
+var AF_LEAGUES={283:{n:'Liga 1',c:'Romania'},144:{n:'Pro League',c:'Belgia'}};
 
-var AF_LEAGUES = {
-  283:{n:'Liga 1', c:'Romania'},
-  144:{n:'Pro League', c:'Belgia'}
-};
+var TRACKED={'Wrexham':{p:['score','corners','over25'],sr:0.85,ac:8.2,o25:0.72},'Real Madrid':{p:['score','over25'],sr:0.88,ac:6.8,o25:0.68},'Barcelona':{p:['score','corners','over25'],sr:0.86,ac:7.4,o25:0.71},'Manchester United':{p:['score'],sr:0.74,ac:5.9,o25:0.58},'Newcastle':{p:['score','corners'],sr:0.78,ac:7.1,o25:0.62},'Aston Villa':{p:['score','over25'],sr:0.76,ac:6.4,o25:0.64},'Leeds':{p:['score','corners'],sr:0.77,ac:7.8,o25:0.65},'Bayern':{p:['score','over25'],sr:0.91,ac:7.2,o25:0.74},'RB Leipzig':{p:['score','over25'],sr:0.82,ac:6.6,o25:0.69},'Dortmund':{p:['score','over25'],sr:0.80,ac:6.9,o25:0.67}};
 
-var TRACKED = {
-  'Wrexham':           {p:['score','corners','over25'], sr:0.85, ac:8.2, o25:0.72},
-  'Real Madrid':       {p:['score','over25'],           sr:0.88, ac:6.8, o25:0.68},
-  'Barcelona':         {p:['score','corners','over25'], sr:0.86, ac:7.4, o25:0.71},
-  'Manchester United': {p:['score'],                    sr:0.74, ac:5.9, o25:0.58},
-  'Newcastle':         {p:['score','corners'],          sr:0.78, ac:7.1, o25:0.62},
-  'Aston Villa':       {p:['score','over25'],           sr:0.76, ac:6.4, o25:0.64},
-  'Leeds':             {p:['score','corners'],          sr:0.77, ac:7.8, o25:0.65},
-  'Bayern':            {p:['score','over25'],           sr:0.91, ac:7.2, o25:0.74},
-  'RB Leipzig':        {p:['score','over25'],           sr:0.82, ac:6.6, o25:0.69},
-  'Dortmund':          {p:['score','over25'],           sr:0.80, ac:6.9, o25:0.67}
-};
+function getTracked(hn,an){for(var t in TRACKED){if(hn.includes(t)||an.includes(t))return Object.assign({},TRACKED[t],{team:t,side:hn.includes(t)?'home':'away'});}return null;}
 
-function getTracked(hn, an) {
-  for (var t in TRACKED) {
-    if (hn.includes(t) || an.includes(t))
-      return Object.assign({}, TRACKED[t], {team:t, side: hn.includes(t) ? 'home' : 'away'});
-  }
-  return null;
+var dateOffset=0,allFixtures=[],activeLeague='all',bilet=[],miza=50,catFilter={};
+
+function getDateStr(off){var d=new Date();d.setDate(d.getDate()+off);return d.toISOString().split('T')[0];}
+function getDateLabel(off){var d=new Date();d.setDate(d.getDate()+off);if(off===0)return'Azi';if(off===1)return'Maine';var days=['Dum','Lun','Mar','Mie','Joi','Vin','Sam'];return days[d.getDay()]+' '+d.getDate()+'/'+(d.getMonth()+1);}
+
+function buildDateRow(){
+  var html='<span style="font-size:11px;color:#555;align-self:center">Data:</span>';
+  for(var i=0;i<=6;i++)html+='<button class="date-btn '+(dateOffset===i?'active':'')+'" onclick="setDate('+i+',this)">'+getDateLabel(i)+'</button>';
+  html+='<button onclick="loadFixtures()" style="padding:4px 10px;border-radius:20px;border:1px solid #2a2a2a;background:transparent;color:#666;font-size:11px;cursor:pointer;margin-left:4px">&#8635;</button>';
+  document.getElementById('dateRow').innerHTML=html;
 }
 
-var dateOffset = 0, allFixtures = [], activeLeague = 'all', bilet = [], miza = 50, catFilter = {};
-
-function saveFdKey() {
-  var v = document.getElementById('fdKey').value.trim();
-  if (v) { FD_KEY = v; localStorage.setItem('fd_key', v); document.getElementById('keySetup').style.display = 'none'; loadFixtures(); }
-}
-
-function getDateStr(off) {
-  var d = new Date(); d.setDate(d.getDate() + off);
-  return d.toISOString().split('T')[0];
-}
-
-function getDateLabel(off) {
-  var d = new Date(); d.setDate(d.getDate() + off);
-  if (off === 0) return 'Azi';
-  if (off === 1) return 'Maine';
-  var days = ['Dum','Lun','Mar','Mie','Joi','Vin','Sam'];
-  return days[d.getDay()] + ' ' + d.getDate() + '/' + (d.getMonth()+1);
-}
-
-function buildDateRow() {
-  var html = '<span style="font-size:11px;color:#555;align-self:center">Data:</span>';
-  for (var i = 0; i <= 6; i++) {
-    html += '<button class="date-btn ' + (dateOffset===i?'active':'') + '" onclick="setDate(' + i + ',this)">' + getDateLabel(i) + '</button>';
-  }
-  html += '<button onclick="loadFixtures()" style="padding:4px 10px;border-radius:20px;border:1px solid #2a2a2a;background:transparent;color:#666;font-size:11px;cursor:pointer;margin-left:4px">&#8635;</button>';
-  document.getElementById('dateRow').innerHTML = html;
-}
-
-async function fetchAF(path, params) {
-  params = params || {};
-  var qs = new URLSearchParams(Object.assign({path: path}, params)).toString();
-  var r = await fetch(AF_PROXY + '?' + qs, {headers: {'x-apisports-key': AF_KEY}});
-  var rem = r.headers.get('x-ratelimit-requests-remaining');
-  if (rem) document.getElementById('reqInfo').textContent = 'AF: ' + rem + ' req. ramase';
-  if (!r.ok) throw new Error('AF HTTP ' + r.status);
+async function fetchAF(path,params){
+  var qs=new URLSearchParams(Object.assign({path:path},params||{})).toString();
+  var r=await fetch(AF_PROXY+'?'+qs,{headers:{'x-apisports-key':AF_KEY}});
+  var rem=r.headers.get('x-ratelimit-requests-remaining');
+  if(rem)document.getElementById('reqInfo').textContent='AF:'+rem+' req';
+  if(!r.ok)throw new Error('AF '+r.status);
   return r.json();
 }
 
-async function fetchFD(endpoint) {
-  var r = await fetch(FD_BASE + endpoint, {headers: {'X-Auth-Token': FD_KEY}});
-  if (!r.ok) throw new Error('FD HTTP ' + r.status);
+async function fetchFD(comp,date){
+  var qs='competitions/'+comp+'/matches?dateFrom='+date+'&dateTo='+date;
+  var r=await fetch(FD_PROXY+'?path='+encodeURIComponent(qs));
+  if(!r.ok)throw new Error('FD '+r.status);
   return r.json();
 }
 
-function normalizeFD(match, compCode) {
-  var compInfo = FD_COMPETITIONS[compCode] || {n: compCode, c: ''};
-  var st = match.status;
-  var statusShort = 'NS';
-  if (st === 'FINISHED') statusShort = 'FT';
-  else if (st === 'IN_PLAY') statusShort = '1H';
-  else if (st === 'PAUSED') statusShort = 'HT';
-  else if (st === 'TIMED' || st === 'SCHEDULED') statusShort = 'NS';
-  var hs = match.score && match.score.fullTime ? match.score.fullTime.home : null;
-  var as = match.score && match.score.fullTime ? match.score.fullTime.away : null;
-  return {
-    _source: 'fd',
-    fixture: {
-      id: 'fd_' + match.id,
-      date: match.utcDate,
-      status: {short: statusShort, elapsed: match.minute || null}
-    },
-    league: {id: compCode, name: compInfo.n, country: compInfo.c},
-    teams: {
-      home: {name: match.homeTeam.name, logo: match.homeTeam.crest || null, form: null},
-      away: {name: match.awayTeam.name, logo: match.awayTeam.crest || null, form: null}
-    },
-    goals: {home: hs, away: as}
-  };
+function normFD(m,comp){
+  var info=FD_INFO[comp]||{n:comp,c:''};
+  var st=m.status,ss='NS';
+  if(st==='FINISHED')ss='FT';
+  else if(st==='IN_PLAY')ss='1H';
+  else if(st==='PAUSED')ss='HT';
+  var hs=m.score&&m.score.fullTime?m.score.fullTime.home:null;
+  var as=m.score&&m.score.fullTime?m.score.fullTime.away:null;
+  return{_source:'fd',fixture:{id:'fd_'+m.id,date:m.utcDate,status:{short:ss,elapsed:m.minute||null}},league:{id:'fd_'+comp,name:info.n,country:info.c},teams:{home:{name:m.homeTeam.shortName||m.homeTeam.name,logo:m.homeTeam.crest||null,form:null},away:{name:m.awayTeam.shortName||m.awayTeam.name,logo:m.awayTeam.crest||null,form:null}},goals:{home:hs,away:as}};
 }
 
-async function loadFixtures() {
-  document.getElementById('matchCol').innerHTML = '<div class="loading-card"><div class="spin"></div><p style="font-size:12px;color:#555">Se incarca meciurile...</p></div>';
-  document.getElementById('statusPill').className = 'status-pill sp-gray';
-  document.getElementById('statusPill').textContent = 'Se conecteaza...';
-  allFixtures = []; catFilter = {};
-  var date = getDateStr(dateOffset);
-  var fixtures = [];
-  var afCount = 0, fdCount = 0, fdError = false;
+async function loadFixtures(){
+  document.getElementById('matchCol').innerHTML='<div class="loading-card"><div class="spin"></div><p style="font-size:12px;color:#555">Se incarca meciurile...</p></div>';
+  document.getElementById('statusPill').className='status-pill sp-gray';
+  document.getElementById('statusPill').textContent='Se conecteaza...';
+  allFixtures=[];catFilter=[];
+  var date=getDateStr(dateOffset);
+  var fixtures=[];var afCnt=0,fdCnt=0;
 
-  try {
-    var afResults = await Promise.allSettled(
-      Object.keys(AF_LEAGUES).map(function(l) { return fetchAF('fixtures', {date: date, league: l, season: 2025}); })
-    );
-    afResults.forEach(function(r) {
-      if (r.status === 'fulfilled' && r.value && r.value.response) {
-        fixtures = fixtures.concat(r.value.response.map(function(f) { f._source = 'af'; return f; }));
-        afCount += r.value.response.length;
-      }
-    });
-  } catch(e) { console.warn('AF error:', e); }
+  var afRes=await Promise.allSettled(Object.keys(AF_LEAGUES).map(function(l){return fetchAF('fixtures',{date:date,league:l,season:2025});}));
+  afRes.forEach(function(r){if(r.status==='fulfilled'&&r.value&&r.value.response){r.value.response.forEach(function(f){f._source='af';fixtures.push(f);});afCnt+=r.value.response.length;}});
 
-  if (FD_KEY) {
-    try {
-      var fdResults = await Promise.allSettled(
-        Object.keys(FD_COMPETITIONS).map(function(code) {
-          return fetchFD('/matches?competitions=' + code + '&dateFrom=' + date + '&dateTo=' + date);
-        })
-      );
-      fdResults.forEach(function(r, i) {
-        var code = Object.keys(FD_COMPETITIONS)[i];
-        if (r.status === 'fulfilled' && r.value && r.value.matches) {
-          r.value.matches.forEach(function(m) { fixtures.push(normalizeFD(m, code)); });
-          fdCount += (r.value.matches || []).length;
-        }
-      });
-    } catch(e) { fdError = true; console.warn('FD error:', e); }
-  } else {
-    document.getElementById('keySetup').style.display = 'block';
-  }
-
-  fixtures.sort(function(a,b) { return new Date(a.fixture.date) - new Date(b.fixture.date); });
-  allFixtures = fixtures;
-
-  var tr = allFixtures.filter(function(f) { return getTracked(f.teams.home.name, f.teams.away.name); }).length;
-  document.getElementById('statusPill').className = 'status-pill sp-green';
-  document.getElementById('statusPill').textContent = allFixtures.length + ' meciuri · ' + tr + ' urmarite';
-  document.getElementById('reqInfo').textContent = 'AF: ' + afCount + ' · FD: ' + fdCount + (fdError?' (eroare FD)':'');
-
-  buildLeagueFilter();
-  render();
-}
-
-function buildLeagueFilter() {
-  var seen = [], lids = [];
-  allFixtures.forEach(function(f) {
-    var key = f.league.id.toString();
-    if (seen.indexOf(key) < 0) { seen.push(key); lids.push({key: key, name: f.league.name}); }
-  });
-  var html = '<button class="lfbtn ' + (activeLeague==='all'?'active':'') + '" onclick="setLeague(\'all\')">Toate (' + allFixtures.length + ')</button>';
-  lids.forEach(function(l) {
-    var cnt = allFixtures.filter(function(f) { return f.league.id.toString() === l.key; }).length;
-    html += '<button class="lfbtn ' + (activeLeague===l.key?'active':'') + '" onclick="setLeague(\'' + l.key + '\')">' + l.name + ' (' + cnt + ')</button>';
-  });
-  document.getElementById('leagueFilter').innerHTML = html;
-}
-
-function setLeague(l) { activeLeague = l; buildLeagueFilter(); render(); }
-function setDate(off, el) {
-  dateOffset = off; bilet = [];
-  buildDateRow(); loadFixtures();
-}
-
-function calcProbs(hf, af) {
-  function pts(s) { return s ? Array.from(s).reduce(function(a,c){return a+(c==='W'?3:c==='D'?1:0);},0) : 8; }
-  var h = pts(hf), a = pts(af), tot = h + a + 5;
-  var ph = Math.max(22, Math.min(68, Math.round((h+2)/tot*100)));
-  var pa = Math.max(15, Math.min(55, Math.round((a+1)/tot*100)));
-  return {h: ph, d: Math.max(15, 100-ph-pa), a: pa};
-}
-
-function genSels(fix, prob, tr) {
-  var id = fix.fixture.id;
-  var hn = fix.teams.home.name, an = fix.teams.away.name;
-  var hs = hn.split(' ')[0], as = an.split(' ')[0];
-  var live = ['1H','2H','HT','ET','P','LIVE'].indexOf(fix.fixture.status.short) >= 0;
-  var sels = [];
-  if (!live) {
-    var w = prob.h>prob.a?hn:an, wp = prob.h>prob.a?prob.h:prob.a;
-    sels.push({id:id+'_w', cat:'1X2', name:w+' castiga', prob:wp, odd:+(100/wp*0.90).toFixed(2), rec:wp>54, fix:false});
-    sels.push({id:id+'_d', cat:'1X2', name:'Egal', prob:prob.d, odd:+(100/prob.d*0.88).toFixed(2), rec:false, fix:false});
-    var g15 = Math.min(85, 52+prob.h*0.28+prob.a*0.22);
-    var g25 = Math.round(g15*0.72);
-    sels.push({id:id+'_g15', cat:'Goluri', name:'Peste 1.5 goluri', prob:Math.round(g15), odd:+(100/g15*0.88).toFixed(2), rec:g15>68, fix:false});
-    sels.push({id:id+'_g25', cat:'Goluri', name:'Peste 2.5 goluri', prob:g25, odd:+(100/g25*0.88).toFixed(2), rec:g25>58, fix:tr&&tr.p.indexOf('over25')>=0});
-    sels.push({id:id+'_btts', cat:'Goluri', name:'Ambele marcheaza', prob:Math.round(g15*0.80), odd:+(100/(g15*0.80)*0.88).toFixed(2), rec:false, fix:false});
-    if (tr && tr.p.indexOf('score') >= 0) {
-      var tn = tr.side==='home'?hs:as, sp = Math.round(tr.sr*100);
-      sels.push({id:id+'_ts', cat:'Goluri', name:tn+' marcheaza', prob:sp, odd:+(100/sp*0.88).toFixed(2), rec:true, fix:true});
+  var fdRes=await Promise.allSettled(FD_COMPS.map(function(c){return fetchFD(c,date);}));
+  fdRes.forEach(function(r,i){
+    var comp=FD_COMPS[i];
+    if(r.status==='fulfilled'&&r.value&&r.value.matches){
+      r.value.matches.forEach(function(m){fixtures.push(normFD(m,comp));});
+      fdCnt+=r.value.matches.length;
     }
-    sels.push({id:id+'_c9', cat:'Cornere', name:'Peste 9.5 cornere total', prob:64, odd:1.50, rec:true, fix:false});
-    sels.push({id:id+'_ch', cat:'Cornere', name:'Peste 4.5 cornere '+hs, prob:67, odd:1.42, rec:true, fix:false});
-    if (tr && tr.p.indexOf('corners') >= 0) {
-      var tn2 = tr.side==='home'?hs:as, cp = Math.min(82, Math.round(tr.ac/10*100));
-      sels.push({id:id+'_tc', cat:'Cornere', name:tn2+' Peste 3.5 cornere', prob:cp, odd:+(100/cp*0.88).toFixed(2), rec:true, fix:true});
-    }
-    sels.push({id:id+'_sh', cat:'Suturi', name:'Atacant '+hs+' peste 0.5 suturi', prob:73, odd:1.30, rec:true, fix:false});
-    sels.push({id:id+'_sa', cat:'Suturi', name:'Atacant '+as+' peste 0.5 suturi', prob:68, odd:1.38, rec:false, fix:false});
-  } else {
-    sels.push({id:id+'_lg', cat:'Goluri', name:'Urmator gol', prob:72, odd:1.32, rec:true, fix:false});
-    sels.push({id:id+'_lc', cat:'Cornere', name:'Urmator corner', prob:66, odd:1.44, rec:true, fix:false});
-  }
+  });
+
+  fixtures.sort(function(a,b){return new Date(a.fixture.date)-new Date(b.fixture.date);});
+  allFixtures=fixtures;
+  var tr=allFixtures.filter(function(f){return getTracked(f.teams.home.name,f.teams.away.name);}).length;
+  document.getElementById('statusPill').className='status-pill sp-green';
+  document.getElementById('statusPill').textContent=allFixtures.length+' meciuri · '+tr+' urmarite';
+  document.getElementById('reqInfo').textContent='AF:'+afCnt+' FD:'+fdCnt;
+  buildLeagueFilter();render();
+}
+
+function buildLeagueFilter(){
+  var seen=[],lids=[];
+  allFixtures.forEach(function(f){var k=f.league.id.toString();if(seen.indexOf(k)<0){seen.push(k);lids.push({key:k,name:f.league.name});}});
+  var html='<button class="lfbtn '+(activeLeague==='all'?'active':'')+'" onclick="setLeague(\'all\')">Toate ('+allFixtures.length+')</button>';
+  lids.forEach(function(l){var cnt=allFixtures.filter(function(f){return f.league.id.toString()===l.key;}).length;html+='<button class="lfbtn '+(activeLeague===l.key?'active':'')+'" onclick="setLeague(\''+l.key+'\')">'+l.name+' ('+cnt+')</button>';});
+  document.getElementById('leagueFilter').innerHTML=html;
+}
+
+function setLeague(l){activeLeague=l;buildLeagueFilter();render();}
+function setDate(off,el){dateOffset=off;bilet=[];buildDateRow();loadFixtures();}
+
+function calcProbs(hf,af){
+  function pts(s){return s?Array.from(s).reduce(function(a,c){return a+(c==='W'?3:c==='D'?1:0);},0):8;}
+  var h=pts(hf),a=pts(af),tot=h+a+5;
+  var ph=Math.max(22,Math.min(68,Math.round((h+2)/tot*100)));
+  var pa=Math.max(15,Math.min(55,Math.round((a+1)/tot*100)));
+  return{h:ph,d:Math.max(15,100-ph-pa),a:pa};
+}
+
+function genSels(fix,prob,tr){
+  var id=fix.fixture.id;var hn=fix.teams.home.name,an=fix.teams.away.name;var hs=hn.split(' ')[0],as=an.split(' ')[0];
+  var live=['1H','2H','HT','ET','P','LIVE'].indexOf(fix.fixture.status.short)>=0;var sels=[];
+  if(!live){
+    var w=prob.h>prob.a?hn:an,wp=prob.h>prob.a?prob.h:prob.a;
+    sels.push({id:id+'_w',cat:'1X2',name:w+' castiga',prob:wp,odd:+(100/wp*0.90).toFixed(2),rec:wp>54,fix:false});
+    sels.push({id:id+'_d',cat:'1X2',name:'Egal',prob:prob.d,odd:+(100/prob.d*0.88).toFixed(2),rec:false,fix:false});
+    var g15=Math.min(85,52+prob.h*0.28+prob.a*0.22),g25=Math.round(g15*0.72);
+    sels.push({id:id+'_g15',cat:'Goluri',name:'Peste 1.5 goluri',prob:Math.round(g15),odd:+(100/g15*0.88).toFixed(2),rec:g15>68,fix:false});
+    sels.push({id:id+'_g25',cat:'Goluri',name:'Peste 2.5 goluri',prob:g25,odd:+(100/g25*0.88).toFixed(2),rec:g25>58,fix:tr&&tr.p.indexOf('over25')>=0});
+    sels.push({id:id+'_btts',cat:'Goluri',name:'Ambele marcheaza',prob:Math.round(g15*0.80),odd:+(100/(g15*0.80)*0.88).toFixed(2),rec:false,fix:false});
+    if(tr&&tr.p.indexOf('score')>=0){var tn=tr.side==='home'?hs:as,sp=Math.round(tr.sr*100);sels.push({id:id+'_ts',cat:'Goluri',name:tn+' marcheaza',prob:sp,odd:+(100/sp*0.88).toFixed(2),rec:true,fix:true});}
+    sels.push({id:id+'_c9',cat:'Cornere',name:'Peste 9.5 cornere total',prob:64,odd:1.50,rec:true,fix:false});
+    sels.push({id:id+'_ch',cat:'Cornere',name:'Peste 4.5 cornere '+hs,prob:67,odd:1.42,rec:true,fix:false});
+    if(tr&&tr.p.indexOf('corners')>=0){var tn2=tr.side==='home'?hs:as,cp=Math.min(82,Math.round(tr.ac/10*100));sels.push({id:id+'_tc',cat:'Cornere',name:tn2+' Peste 3.5 cornere',prob:cp,odd:+(100/cp*0.88).toFixed(2),rec:true,fix:true});}
+    sels.push({id:id+'_sh',cat:'Suturi',name:'Atacant '+hs+' peste 0.5 suturi',prob:73,odd:1.30,rec:true,fix:false});
+    sels.push({id:id+'_sa',cat:'Suturi',name:'Atacant '+as+' peste 0.5 suturi',prob:68,odd:1.38,rec:false,fix:false});
+  }else{sels.push({id:id+'_lg',cat:'Goluri',name:'Urmator gol',prob:72,odd:1.32,rec:true,fix:false});sels.push({id:id+'_lc',cat:'Cornere',name:'Urmator corner',prob:66,odd:1.44,rec:true,fix:false});}
   return sels;
 }
 
-function pc(p) { return p>=72?'#4ade80':p>=58?'#fbbf24':'#f87171'; }
+function pc(p){return p>=72?'#4ade80':p>=58?'#fbbf24':'#f87171';}
 
-function getStatus(fix) {
-  var s = fix.fixture.status;
-  if (['1H','2H','ET','P','LIVE'].indexOf(s.short) >= 0) return {live:true, txt:(s.elapsed||'?')+"'"};
-  if (s.short === 'HT') return {live:true, txt:'Pauza'};
-  if (['FT','AET','PEN'].indexOf(s.short) >= 0) return {live:false, txt:'Final'};
-  return {live:false, txt:new Date(fix.fixture.date).toLocaleTimeString('ro-RO',{hour:'2-digit',minute:'2-digit'})};
+function getStatus(fix){
+  var s=fix.fixture.status;
+  if(['1H','2H','ET','P','LIVE'].indexOf(s.short)>=0)return{live:true,txt:(s.elapsed||'?')+"'"};
+  if(s.short==='HT')return{live:true,txt:'Pauza'};
+  if(['FT','AET','PEN'].indexOf(s.short)>=0)return{live:false,txt:'Final'};
+  return{live:false,txt:new Date(fix.fixture.date).toLocaleTimeString('ro-RO',{hour:'2-digit',minute:'2-digit'})};
 }
 
-function toggleSel(selId, fixId) {
-  var fix = allFixtures.find(function(f) { return f.fixture.id == fixId || f.fixture.id === fixId; });
-  if (!fix) return;
-  var tr = getTracked(fix.teams.home.name, fix.teams.away.name);
-  var s = genSels(fix, calcProbs(fix.teams.home.form, fix.teams.away.form), tr).find(function(x) { return x.id == selId; });
-  if (!s) return;
-  var idx = bilet.findIndex(function(b) { return b.selId == selId; });
-  if (idx >= 0) bilet.splice(idx, 1);
-  else {
-    if (bilet.length >= 8) return;
-    bilet.push({selId:selId, fixId:fixId, name:s.name, odd:s.odd, prob:s.prob, matchName:fix.teams.home.name+' vs '+fix.teams.away.name, cat:s.cat});
-  }
+function toggleSel(selId,fixId){
+  var fix=allFixtures.find(function(f){return f.fixture.id==fixId;});if(!fix)return;
+  var tr=getTracked(fix.teams.home.name,fix.teams.away.name);
+  var s=genSels(fix,calcProbs(fix.teams.home.form,fix.teams.away.form),tr).find(function(x){return x.id==selId;});if(!s)return;
+  var idx=bilet.findIndex(function(b){return b.selId==selId;});
+  if(idx>=0)bilet.splice(idx,1);
+  else{if(bilet.length>=8)return;bilet.push({selId:selId,fixId:fixId,name:s.name,odd:s.odd,prob:s.prob,matchName:fix.teams.home.name+' vs '+fix.teams.away.name,cat:s.cat});}
   render();
 }
+function removeSel(id){bilet=bilet.filter(function(b){return b.selId!=id;});render();}
+function setMiza(v){miza=v;renderBilet();}
+function calcCota(){return bilet.reduce(function(a,b){return a*b.odd;},1);}
+function calcProbEst(){return bilet.reduce(function(a,b){return a*(b.prob/100);},1)*100;}
+function profileScore(c){if(c<1.30)return{lbl:'Sub-profil',color:'#fbbf24',pct:18};if(c<1.60)return{lbl:'Conservator',color:'#4ade80',pct:42};if(c<2.50)return{lbl:'Echilibrat',color:'#4ade80',pct:70};if(c<4.00)return{lbl:'Moderat agresiv',color:'#fbbf24',pct:87};return{lbl:'Agresiv',color:'#f87171',pct:100};}
 
-function removeSel(id) { bilet = bilet.filter(function(b) { return b.selId != id; }); render(); }
-function setMiza(v) { miza = v; renderBilet(); }
-function calcCota() { return bilet.reduce(function(a,b){return a*b.odd;},1); }
-function calcProbEst() { return bilet.reduce(function(a,b){return a*(b.prob/100);},1)*100; }
-
-function profileScore(c) {
-  if (c<1.30) return {lbl:'Sub-profil', color:'#fbbf24', pct:18};
-  if (c<1.60) return {lbl:'Conservator', color:'#4ade80', pct:42};
-  if (c<2.50) return {lbl:'Echilibrat', color:'#4ade80', pct:70};
-  if (c<4.00) return {lbl:'Moderat agresiv', color:'#fbbf24', pct:87};
-  return {lbl:'Agresiv', color:'#f87171', pct:100};
-}
-
-function renderMatchCol() {
-  var filtered = activeLeague==='all' ? allFixtures : allFixtures.filter(function(f){return f.league.id.toString()===activeLeague;});
-  if (!filtered.length) return '<div class="empty-state">Niciun meci pentru ziua selectata</div>';
-  return filtered.map(function(fix) {
-    var id = fix.fixture.id;
-    var tr = getTracked(fix.teams.home.name, fix.teams.away.name);
-    var prob = calcProbs(fix.teams.home.form, fix.teams.away.form);
-    var sels = genSels(fix, prob, tr);
-    var st = getStatus(fix);
-    var cf = catFilter[id] || null;
-    var cats = []; sels.forEach(function(s){if(cats.indexOf(s.cat)<0)cats.push(s.cat);});
-    var vis = cf ? sels.filter(function(s){return s.cat===cf;}) : sels;
-    var added = bilet.filter(function(b){return b.fixId==id;}).length;
-    var score = fix.goals.home !== null ? fix.goals.home+'-'+fix.goals.away : null;
-    var hl = fix.teams.home.logo ? '<img class="tlogo" src="'+fix.teams.home.logo+'" onerror="this.outerHTML=\'<div class=tlogo-fb>'+fix.teams.home.name.slice(0,2).toUpperCase()+'</div>\'">'
-      : '<div class="tlogo-fb">'+fix.teams.home.name.slice(0,2).toUpperCase()+'</div>';
-    var al = fix.teams.away.logo ? '<img class="tlogo" src="'+fix.teams.away.logo+'" onerror="this.outerHTML=\'<div class=tlogo-fb>'+fix.teams.away.name.slice(0,2).toUpperCase()+'</div>\'">'
-      : '<div class="tlogo-fb">'+fix.teams.away.name.slice(0,2).toUpperCase()+'</div>';
-    var srcBadge = fix._source==='fd' ? '<span class="src-badge src-fd">football-data</span>' : '<span class="src-badge src-af">api-football</span>';
-    return '<div class="match-card '+(tr?'tracked':'')+'">'
+function renderMatchCol(){
+  var filtered=activeLeague==='all'?allFixtures:allFixtures.filter(function(f){return f.league.id.toString()===activeLeague;});
+  if(!filtered.length)return'<div class="empty-state">Niciun meci pentru ziua selectata</div>';
+  return filtered.map(function(fix){
+    var id=fix.fixture.id;var tr=getTracked(fix.teams.home.name,fix.teams.away.name);
+    var prob=calcProbs(fix.teams.home.form,fix.teams.away.form);var sels=genSels(fix,prob,tr);
+    var st=getStatus(fix);var cf=catFilter[id]||null;
+    var cats=[];sels.forEach(function(s){if(cats.indexOf(s.cat)<0)cats.push(s.cat);});
+    var vis=cf?sels.filter(function(s){return s.cat===cf;}):sels;
+    var added=bilet.filter(function(b){return b.fixId==id;}).length;
+    var score=fix.goals.home!==null?fix.goals.home+'-'+fix.goals.away:null;
+    var hl=fix.teams.home.logo?'<img class="tlogo" src="'+fix.teams.home.logo+'" onerror="this.outerHTML=\'<div class=tlogo-fb>'+fix.teams.home.name.slice(0,2).toUpperCase()+'</div>\'">'
+      :'<div class="tlogo-fb">'+fix.teams.home.name.slice(0,2).toUpperCase()+'</div>';
+    var al=fix.teams.away.logo?'<img class="tlogo" src="'+fix.teams.away.logo+'" onerror="this.outerHTML=\'<div class=tlogo-fb>'+fix.teams.away.name.slice(0,2).toUpperCase()+'</div>\'">'
+      :'<div class="tlogo-fb">'+fix.teams.away.name.slice(0,2).toUpperCase()+'</div>';
+    var srcBadge=fix._source==='fd'?'<span class="src-badge src-fd">FD</span>':'<span class="src-badge src-af">AF</span>';
+    return'<div class="match-card '+(tr?'tracked':'')+'">'
       +'<div class="mc-hdr"><div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap">'
-      +'<span class="lbadge">'+fix.league.name+'</span>'
-      +srcBadge
+      +'<span class="lbadge">'+fix.league.name+'</span>'+srcBadge
       +(st.live?'<span class="live-dot"></span><span style="font-size:10px;color:#ef4444;font-weight:500"> '+st.txt+'</span>':'<span style="font-size:10px;color:#444">'+st.txt+'</span>')
       +(tr?'<span class="tracked-badge">&#9733; urmarit</span>':'')
       +(added?'<span style="font-size:10px;padding:1px 6px;border-radius:8px;background:#0a2e1a;color:#4ade80;font-weight:500">'+added+' sel.</span>':'')
       +(added>=2?'<span class="bb-badge">BB</span>':'')
       +'</div><span style="font-size:10px;color:#333">'+fix.league.country+'</span></div>'
-      +'<div class="teams">'+hl
-      +'<span class="tn '+(tr&&tr.side==='home'?'tracked-team':'')+'">'+fix.teams.home.name+'</span>'
+      +'<div class="teams">'+hl+'<span class="tn '+(tr&&tr.side==='home'?'tracked-team':'')+'">'+fix.teams.home.name+'</span>'
       +(score?'<span class="score-b">'+score+'</span>':'<span class="vs">vs</span>')
       +'<span class="tn '+(tr&&tr.side==='away'?'tracked-team':'')+'" style="text-align:right">'+fix.teams.away.name+'</span>'+al+'</div>'
       +'<div class="prob-labels"><span>1 &middot; '+prob.h+'%</span><span>X &middot; '+prob.d+'%</span><span>2 &middot; '+prob.a+'%</span></div>'
@@ -471,35 +323,28 @@ function renderMatchCol() {
       +'<div class="sel-hdr"><span style="font-size:11px;color:#555;font-weight:500">Selectii</span>'
       +'<div class="cat-tabs">'+cats.map(function(c){return'<button class="ctab '+(cf===c?'active':'')+'" onclick="catFilter[\''+id+'\']=\''+(cf===c?'':c)+'\';render()">'+c+'</button>';}).join('')+'</div></div>'
       +'<div class="sel-grid">'+vis.map(function(s){
-        var inB = bilet.some(function(b){return b.selId==s.id;});
-        return '<div class="sel-item '+(inB?'added':'')+' '+(s.fix&&!inB?'fix-sel':'')+'" onclick="toggleSel(\''+s.id+'\',\''+id+'\')">'
+        var inB=bilet.some(function(b){return b.selId==s.id;});
+        return'<div class="sel-item '+(inB?'added':'')+' '+(s.fix&&!inB?'fix-sel':'')+'" onclick="toggleSel(\''+s.id+'\',\''+id+'\')">'
           +'<div class="sel-check">'+(inB?'&#10003;':'')+'</div>'
-          +'<div style="flex:1"><div style="display:flex;align-items:center;gap:4px">'
-          +'<span class="sel-name">'+s.name+'</span>'
+          +'<div style="flex:1"><div style="display:flex;align-items:center;gap:4px"><span class="sel-name">'+s.name+'</span>'
           +(s.fix?'<span class="fix-star">&#9733; fix</span>':s.rec?'<span class="rec-star">&#9733;</span>':'')
           +'</div><div class="pb-sm"><div class="pb-fill" style="width:'+s.prob+'%;background:'+pc(s.prob)+'"></div></div></div>'
-          +'<div style="text-align:right;flex-shrink:0">'
-          +'<div style="font-size:10px;font-weight:500;color:'+pc(s.prob)+'">'+s.prob+'%</div>'
-          +'<div style="font-size:11px;font-weight:600;color:#60a5fa">'+s.odd.toFixed(2)+'</div>'
-          +'</div></div>';
+          +'<div style="text-align:right;flex-shrink:0"><div style="font-size:10px;font-weight:500;color:'+pc(s.prob)+'">'+s.prob+'%</div>'
+          +'<div style="font-size:11px;font-weight:600;color:#60a5fa">'+s.odd.toFixed(2)+'</div></div></div>';
       }).join('')+'</div></div>';
   }).join('');
 }
 
-function renderBilet() {
-  var cota = calcCota(), prob = calcProbEst();
-  var castig = (miza*cota).toFixed(2), profit = (miza*cota-miza).toFixed(2);
-  var ps = profileScore(cota), ready = bilet.length >= 2;
-  var html = '<div class="bilet-panel"><div class="bp-title">Biletul meu <span class="bp-cnt">'+bilet.length+'/8</span></div>';
-  if (!bilet.length) {
-    html += '<div class="bilet-empty">Adauga selectii din meciuri pentru a construi biletul</div>';
-  } else {
-    html += bilet.map(function(b){
-      return '<div class="bs"><div class="bs-match">'+b.matchName+'</div><div class="bs-row"><span class="bs-name">'+b.name+'</span><span class="bs-odd">'+b.odd.toFixed(2)+'</span><div class="bs-rm" onclick="removeSel(\''+b.selId+'\')">&#10005;</div></div></div>';
-    }).join('');
-    html += '<div class="divider"></div>'
+function renderBilet(){
+  var cota=calcCota(),prob=calcProbEst();var castig=(miza*cota).toFixed(2),profit=(miza*cota-miza).toFixed(2);
+  var ps=profileScore(cota),ready=bilet.length>=2;
+  var html='<div class="bilet-panel"><div class="bp-title">Biletul meu <span class="bp-cnt">'+bilet.length+'/8</span></div>';
+  if(!bilet.length){html+='<div class="bilet-empty">Adauga selectii din meciuri pentru a construi biletul</div>';}
+  else{
+    html+=bilet.map(function(b){return'<div class="bs"><div class="bs-match">'+b.matchName+'</div><div class="bs-row"><span class="bs-name">'+b.name+'</span><span class="bs-odd">'+b.odd.toFixed(2)+'</span><div class="bs-rm" onclick="removeSel(\''+b.selId+'\')">&#10005;</div></div></div>';}).join('');
+    html+='<div class="divider"></div>'
       +'<div class="miza-row"><label>Miza</label><input class="miza-inp" type="number" min="1" value="'+miza+'" oninput="miza=+this.value;renderBilet()"><span style="font-size:11px;color:#555">RON</span></div>'
-      +'<div class="miza-btns">'+[25,50,100,150,200].map(function(v){return'<button class="mbtn"h onclick="setMiza('+v+')">'+v+'</button>';}).join('')+'</div>'
+      +'<div class="miza-btns">'+[25,50,100,150,200].map(function(v){return'<button class="mbtn" onclick="setMiza('+v+')">'+v+'</button>';}).join('')+'</div>'
       +'<div class="cota-box">'
       +'<div class="cr"><span class="cl">Cota totala</span><span class="cv big">'+cota.toFixed(2)+'</span></div>'
       +'<div class="cr"><span class="cl">Prob. estimata</span><span class="cv" style="color:'+pc(prob)+'">'+prob.toFixed(1)+'%</span></div>'
@@ -510,15 +355,11 @@ function renderBilet() {
       +'<div class="pz-bar"><div class="pz-fill" style="width:'+ps.pct+'%;background:'+ps.color+'"></div></div>'
       +'<div class="pz-lbl"><span>Conservator</span><span>Agresiv</span></div></div>';
   }
-  html += '<button class="place-btn '+(ready?'ready':'')+'" '+(ready?'':'disabled')+'>'+(bilet.length<2?'Adauga minim 2 selectii':'&#10003; Bilet gata &middot; '+cota.toFixed(2)+' &middot; '+castig+' RON')+'</button></div>';
-  document.getElementById('biletCol').innerHTML = html;
+  html+='<button class="place-btn '+(ready?'ready':'')+'" '+(ready?'':'disabled')+'>'+(bilet.length<2?'Adauga minim 2 selectii':'&#10003; Bilet gata &middot; '+cota.toFixed(2)+' &middot; '+castig+' RON')+'</button></div>';
+  document.getElementById('biletCol').innerHTML=html;
 }
 
-function render() {
-  document.getElementById('matchCol').innerHTML = renderMatchCol();
-  renderBilet();
-}
-
+function render(){document.getElementById('matchCol').innerHTML=renderMatchCol();renderBilet();}
 buildDateRow();
 loadFixtures();
 </script>
