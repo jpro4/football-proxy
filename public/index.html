@@ -139,8 +139,8 @@ var AF_PROXY='https://football-proxy-weld.vercel.app/api/proxy';
 var FD_PROXY='https://football-proxy-weld.vercel.app/api/fd';
 var AF_KEY='28e79815a34a62ca876f166048fe0f68';
 
-var FD_COMPS=['PL','PD','BL1','SA','FL1','PPL','CL','EL','EC'];
-var FD_INFO={PL:{n:'Premier League',c:'Anglia'},PD:{n:'La Liga',c:'Spania'},BL1:{n:'Bundesliga',c:'Germania'},SA:{n:'Serie A',c:'Italia'},FL1:{n:'Ligue 1',c:'Franta'},PPL:{n:'Primeira Liga',c:'Portugalia'},CL:{n:'UCL',c:'Europa'},EL:{n:'Europa League',c:'Europa'},EC:{n:'Championship',c:'Anglia'}};
+var FD_COMPS=['PL','PD','BL1','SA','FL1','PPL','CL','EC'];
+var FD_INFO={PL:{n:'Premier League',c:'Anglia'},PD:{n:'La Liga',c:'Spania'},BL1:{n:'Bundesliga',c:'Germania'},SA:{n:'Serie A',c:'Italia'},FL1:{n:'Ligue 1',c:'Franta'},PPL:{n:'Primeira Liga',c:'Portugalia'},CL:{n:'UCL',c:'Europa'},EC:{n:'Championship',c:'Anglia'}};
 var AF_LEAGUES={283:{n:'Liga 1',c:'Romania'},144:{n:'Pro League',c:'Belgia'}};
 
 var TRACKED={'Wrexham':{p:['score','corners','over25'],sr:0.85,ac:8.2,o25:0.72},'Real Madrid':{p:['score','over25'],sr:0.88,ac:6.8,o25:0.68},'Barcelona':{p:['score','corners','over25'],sr:0.86,ac:7.4,o25:0.71},'Manchester United':{p:['score'],sr:0.74,ac:5.9,o25:0.58},'Newcastle':{p:['score','corners'],sr:0.78,ac:7.1,o25:0.62},'Aston Villa':{p:['score','over25'],sr:0.76,ac:6.4,o25:0.64},'Leeds':{p:['score','corners'],sr:0.77,ac:7.8,o25:0.65},'Bayern':{p:['score','over25'],sr:0.91,ac:7.2,o25:0.74},'RB Leipzig':{p:['score','over25'],sr:0.82,ac:6.6,o25:0.69},'Dortmund':{p:['score','over25'],sr:0.80,ac:6.9,o25:0.67}};
@@ -149,6 +149,7 @@ function getTracked(hn,an){for(var t in TRACKED){if(hn.includes(t)||an.includes(
 
 var dateOffset=0,allFixtures=[],activeLeague='all',bilet=[],miza=50,catFilter={};
 
+function sleep(ms){return new Promise(function(r){setTimeout(r,ms);});}
 function getDateStr(off){var d=new Date();d.setDate(d.getDate()+off);return d.toISOString().split('T')[0];}
 function getDateLabel(off){var d=new Date();d.setDate(d.getDate()+off);if(off===0)return'Azi';if(off===1)return'Maine';var days=['Dum','Lun','Mar','Mie','Joi','Vin','Sam'];return days[d.getDay()]+' '+d.getDate()+'/'+(d.getMonth()+1);}
 
@@ -169,9 +170,9 @@ async function fetchAF(path,params){
 }
 
 async function fetchFD(comp,date){
-  var qs='competitions/'+comp+'/matches?dateFrom='+date+'&dateTo='+date;
-  var r=await fetch(FD_PROXY+'?path='+encodeURIComponent(qs));
-  if(!r.ok)throw new Error('FD '+r.status);
+  var path='competitions/'+comp+'/matches?dateFrom='+date+'&dateTo='+date;
+  var r=await fetch(FD_PROXY+'?path='+encodeURIComponent(path));
+  if(!r.ok)throw new Error('FD '+r.status+' '+comp);
   return r.json();
 }
 
@@ -182,36 +183,41 @@ function normFD(m,comp){
   else if(st==='IN_PLAY')ss='1H';
   else if(st==='PAUSED')ss='HT';
   var hs=m.score&&m.score.fullTime?m.score.fullTime.home:null;
-  var as=m.score&&m.score.fullTime?m.score.fullTime.away:null;
-  return{_source:'fd',fixture:{id:'fd_'+m.id,date:m.utcDate,status:{short:ss,elapsed:m.minute||null}},league:{id:'fd_'+comp,name:info.n,country:info.c},teams:{home:{name:m.homeTeam.shortName||m.homeTeam.name,logo:m.homeTeam.crest||null,form:null},away:{name:m.awayTeam.shortName||m.awayTeam.name,logo:m.awayTeam.crest||null,form:null}},goals:{home:hs,away:as}};
+  var as2=m.score&&m.score.fullTime?m.score.fullTime.away:null;
+  return{_source:'fd',fixture:{id:'fd_'+m.id,date:m.utcDate,status:{short:ss,elapsed:m.minute||null}},league:{id:'fd_'+comp,name:info.n,country:info.c},teams:{home:{name:m.homeTeam.shortName||m.homeTeam.name,logo:m.homeTeam.crest||null,form:null},away:{name:m.awayTeam.shortName||m.awayTeam.name,logo:m.awayTeam.crest||null,form:null}},goals:{home:hs,away:as2}};
 }
 
 async function loadFixtures(){
   document.getElementById('matchCol').innerHTML='<div class="loading-card"><div class="spin"></div><p style="font-size:12px;color:#555">Se incarca meciurile...</p></div>';
   document.getElementById('statusPill').className='status-pill sp-gray';
   document.getElementById('statusPill').textContent='Se conecteaza...';
-  allFixtures=[];catFilter=[];
+  allFixtures=[];catFilter={};
   var date=getDateStr(dateOffset);
-  var fixtures=[];var afCnt=0,fdCnt=0;
+  var fixtures=[];var fdCnt=0;
 
-  var afRes=await Promise.allSettled(Object.keys(AF_LEAGUES).map(function(l){return fetchAF('fixtures',{date:date,league:l,season:2025});}));
-  afRes.forEach(function(r){if(r.status==='fulfilled'&&r.value&&r.value.response){r.value.response.forEach(function(f){f._source='af';fixtures.push(f);});afCnt+=r.value.response.length;}});
-
-  var fdRes=await Promise.allSettled(FD_COMPS.map(function(c){return fetchFD(c,date);}));
-  fdRes.forEach(function(r,i){
+  // FD: sequential cu 200ms intre requesturi ca sa nu depasim 10 req/min
+  for(var i=0;i<FD_COMPS.length;i++){
     var comp=FD_COMPS[i];
-    if(r.status==='fulfilled'&&r.value&&r.value.matches){
-      r.value.matches.forEach(function(m){fixtures.push(normFD(m,comp));});
-      fdCnt+=r.value.matches.length;
-    }
-  });
+    try{
+      if(i>0)await sleep(200);
+      var r=await fetchFD(comp,date);
+      if(r&&r.matches){
+        r.matches.forEach(function(m){fixtures.push(normFD(m,comp));});
+        fdCnt+=r.matches.length;
+      }
+    }catch(e){console.warn('FD skip '+comp+':',e.message);}
+  }
+
+  // AF: Liga 1 si Belgia
+  var afRes=await Promise.allSettled(Object.keys(AF_LEAGUES).map(function(l){return fetchAF('fixtures',{date:date,league:l,season:2025});}));
+  afRes.forEach(function(r){if(r.status==='fulfilled'&&r.value&&r.value.response){r.value.response.forEach(function(f){f._source='af';fixtures.push(f);});}});
 
   fixtures.sort(function(a,b){return new Date(a.fixture.date)-new Date(b.fixture.date);});
   allFixtures=fixtures;
   var tr=allFixtures.filter(function(f){return getTracked(f.teams.home.name,f.teams.away.name);}).length;
   document.getElementById('statusPill').className='status-pill sp-green';
   document.getElementById('statusPill').textContent=allFixtures.length+' meciuri · '+tr+' urmarite';
-  document.getElementById('reqInfo').textContent='AF:'+afCnt+' FD:'+fdCnt;
+  document.getElementById('reqInfo').textContent='FD:'+fdCnt+' meciuri';
   buildLeagueFilter();render();
 }
 
@@ -251,7 +257,10 @@ function genSels(fix,prob,tr){
     if(tr&&tr.p.indexOf('corners')>=0){var tn2=tr.side==='home'?hs:as,cp=Math.min(82,Math.round(tr.ac/10*100));sels.push({id:id+'_tc',cat:'Cornere',name:tn2+' Peste 3.5 cornere',prob:cp,odd:+(100/cp*0.88).toFixed(2),rec:true,fix:true});}
     sels.push({id:id+'_sh',cat:'Suturi',name:'Atacant '+hs+' peste 0.5 suturi',prob:73,odd:1.30,rec:true,fix:false});
     sels.push({id:id+'_sa',cat:'Suturi',name:'Atacant '+as+' peste 0.5 suturi',prob:68,odd:1.38,rec:false,fix:false});
-  }else{sels.push({id:id+'_lg',cat:'Goluri',name:'Urmator gol',prob:72,odd:1.32,rec:true,fix:false});sels.push({id:id+'_lc',cat:'Cornere',name:'Urmator corner',prob:66,odd:1.44,rec:true,fix:false});}
+  }else{
+    sels.push({id:id+'_lg',cat:'Goluri',name:'Urmator gol',prob:72,odd:1.32,rec:true,fix:false});
+    sels.push({id:id+'_lc',cat:'Cornere',name:'Urmator corner',prob:66,odd:1.44,rec:true,fix:false});
+  }
   return sels;
 }
 
