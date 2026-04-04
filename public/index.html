@@ -11,366 +11,465 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .hdr{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:1.5rem}
 .hdr h1{font-size:22px;font-weight:600;color:#fff}
 .hdr p{font-size:12px;color:#888;margin-top:3px}
-.status-pill{font-size:11px;padding:3px 10px;border-radius:10px;font-weight:500}
-.sp-green{background:#0a2e1a;color:#4ade80}.sp-red{background:#2e0a0a;color:#f87171}.sp-gray{background:#1a1a1a;color:#888}
-.req-info{font-size:10px;color:#555;margin-top:2px;text-align:right}
-.date-row{display:flex;gap:5px;margin-bottom:1rem;flex-wrap:wrap;align-items:center}
-.date-btn{padding:4px 11px;border-radius:20px;border:1px solid #2a2a2a;font-size:11px;cursor:pointer;background:transparent;color:#888;transition:all .15s;white-space:nowrap}
-.date-btn.active{background:#fff;color:#000;border-color:#fff}
-.date-btn:hover:not(.active){background:#1a1a1a;color:#ccc}
-.league-filter{display:flex;gap:5px;margin-bottom:1rem;flex-wrap:wrap}
-.lfbtn{padding:3px 10px;border-radius:20px;border:1px solid #2a2a2a;font-size:11px;cursor:pointer;background:transparent;color:#666;transition:all .15s}
-.lfbtn.active{background:#fff;color:#000;border-color:#fff}
-.lfbtn:hover:not(.active){background:#1a1a1a;color:#ccc}
-.layout{display:grid;grid-template-columns:1fr 300px;gap:14px;align-items:start}
-@media(max-width:700px){.layout{grid-template-columns:1fr}}
-.match-card{background:#161616;border:1px solid #222;border-radius:12px;padding:1rem;margin-bottom:10px;transition:border-color .15s}
-.match-card:hover{border-color:#333}
-.match-card.tracked{border-left:3px solid #1D9E75}
-.mc-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:4px}
-.lbadge{font-size:10px;padding:2px 8px;border-radius:8px;background:#1a1a1a;color:#666}
-.src-badge{font-size:9px;padding:1px 6px;border-radius:6px;font-weight:500}
-.src-fd{background:#1a1a2e;color:#818cf8}.src-af{background:#1a2e1a;color:#4ade80}
-.live-dot{width:6px;height:6px;border-radius:50%;background:#ef4444;display:inline-block;animation:pulse 1.5s infinite}
+.sp{font-size:11px;padding:3px 10px;border-radius:10px;font-weight:500}
+.spg{background:#0a2e1a;color:#4ade80}.spx{background:#1a1a1a;color:#888}
+.ri{font-size:10px;color:#555;margin-top:2px;text-align:right}
+.dr{display:flex;gap:5px;margin-bottom:1rem;flex-wrap:wrap;align-items:center}
+.db{padding:4px 11px;border-radius:20px;border:1px solid #2a2a2a;font-size:11px;cursor:pointer;background:transparent;color:#888;white-space:nowrap}
+.db.active{background:#fff;color:#000;border-color:#fff}
+.db:hover:not(.active){background:#1a1a1a;color:#ccc}
+.lf{display:flex;gap:5px;margin-bottom:1rem;flex-wrap:wrap}
+.lb{padding:3px 10px;border-radius:20px;border:1px solid #2a2a2a;font-size:11px;cursor:pointer;background:transparent;color:#666}
+.lb.active{background:#fff;color:#000;border-color:#fff}
+.lb:hover:not(.active){background:#1a1a1a;color:#ccc}
+.lay{display:grid;grid-template-columns:1fr 300px;gap:14px;align-items:start}
+@media(max-width:700px){.lay{grid-template-columns:1fr}}
+.mc{background:#161616;border:1px solid #222;border-radius:12px;padding:1rem;margin-bottom:10px}
+.mc.tr{border-left:3px solid #1D9E75}
+.mh{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:4px}
+.lg{font-size:10px;padding:2px 8px;border-radius:8px;background:#1a1a1a;color:#666}
+.sfd{font-size:9px;padding:1px 6px;border-radius:6px;font-weight:500;background:#1a1a2e;color:#818cf8}
+.saf{font-size:9px;padding:1px 6px;border-radius:6px;font-weight:500;background:#1a2e1a;color:#4ade80}
+.ld{width:6px;height:6px;border-radius:50%;background:#ef4444;display:inline-block;animation:pulse 1.5s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.tracked-badge{font-size:10px;padding:1px 7px;border-radius:8px;background:#0a2e1a;color:#4ade80;font-weight:500}
-.bb-badge{font-size:10px;padding:1px 6px;border-radius:8px;background:#0a1a2e;color:#60a5fa;font-weight:500}
-.teams{display:flex;align-items:center;gap:8px;margin-bottom:10px}
-.tlogo{width:28px;height:28px;border-radius:50%;object-fit:contain;flex-shrink:0;background:#1a1a1a}
-.tlogo-fb{width:28px;height:28px;border-radius:50%;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;flex-shrink:0;color:#666}
+.tb{font-size:10px;padding:1px 7px;border-radius:8px;background:#0a2e1a;color:#4ade80;font-weight:500}
+.bb{font-size:10px;padding:1px 6px;border-radius:8px;background:#0a1a2e;color:#60a5fa;font-weight:500}
+.bil-day{font-size:9px;padding:1px 5px;border-radius:5px;background:#1a1a2e;color:#818cf8;font-weight:500}
+.tm{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.tl{width:28px;height:28px;border-radius:50%;object-fit:contain;flex-shrink:0;background:#1a1a1a}
+.tlf{width:28px;height:28px;border-radius:50%;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;flex-shrink:0;color:#666}
 .tn{font-size:13px;font-weight:500;color:#e8e8e8;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tn.tracked-team{color:#4ade80}
+.tn.tt{color:#4ade80}
 .vs{font-size:11px;color:#444;flex-shrink:0}
-.score-b{font-size:14px;font-weight:600;background:#1a1a1a;padding:3px 10px;border-radius:8px;flex-shrink:0;color:#fff}
-.prob-labels{display:flex;justify-content:space-between;font-size:11px;color:#555;margin-bottom:3px}
-.pbar{height:5px;border-radius:3px;display:flex;overflow:hidden;width:100%;gap:2px}
+.sc{font-size:14px;font-weight:600;background:#1a1a1a;padding:3px 10px;border-radius:8px;flex-shrink:0;color:#fff}
+.pl2{display:flex;justify-content:space-between;font-size:11px;color:#555;margin-bottom:3px}
+.pb{height:5px;border-radius:3px;display:flex;overflow:hidden;width:100%;gap:2px}
 .ps{height:100%;border-radius:2px}
 .ph{background:#3b82f6}.pd{background:#52525b}.pa{background:#ef4444}
-.mpills{display:flex;gap:5px;margin-top:8px;flex-wrap:wrap}
-.mpill{background:#1a1a1a;border-radius:8px;padding:5px 8px;font-size:11px;flex:1;min-width:60px;text-align:center}
-.mpill.hl{background:#0a2e1a}
+.mp{display:flex;gap:5px;margin-top:8px;flex-wrap:wrap}
+.pi{background:#1a1a1a;border-radius:8px;padding:5px 8px;font-size:11px;flex:1;min-width:60px;text-align:center}
+.pi.hl{background:#0a2e1a}
 .ml{color:#555;display:block;font-size:10px;margin-bottom:1px}
 .mv{font-weight:600;color:#e8e8e8}
-.mpill.hl .mv{color:#4ade80}
-.fixuri-box{background:#0a2e1a;border-radius:8px;padding:8px 10px;margin-top:8px}
-.fixuri-title{font-size:11px;font-weight:600;color:#4ade80;margin-bottom:5px}
-.fixuri-tags{display:flex;gap:4px;flex-wrap:wrap}
-.ftag{background:#0f3d22;border-radius:6px;padding:2px 8px;font-size:10px;color:#4ade80;font-weight:500}
-.sel-hdr{display:flex;align-items:center;justify-content:space-between;margin-top:10px;margin-bottom:5px}
-.cat-tabs{display:flex;gap:0;border:1px solid #2a2a2a;border-radius:8px;overflow:hidden}
-.ctab{padding:3px 9px;font-size:10px;cursor:pointer;background:transparent;color:#666;border:none;border-right:1px solid #2a2a2a;transition:all .15s}
-.ctab:last-child{border-right:none}
-.ctab.active{background:#1a1a1a;color:#e8e8e8;font-weight:500}
-.sel-grid{display:flex;flex-direction:column;gap:3px}
-.sel-item{display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:8px;border:1px solid #222;cursor:pointer;transition:all .15s}
-.sel-item:hover{border-color:#333;background:#1a1a1a}
-.sel-item.added{border-color:#1D9E75;background:#0a2e1a}
-.sel-item.fix-sel{border-color:#1a3a2a}
-.sel-check{width:15px;height:15px;border-radius:3px;border:1px solid #333;display:flex;align-items:center;justify-content:center;font-size:9px;flex-shrink:0;color:#888}
-.sel-item.added .sel-check{background:#1D9E75;border-color:#1D9E75;color:#fff}
-.sel-name{font-size:11px;color:#ccc;flex:1;line-height:1.3}
-.pb-sm{height:3px;border-radius:2px;background:#1a1a1a;margin-top:2px}
-.pb-fill{height:100%;border-radius:2px}
-.rec-star{font-size:9px;color:#4ade80;font-weight:600}
-.fix-star{font-size:9px;color:#4ade80;font-weight:600}
-.bilet-panel{background:#161616;border:1px solid #222;border-radius:12px;padding:1rem;position:sticky;top:16px}
-.bp-title{font-size:14px;font-weight:600;color:#fff;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
-.bp-cnt{font-size:11px;padding:2px 8px;border-radius:10px;background:#1a1a1a;color:#666}
-.bilet-empty{text-align:center;padding:2rem 1rem;color:#444;font-size:12px;line-height:1.7}
+.pi.hl .mv{color:#4ade80}
+.fb{background:#0a2e1a;border-radius:8px;padding:8px 10px;margin-top:8px}
+.ft{font-size:11px;font-weight:600;color:#4ade80;margin-bottom:5px}
+.fg{display:flex;gap:4px;flex-wrap:wrap}
+.fk{background:#0f3d22;border-radius:6px;padding:2px 8px;font-size:10px;color:#4ade80;font-weight:500}
+.cat-grp{margin-top:5px}
+.cat-hdr{display:flex;align-items:center;justify-content:space-between;padding:6px 8px;background:#1a1a1a;border-radius:8px;cursor:pointer;margin-bottom:2px;border:1px solid #222;user-select:none}
+.cat-hdr:hover{background:#222}
+.cat-ttl{font-size:11px;font-weight:500;color:#aaa;display:flex;align-items:center;gap:6px}
+.cat-cnt{font-size:10px;color:#4ade80;font-weight:600}
+.cat-arr{font-size:9px;color:#444}
+.sg{display:flex;flex-direction:column;gap:3px;margin-bottom:4px}
+.si{display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:8px;border:1px solid #222;cursor:pointer;transition:all .1s}
+.si:hover{border-color:#333;background:#1a1a1a}
+.si.ad{border-color:#1D9E75;background:#0a2e1a}
+.si.fx{border-color:#1a3a2a}
+.sk{width:15px;height:15px;border-radius:3px;border:1px solid #333;display:flex;align-items:center;justify-content:center;font-size:9px;flex-shrink:0;color:#888}
+.si.ad .sk{background:#1D9E75;border-color:#1D9E75;color:#fff}
+.sn{font-size:11px;color:#ccc;flex:1;line-height:1.3}
+.psm{height:3px;border-radius:2px;background:#1a1a1a;margin-top:2px}
+.pf{height:100%;border-radius:2px}
+.bp{background:#161616;border:1px solid #222;border-radius:12px;padding:1rem;position:sticky;top:16px}
+.bpt{font-size:14px;font-weight:600;color:#fff;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
+.bpc{font-size:11px;padding:2px 8px;border-radius:10px;background:#1a1a1a;color:#666}
+.be{text-align:center;padding:2rem 1rem;color:#444;font-size:12px;line-height:1.8}
 .bs{padding:6px 0;border-bottom:1px solid #1a1a1a}
 .bs:last-child{border-bottom:none}
-.bs-match{font-size:10px;color:#444;margin-bottom:1px}
-.bs-row{display:flex;align-items:center;gap:5px}
-.bs-name{font-size:11px;color:#ccc;flex:1;line-height:1.3}
-.bs-odd{font-size:12px;font-weight:600;color:#60a5fa;min-width:28px;text-align:right}
-.bs-rm{width:15px;height:15px;border-radius:50%;border:1px solid #2a2a2a;display:flex;align-items:center;justify-content:center;font-size:9px;cursor:pointer;color:#555;flex-shrink:0}
-.bs-rm:hover{background:#2e0a0a;border-color:#ef4444;color:#f87171}
-.divider{height:1px;background:#1a1a1a;margin:10px 0}
-.miza-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
-.miza-row label{font-size:11px;color:#666;min-width:32px}
-.miza-inp{padding:5px 8px;border-radius:8px;border:1px solid #2a2a2a;background:#0f0f0f;color:#fff;font-size:13px;width:80px;font-family:inherit}
-.miza-btns{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:10px}
-.mbtn{padding:3px 8px;border-radius:8px;border:1px solid #2a2a2a;background:transparent;color:#666;font-size:11px;cursor:pointer}
-.mbtn:hover{background:#1a1a1a;color:#ccc}
-.cota-box{background:#0f0f0f;border-radius:8px;padding:10px 12px;margin-bottom:8px;border:1px solid #1a1a1a}
+.bsm{font-size:10px;color:#444;margin-bottom:2px;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.bsr{display:flex;align-items:center;gap:5px}
+.bsn{font-size:11px;color:#ccc;flex:1;line-height:1.3}
+.bso{font-size:12px;font-weight:600;color:#60a5fa;min-width:32px;text-align:right}
+.brm{width:15px;height:15px;border-radius:50%;border:1px solid #2a2a2a;display:flex;align-items:center;justify-content:center;font-size:9px;cursor:pointer;color:#555;flex-shrink:0}
+.brm:hover{background:#2e0a0a;border-color:#ef4444;color:#f87171}
+.dv{height:1px;background:#1a1a1a;margin:10px 0}
+.mr{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.mr label{font-size:11px;color:#666;min-width:32px}
+.mi{padding:5px 8px;border-radius:8px;border:1px solid #2a2a2a;background:#0f0f0f;color:#fff;font-size:13px;width:80px;font-family:inherit}
+.mbs{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:10px}
+.mbt{padding:3px 8px;border-radius:8px;border:1px solid #2a2a2a;background:transparent;color:#666;font-size:11px;cursor:pointer}
+.mbt:hover{background:#1a1a1a;color:#ccc}
+.cb{background:#0f0f0f;border-radius:8px;padding:10px 12px;margin-bottom:8px;border:1px solid #1a1a1a}
 .cr{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
 .cr:last-child{margin-bottom:0}
 .cl{font-size:11px;color:#555}
 .cv{font-size:13px;font-weight:600;color:#e8e8e8}
 .cv.big{font-size:20px;color:#fff}
-.cv.green{color:#4ade80}
+.cv.gr{color:#4ade80}
 .pz{background:#0f0f0f;border-radius:8px;padding:8px 10px;margin-bottom:10px;border:1px solid #1a1a1a}
-.pz-bar{height:5px;border-radius:3px;background:#1a1a1a;overflow:hidden;margin:4px 0}
-.pz-fill{height:100%;border-radius:3px;transition:width .4s}
-.pz-lbl{display:flex;justify-content:space-between;font-size:10px;color:#444}
-.place-btn{width:100%;padding:10px;border-radius:8px;border:1px solid #2a2a2a;background:transparent;color:#888;font-size:13px;cursor:pointer;font-weight:500;transition:all .15s}
-.place-btn:hover{background:#1a1a1a}
-.place-btn:disabled{opacity:.3;cursor:not-allowed}
-.place-btn.ready{border-color:#1D9E75;color:#4ade80}
-.place-btn.ready:hover{background:#0a2e1a}
-.loading-card{background:#161616;border-radius:12px;padding:2rem;text-align:center;margin-bottom:10px}
-.spin{display:inline-block;width:16px;height:16px;border:2px solid #222;border-top-color:#888;border-radius:50%;animation:spin .7s linear infinite;margin-bottom:8px}
+.pzb{height:5px;border-radius:3px;background:#1a1a1a;overflow:hidden;margin:4px 0}
+.pzf{height:100%;border-radius:3px}
+.pzl{display:flex;justify-content:space-between;font-size:10px;color:#444}
+.plb{width:100%;padding:10px;border-radius:8px;border:1px solid #2a2a2a;background:transparent;color:#888;font-size:13px;cursor:pointer;font-weight:500}
+.plb.rdy{border-color:#1D9E75;color:#4ade80}
+.plb:disabled{opacity:.3;cursor:not-allowed}
+.ldc{background:#161616;border-radius:12px;padding:2rem;text-align:center;margin-bottom:10px}
+.spn{display:inline-block;width:16px;height:16px;border:2px solid #222;border-top-color:#888;border-radius:50%;animation:spin .7s linear infinite;margin-bottom:8px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.error-card{background:#1a0a0a;border:1px solid #3a1a1a;border-radius:12px;padding:1.25rem;margin-bottom:10px;font-size:12px;color:#f87171;line-height:1.7}
-.empty-state{text-align:center;padding:3rem 1rem;color:#333;font-size:13px}
+.es{text-align:center;padding:3rem 1rem;color:#333;font-size:13px}
 </style>
 </head>
 <body>
 <div class="app">
-  <div class="hdr">
-    <div>
-      <h1>Football Intelligence</h1>
-      <p>API-Football + football-data.org · profil conservator · fixuri urmarite</p>
-    </div>
-    <div style="text-align:right">
-      <span id="statusPill" class="status-pill sp-gray">Se conecteaza...</span>
-      <div id="reqInfo" class="req-info"></div>
-    </div>
-  </div>
-  <div class="date-row" id="dateRow"></div>
-  <div class="league-filter" id="leagueFilter"></div>
-  <div class="layout">
-    <div id="matchCol"></div>
-    <div id="biletCol"></div>
-  </div>
+<div class="hdr">
+<div><h1>Football Intelligence</h1><p>API-Football + football-data.org &middot; profil conservator &middot; fixuri urmarite</p></div>
+<div style="text-align:right"><span id="sP" class="sp spx">Se conecteaza...</span><div id="rI" class="ri"></div></div>
+</div>
+<div class="dr" id="dR"></div>
+<div class="lf" id="lF"></div>
+<div class="lay"><div id="mC"></div><div id="bC"></div></div>
 </div>
 <script>
-var AF_PROXY='https://football-proxy-weld.vercel.app/api/proxy';
-var FD_PROXY='https://football-proxy-weld.vercel.app/api/fd';
-var AF_KEY='28e79815a34a62ca876f166048fe0f68';
+var FP='https://football-proxy-weld.vercel.app/api/fd';
+var AP='https://football-proxy-weld.vercel.app/api/proxy';
+var AK='28e79815a34a62ca876f166048fe0f68';
+var FC=['PL','PD','BL1','SA','FL1','PPL','CL','EC'];
+var FI={PL:{n:'Premier League',c:'Anglia'},PD:{n:'La Liga',c:'Spania'},BL1:{n:'Bundesliga',c:'Germania'},SA:{n:'Serie A',c:'Italia'},FL1:{n:'Ligue 1',c:'Franta'},PPL:{n:'Primeira Liga',c:'Portugalia'},CL:{n:'UCL',c:'Europa'},EC:{n:'Championship',c:'Anglia'}};
+var AL={283:{n:'Liga 1',c:'Romania'},144:{n:'Pro League',c:'Belgia'}};
 
-var FD_COMPS=['PL','PD','BL1','SA','FL1','PPL','CL','EC'];
-var FD_INFO={PL:{n:'Premier League',c:'Anglia'},PD:{n:'La Liga',c:'Spania'},BL1:{n:'Bundesliga',c:'Germania'},SA:{n:'Serie A',c:'Italia'},FL1:{n:'Ligue 1',c:'Franta'},PPL:{n:'Primeira Liga',c:'Portugalia'},CL:{n:'UCL',c:'Europa'},EC:{n:'Championship',c:'Anglia'}};
-var AF_LEAGUES={283:{n:'Liga 1',c:'Romania'},144:{n:'Pro League',c:'Belgia'}};
+var TR={'Wrexham':{p:['score','corners','over25'],sr:0.85,ac:8.2,o25:0.72},'Real Madrid':{p:['score','over25'],sr:0.88,ac:6.8,o25:0.68},'Barcelona':{p:['score','corners','over25'],sr:0.86,ac:7.4,o25:0.71},'Manchester United':{p:['score'],sr:0.74,ac:5.9,o25:0.58},'Newcastle':{p:['score','corners'],sr:0.78,ac:7.1,o25:0.62},'Aston Villa':{p:['score','over25'],sr:0.76,ac:6.4,o25:0.64},'Leeds':{p:['score','corners'],sr:0.77,ac:7.8,o25:0.65},'Bayern':{p:['score','over25'],sr:0.91,ac:7.2,o25:0.74},'RB Leipzig':{p:['score','over25'],sr:0.82,ac:6.6,o25:0.69},'Dortmund':{p:['score','over25'],sr:0.80,ac:6.9,o25:0.67}};
 
-var TRACKED={'Wrexham':{p:['score','corners','over25'],sr:0.85,ac:8.2,o25:0.72},'Real Madrid':{p:['score','over25'],sr:0.88,ac:6.8,o25:0.68},'Barcelona':{p:['score','corners','over25'],sr:0.86,ac:7.4,o25:0.71},'Manchester United':{p:['score'],sr:0.74,ac:5.9,o25:0.58},'Newcastle':{p:['score','corners'],sr:0.78,ac:7.1,o25:0.62},'Aston Villa':{p:['score','over25'],sr:0.76,ac:6.4,o25:0.64},'Leeds':{p:['score','corners'],sr:0.77,ac:7.8,o25:0.65},'Bayern':{p:['score','over25'],sr:0.91,ac:7.2,o25:0.74},'RB Leipzig':{p:['score','over25'],sr:0.82,ac:6.6,o25:0.69},'Dortmund':{p:['score','over25'],sr:0.80,ac:6.9,o25:0.67}};
+var PL={
+  'Real Madrid':['Vinicius Jr','Mbappe','Bellingham','Rodrygo'],
+  'Bayern':['Kane','Musiala','Gnabry','Sane'],
+  'Barcelona':['Lewandowski','Yamal','Raphinha','Ferran Torres'],
+  'Arsenal':['Saka','Havertz','Martinelli','Trossard'],
+  'Liverpool':['Salah','Diaz','Nunez','Gakpo'],
+  'Manchester United':['Hojlund','Fernandes','Rashford','Amad'],
+  'Newcastle':['Isak','Gordon','Barnes','Almiron'],
+  'Aston Villa':['Watkins','Rogers','Duran','McGinn'],
+  'Leeds':['Piroe','Gnonto','Bamford','Bogle'],
+  'Wrexham':['Mullin','Marriott','McAleny','Cannon'],
+  'RB Leipzig':['Openda','Simons','Sesko','Nkunku'],
+  'Dortmund':['Guirassy','Sancho','Brandt','Adeyemi'],
+  'Sporting CP':['Gyokeres','Trincao','Edwards','Coates'],
+  'PSG':['Dembele','Barcola','Lee Kang-in','Doue'],
+  'Atletico Madrid':['Griezmann','Morata','De Paul','Llorente'],
+  'Inter':['Lautaro','Thuram','Calhanoglu','Barella'],
+  'Milan':['Morata','Leao','Pulisic','Reijnders'],
+  'Juventus':['Vlahovic','Yildiz','Cambiaso','Koopmeiners'],
+  'Napoli':['Lukaku','Kvaratskhelia','Politano','Raspadori'],
+  'Roma':['Dovbyk','Dybala','Pellegrini','El Shaarawy'],
+  'Marseille':['Greenwood','Rabiot','Aubameyang','Kondogbia'],
+  'Monaco':['Embolo','Ben Yedder','Golovin','Minamino'],
+  'Benfica':['Pavlidis','Di Maria','Amdouni','Kokcu'],
+  'Porto':['Galeno','Evanilson','Pepelu','Veron'],
+  'Ajax':['Brobbey','Bergwijn','Taylor','Henderson'],
+  'Feyenoord':['Gimenez','Timber','Paixao','Ivanusec']
+};
 
-function getTracked(hn,an){for(var t in TRACKED){if(hn.includes(t)||an.includes(t))return Object.assign({},TRACKED[t],{team:t,side:hn.includes(t)?'home':'away'});}return null;}
-
-var dateOffset=0,allFixtures=[],activeLeague='all',bilet=[],miza=50,catFilter={};
-
-function sleep(ms){return new Promise(function(r){setTimeout(r,ms);});}
-function getDateStr(off){var d=new Date();d.setDate(d.getDate()+off);return d.toISOString().split('T')[0];}
-function getDateLabel(off){var d=new Date();d.setDate(d.getDate()+off);if(off===0)return'Azi';if(off===1)return'Maine';var days=['Dum','Lun','Mar','Mie','Joi','Vin','Sam'];return days[d.getDay()]+' '+d.getDate()+'/'+(d.getMonth()+1);}
-
-function buildDateRow(){
-  var html='<span style="font-size:11px;color:#555;align-self:center">Data:</span>';
-  for(var i=0;i<=6;i++)html+='<button class="date-btn '+(dateOffset===i?'active':'')+'" onclick="setDate('+i+',this)">'+getDateLabel(i)+'</button>';
-  html+='<button onclick="loadFixtures()" style="padding:4px 10px;border-radius:20px;border:1px solid #2a2a2a;background:transparent;color:#666;font-size:11px;cursor:pointer;margin-left:4px">&#8635;</button>';
-  document.getElementById('dateRow').innerHTML=html;
+function getPL(name){
+  for(var k in PL){
+    if(name.includes(k)||k.includes(name.split(' ')[0]))return PL[k];
+  }
+  return['Atacant 1','Atacant 2','Atacant 3'];
 }
 
-async function fetchAF(path,params){
-  var qs=new URLSearchParams(Object.assign({path:path},params||{})).toString();
-  var r=await fetch(AF_PROXY+'?'+qs,{headers:{'x-apisports-key':AF_KEY}});
-  var rem=r.headers.get('x-ratelimit-requests-remaining');
-  if(rem)document.getElementById('reqInfo').textContent='AF:'+rem+' req';
-  if(!r.ok)throw new Error('AF '+r.status);
+function gt(h,a){for(var k in TR){if(h.includes(k)||a.includes(k))return Object.assign({},TR[k],{team:k,side:h.includes(k)?'home':'away'});}return null;}
+
+var dO=0,aF=[],aL='all',bil=[],miz=50,catOp={};
+
+function slp(ms){return new Promise(function(r){setTimeout(r,ms);});}
+function gd(o){var d=new Date();d.setDate(d.getDate()+o);return d.toISOString().split('T')[0];}
+function gdl(o){var d=new Date();d.setDate(d.getDate()+o);if(o===0)return'Azi';if(o===1)return'Maine';return['Dum','Lun','Mar','Mie','Joi','Vin','Sam'][d.getDay()]+' '+d.getDate()+'/'+(d.getMonth()+1);}
+
+function bdr(){
+  var h='<span style="font-size:11px;color:#555;align-self:center">Data:</span>';
+  for(var i=0;i<=6;i++)h+='<button class="db'+(dO===i?' active':'')+'" onclick="setD('+i+')">'+gdl(i)+'</button>';
+  h+='<button onclick="load()" style="padding:4px 10px;border-radius:20px;border:1px solid #2a2a2a;background:transparent;color:#666;font-size:11px;cursor:pointer;margin-left:4px">&#8635;</button>';
+  document.getElementById('dR').innerHTML=h;
+}
+
+async function ffd(c,d){
+  var r=await fetch(FP+'?path='+encodeURIComponent('competitions/'+c+'/matches?dateFrom='+d+'&dateTo='+d));
+  if(!r.ok)throw new Error(r.status);
+  return r.json();
+}
+async function faf(p,q){
+  var qs=new URLSearchParams(Object.assign({path:p},q||{})).toString();
+  var r=await fetch(AP+'?'+qs,{headers:{'x-apisports-key':AK}});
+  if(!r.ok)throw new Error(r.status);
   return r.json();
 }
 
-async function fetchFD(comp,date){
-  var path='competitions/'+comp+'/matches?dateFrom='+date+'&dateTo='+date;
-  var r=await fetch(FD_PROXY+'?path='+encodeURIComponent(path));
-  if(!r.ok)throw new Error('FD '+r.status+' '+comp);
-  return r.json();
-}
-
-function normFD(m,comp){
-  var info=FD_INFO[comp]||{n:comp,c:''};
-  var st=m.status,ss='NS';
-  if(st==='FINISHED')ss='FT';
-  else if(st==='IN_PLAY')ss='1H';
-  else if(st==='PAUSED')ss='HT';
+function nfd(m,c){
+  var i=FI[c]||{n:c,c:''};var ss='NS';
+  if(m.status==='FINISHED')ss='FT';
+  else if(m.status==='IN_PLAY')ss='1H';
+  else if(m.status==='PAUSED')ss='HT';
   var hs=m.score&&m.score.fullTime?m.score.fullTime.home:null;
-  var as2=m.score&&m.score.fullTime?m.score.fullTime.away:null;
-  return{_source:'fd',fixture:{id:'fd_'+m.id,date:m.utcDate,status:{short:ss,elapsed:m.minute||null}},league:{id:'fd_'+comp,name:info.n,country:info.c},teams:{home:{name:m.homeTeam.shortName||m.homeTeam.name,logo:m.homeTeam.crest||null,form:null},away:{name:m.awayTeam.shortName||m.awayTeam.name,logo:m.awayTeam.crest||null,form:null}},goals:{home:hs,away:as2}};
+  var as=m.score&&m.score.fullTime?m.score.fullTime.away:null;
+  return{_s:'fd',fixture:{id:'fd_'+m.id,date:m.utcDate,status:{short:ss,elapsed:m.minute||null}},league:{id:'fd_'+c,name:i.n,country:i.c},teams:{home:{name:m.homeTeam.shortName||m.homeTeam.name,logo:m.homeTeam.crest||null,form:null},away:{name:m.awayTeam.shortName||m.awayTeam.name,logo:m.awayTeam.crest||null,form:null}},goals:{home:hs,away:as}};
 }
 
-async function loadFixtures(){
-  document.getElementById('matchCol').innerHTML='<div class="loading-card"><div class="spin"></div><p style="font-size:12px;color:#555">Se incarca meciurile...</p></div>';
-  document.getElementById('statusPill').className='status-pill sp-gray';
-  document.getElementById('statusPill').textContent='Se conecteaza...';
-  allFixtures=[];catFilter={};
-  var date=getDateStr(dateOffset);
-  var fixtures=[];var fdCnt=0;
-
-  // FD: sequential cu 200ms intre requesturi ca sa nu depasim 10 req/min
-  for(var i=0;i<FD_COMPS.length;i++){
-    var comp=FD_COMPS[i];
+async function load(){
+  document.getElementById('mC').innerHTML='<div class="ldc"><div class="spn"></div><p style="font-size:12px;color:#555">Se incarca...</p></div>';
+  document.getElementById('sP').className='sp spx';
+  document.getElementById('sP').textContent='Se conecteaza...';
+  aF=[];
+  var date=gd(dO),fx=[],fc=0;
+  for(var i=0;i<FC.length;i++){
     try{
-      if(i>0)await sleep(200);
-      var r=await fetchFD(comp,date);
-      if(r&&r.matches){
-        r.matches.forEach(function(m){fixtures.push(normFD(m,comp));});
-        fdCnt+=r.matches.length;
-      }
-    }catch(e){console.warn('FD skip '+comp+':',e.message);}
+      if(i>0)await slp(700);
+      var r=await ffd(FC[i],date);
+      if(r&&r.matches){r.matches.forEach(function(m){fx.push(nfd(m,FC[i]));});fc+=r.matches.length;}
+    }catch(e){}
   }
-
-  // AF: Liga 1 si Belgia
-  var afRes=await Promise.allSettled(Object.keys(AF_LEAGUES).map(function(l){return fetchAF('fixtures',{date:date,league:l,season:2025});}));
-  afRes.forEach(function(r){if(r.status==='fulfilled'&&r.value&&r.value.response){r.value.response.forEach(function(f){f._source='af';fixtures.push(f);});}});
-
-  fixtures.sort(function(a,b){return new Date(a.fixture.date)-new Date(b.fixture.date);});
-  allFixtures=fixtures;
-  var tr=allFixtures.filter(function(f){return getTracked(f.teams.home.name,f.teams.away.name);}).length;
-  document.getElementById('statusPill').className='status-pill sp-green';
-  document.getElementById('statusPill').textContent=allFixtures.length+' meciuri · '+tr+' urmarite';
-  document.getElementById('reqInfo').textContent='FD:'+fdCnt+' meciuri';
-  buildLeagueFilter();render();
+  var ar=await Promise.allSettled(Object.keys(AL).map(function(l){return faf('fixtures',{date:date,league:l,season:2025});}));
+  ar.forEach(function(r){if(r.status==='fulfilled'&&r.value&&r.value.response)r.value.response.forEach(function(f){f._s='af';fx.push(f);});});
+  fx.sort(function(a,b){return new Date(a.fixture.date)-new Date(b.fixture.date);});
+  aF=fx;
+  var tr=aF.filter(function(f){return gt(f.teams.home.name,f.teams.away.name);}).length;
+  document.getElementById('sP').className='sp spg';
+  document.getElementById('sP').textContent=aF.length+' meciuri \xb7 '+tr+' urmarite';
+  document.getElementById('rI').textContent='FD:'+fc;
+  blf();rnd();
 }
 
-function buildLeagueFilter(){
-  var seen=[],lids=[];
-  allFixtures.forEach(function(f){var k=f.league.id.toString();if(seen.indexOf(k)<0){seen.push(k);lids.push({key:k,name:f.league.name});}});
-  var html='<button class="lfbtn '+(activeLeague==='all'?'active':'')+'" onclick="setLeague(\'all\')">Toate ('+allFixtures.length+')</button>';
-  lids.forEach(function(l){var cnt=allFixtures.filter(function(f){return f.league.id.toString()===l.key;}).length;html+='<button class="lfbtn '+(activeLeague===l.key?'active':'')+'" onclick="setLeague(\''+l.key+'\')">'+l.name+' ('+cnt+')</button>';});
-  document.getElementById('leagueFilter').innerHTML=html;
+function blf(){
+  var s=[],ld=[];
+  aF.forEach(function(f){var k=f.league.id.toString();if(s.indexOf(k)<0){s.push(k);ld.push({key:k,name:f.league.name});}});
+  var h='<button class="lb'+(aL==='all'?' active':'')+'" onclick="setL(\'all\')">Toate ('+aF.length+')</button>';
+  ld.forEach(function(l){var c=aF.filter(function(f){return f.league.id.toString()===l.key;}).length;h+='<button class="lb'+(aL===l.key?' active':'')+'" onclick="setL(\''+l.key+'\')">'+l.name+' ('+c+')</button>';});
+  document.getElementById('lF').innerHTML=h;
 }
 
-function setLeague(l){activeLeague=l;buildLeagueFilter();render();}
-function setDate(off,el){dateOffset=off;bilet=[];buildDateRow();loadFixtures();}
+function setL(l){aL=l;blf();rnd();}
 
-function calcProbs(hf,af){
-  function pts(s){return s?Array.from(s).reduce(function(a,c){return a+(c==='W'?3:c==='D'?1:0);},0):8;}
-  var h=pts(hf),a=pts(af),tot=h+a+5;
-  var ph=Math.max(22,Math.min(68,Math.round((h+2)/tot*100)));
-  var pa=Math.max(15,Math.min(55,Math.round((a+1)/tot*100)));
-  return{h:ph,d:Math.max(15,100-ph-pa),a:pa};
-}
+// FIX 1: setD nu mai sterge biletul
+function setD(o){dO=o;bdr();load();}
 
-function genSels(fix,prob,tr){
-  var id=fix.fixture.id;var hn=fix.teams.home.name,an=fix.teams.away.name;var hs=hn.split(' ')[0],as=an.split(' ')[0];
-  var live=['1H','2H','HT','ET','P','LIVE'].indexOf(fix.fixture.status.short)>=0;var sels=[];
-  if(!live){
-    var w=prob.h>prob.a?hn:an,wp=prob.h>prob.a?prob.h:prob.a;
-    sels.push({id:id+'_w',cat:'1X2',name:w+' castiga',prob:wp,odd:+(100/wp*0.90).toFixed(2),rec:wp>54,fix:false});
-    sels.push({id:id+'_d',cat:'1X2',name:'Egal',prob:prob.d,odd:+(100/prob.d*0.88).toFixed(2),rec:false,fix:false});
-    var g15=Math.min(85,52+prob.h*0.28+prob.a*0.22),g25=Math.round(g15*0.72);
-    sels.push({id:id+'_g15',cat:'Goluri',name:'Peste 1.5 goluri',prob:Math.round(g15),odd:+(100/g15*0.88).toFixed(2),rec:g15>68,fix:false});
-    sels.push({id:id+'_g25',cat:'Goluri',name:'Peste 2.5 goluri',prob:g25,odd:+(100/g25*0.88).toFixed(2),rec:g25>58,fix:tr&&tr.p.indexOf('over25')>=0});
-    sels.push({id:id+'_btts',cat:'Goluri',name:'Ambele marcheaza',prob:Math.round(g15*0.80),odd:+(100/(g15*0.80)*0.88).toFixed(2),rec:false,fix:false});
-    if(tr&&tr.p.indexOf('score')>=0){var tn=tr.side==='home'?hs:as,sp=Math.round(tr.sr*100);sels.push({id:id+'_ts',cat:'Goluri',name:tn+' marcheaza',prob:sp,odd:+(100/sp*0.88).toFixed(2),rec:true,fix:true});}
-    sels.push({id:id+'_c9',cat:'Cornere',name:'Peste 9.5 cornere total',prob:64,odd:1.50,rec:true,fix:false});
-    sels.push({id:id+'_ch',cat:'Cornere',name:'Peste 4.5 cornere '+hs,prob:67,odd:1.42,rec:true,fix:false});
-    if(tr&&tr.p.indexOf('corners')>=0){var tn2=tr.side==='home'?hs:as,cp=Math.min(82,Math.round(tr.ac/10*100));sels.push({id:id+'_tc',cat:'Cornere',name:tn2+' Peste 3.5 cornere',prob:cp,odd:+(100/cp*0.88).toFixed(2),rec:true,fix:true});}
-    sels.push({id:id+'_sh',cat:'Suturi',name:'Atacant '+hs+' peste 0.5 suturi',prob:73,odd:1.30,rec:true,fix:false});
-    sels.push({id:id+'_sa',cat:'Suturi',name:'Atacant '+as+' peste 0.5 suturi',prob:68,odd:1.38,rec:false,fix:false});
-  }else{
-    sels.push({id:id+'_lg',cat:'Goluri',name:'Urmator gol',prob:72,odd:1.32,rec:true,fix:false});
-    sels.push({id:id+'_lc',cat:'Cornere',name:'Urmator corner',prob:66,odd:1.44,rec:true,fix:false});
-  }
-  return sels;
-}
+function pc(p){return p>=72?'#4ade80':p>=55?'#fbbf24':'#f87171';}
 
-function pc(p){return p>=72?'#4ade80':p>=58?'#fbbf24':'#f87171';}
-
-function getStatus(fix){
-  var s=fix.fixture.status;
+function gst(f){
+  var s=f.fixture.status;
   if(['1H','2H','ET','P','LIVE'].indexOf(s.short)>=0)return{live:true,txt:(s.elapsed||'?')+"'"};
   if(s.short==='HT')return{live:true,txt:'Pauza'};
   if(['FT','AET','PEN'].indexOf(s.short)>=0)return{live:false,txt:'Final'};
-  return{live:false,txt:new Date(fix.fixture.date).toLocaleTimeString('ro-RO',{hour:'2-digit',minute:'2-digit'})};
+  return{live:false,txt:new Date(f.fixture.date).toLocaleTimeString('ro-RO',{hour:'2-digit',minute:'2-digit'})};
 }
 
-function toggleSel(selId,fixId){
-  var fix=allFixtures.find(function(f){return f.fixture.id==fixId;});if(!fix)return;
-  var tr=getTracked(fix.teams.home.name,fix.teams.away.name);
-  var s=genSels(fix,calcProbs(fix.teams.home.form,fix.teams.away.form),tr).find(function(x){return x.id==selId;});if(!s)return;
-  var idx=bilet.findIndex(function(b){return b.selId==selId;});
-  if(idx>=0)bilet.splice(idx,1);
-  else{if(bilet.length>=8)return;bilet.push({selId:selId,fixId:fixId,name:s.name,odd:s.odd,prob:s.prob,matchName:fix.teams.home.name+' vs '+fix.teams.away.name,cat:s.cat});}
-  render();
+function cp(hf,af){
+  function p(s){return s?Array.from(s).reduce(function(a,c){return a+(c==='W'?3:c==='D'?1:0);},0):8;}
+  var h=p(hf),a=p(af),t=h+a+5;
+  var ph=Math.max(22,Math.min(68,Math.round((h+2)/t*100)));
+  var pa=Math.max(15,Math.min(55,Math.round((a+1)/t*100)));
+  return{h:ph,d:Math.max(15,100-ph-pa),a:pa};
 }
-function removeSel(id){bilet=bilet.filter(function(b){return b.selId!=id;});render();}
-function setMiza(v){miza=v;renderBilet();}
-function calcCota(){return bilet.reduce(function(a,b){return a*b.odd;},1);}
-function calcProbEst(){return bilet.reduce(function(a,b){return a*(b.prob/100);},1)*100;}
-function profileScore(c){if(c<1.30)return{lbl:'Sub-profil',color:'#fbbf24',pct:18};if(c<1.60)return{lbl:'Conservator',color:'#4ade80',pct:42};if(c<2.50)return{lbl:'Echilibrat',color:'#4ade80',pct:70};if(c<4.00)return{lbl:'Moderat agresiv',color:'#fbbf24',pct:87};return{lbl:'Agresiv',color:'#f87171',pct:100};}
 
-function renderMatchCol(){
-  var filtered=activeLeague==='all'?allFixtures:allFixtures.filter(function(f){return f.league.id.toString()===activeLeague;});
-  if(!filtered.length)return'<div class="empty-state">Niciun meci pentru ziua selectata</div>';
-  return filtered.map(function(fix){
-    var id=fix.fixture.id;var tr=getTracked(fix.teams.home.name,fix.teams.away.name);
-    var prob=calcProbs(fix.teams.home.form,fix.teams.away.form);var sels=genSels(fix,prob,tr);
-    var st=getStatus(fix);var cf=catFilter[id]||null;
-    var cats=[];sels.forEach(function(s){if(cats.indexOf(s.cat)<0)cats.push(s.cat);});
-    var vis=cf?sels.filter(function(s){return s.cat===cf;}):sels;
-    var added=bilet.filter(function(b){return b.fixId==id;}).length;
-    var score=fix.goals.home!==null?fix.goals.home+'-'+fix.goals.away:null;
-    var hl=fix.teams.home.logo?'<img class="tlogo" src="'+fix.teams.home.logo+'" onerror="this.outerHTML=\'<div class=tlogo-fb>'+fix.teams.home.name.slice(0,2).toUpperCase()+'</div>\'">'
-      :'<div class="tlogo-fb">'+fix.teams.home.name.slice(0,2).toUpperCase()+'</div>';
-    var al=fix.teams.away.logo?'<img class="tlogo" src="'+fix.teams.away.logo+'" onerror="this.outerHTML=\'<div class=tlogo-fb>'+fix.teams.away.name.slice(0,2).toUpperCase()+'</div>\'">'
-      :'<div class="tlogo-fb">'+fix.teams.away.name.slice(0,2).toUpperCase()+'</div>';
-    var srcBadge=fix._source==='fd'?'<span class="src-badge src-fd">FD</span>':'<span class="src-badge src-af">AF</span>';
-    return'<div class="match-card '+(tr?'tracked':'')+'">'
-      +'<div class="mc-hdr"><div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap">'
-      +'<span class="lbadge">'+fix.league.name+'</span>'+srcBadge
-      +(st.live?'<span class="live-dot"></span><span style="font-size:10px;color:#ef4444;font-weight:500"> '+st.txt+'</span>':'<span style="font-size:10px;color:#444">'+st.txt+'</span>')
-      +(tr?'<span class="tracked-badge">&#9733; urmarit</span>':'')
-      +(added?'<span style="font-size:10px;padding:1px 6px;border-radius:8px;background:#0a2e1a;color:#4ade80;font-weight:500">'+added+' sel.</span>':'')
-      +(added>=2?'<span class="bb-badge">BB</span>':'')
+// FIX 2: jucatori reali + FIX 3: categorii colapsabile cu valori de la 0.5
+function gs(fix,prob,tr){
+  var id=fix.fixture.id,hn=fix.teams.home.name,an=fix.teams.away.name;
+  var hs=hn.split(' ')[0],as=an.split(' ')[0];
+  var live=['1H','2H','HT','ET','P','LIVE'].indexOf(fix.fixture.status.short)>=0;
+  if(live)return{'Live':[{id:id+'_lg',name:'Urmator gol',prob:72,odd:1.32,rec:true,fix:false},{id:id+'_lc',name:'Urmator corner',prob:66,odd:1.44,rec:true,fix:false}]};
+
+  var g05=Math.min(97,Math.round((52+prob.h*0.28+prob.a*0.22)*1.15));
+  var g15=Math.min(90,Math.round(52+prob.h*0.28+prob.a*0.22));
+  var g25=Math.round(g15*0.72),g35=Math.round(g25*0.55),g45=Math.round(g35*0.60);
+  var btts=Math.round(g15*0.80);
+
+  var cats={};
+
+  cats['1X2']=[
+    {id:id+'_w1',name:(prob.h>=prob.a?hn:an)+' castiga',prob:Math.max(prob.h,prob.a),odd:+(100/Math.max(prob.h,prob.a)*0.90).toFixed(2),rec:Math.max(prob.h,prob.a)>54,fix:false},
+    {id:id+'_d',name:'Egal',prob:prob.d,odd:+(100/prob.d*0.88).toFixed(2),rec:false,fix:false},
+    {id:id+'_1x',name:hn+' castiga sau egal (1X)',prob:Math.min(95,prob.h+prob.d),odd:+(100/Math.min(95,prob.h+prob.d)*0.88).toFixed(2),rec:false,fix:false},
+    {id:id+'_x2',name:an+' castiga sau egal (X2)',prob:Math.min(95,prob.a+prob.d),odd:+(100/Math.min(95,prob.a+prob.d)*0.88).toFixed(2),rec:false,fix:false}
+  ];
+
+  var gols=[
+    {id:id+'_g05',name:'Peste 0.5 goluri',prob:g05,odd:+(100/g05*0.90).toFixed(2),rec:false,fix:false},
+    {id:id+'_g15',name:'Peste 1.5 goluri',prob:g15,odd:+(100/g15*0.88).toFixed(2),rec:g15>68,fix:false},
+    {id:id+'_g25',name:'Peste 2.5 goluri',prob:g25,odd:+(100/g25*0.88).toFixed(2),rec:g25>55,fix:tr&&tr.p.indexOf('over25')>=0},
+    {id:id+'_g35',name:'Peste 3.5 goluri',prob:g35,odd:+(100/g35*0.88).toFixed(2),rec:false,fix:false},
+    {id:id+'_g45',name:'Peste 4.5 goluri',prob:g45,odd:+(100/g45*0.88).toFixed(2),rec:false,fix:false},
+    {id:id+'_bt',name:'Ambele marcheaza (BTTS)',prob:btts,odd:+(100/btts*0.88).toFixed(2),rec:false,fix:false},
+    {id:id+'_nbt',name:'O echipa nu marcheaza',prob:100-btts,odd:+(100/(100-btts)*0.88).toFixed(2),rec:false,fix:false}
+  ];
+  if(tr&&tr.p.indexOf('score')>=0){
+    var tn=tr.side==='home'?hs:as,sp=Math.round(tr.sr*100);
+    gols.push({id:id+'_ts',name:tn+' marcheaza',prob:sp,odd:+(100/sp*0.88).toFixed(2),rec:true,fix:true});
+  }
+  cats['Goluri']=gols.filter(function(s){return s.prob>2&&s.prob<98;});
+
+  var corn=[
+    {id:id+'_c5',name:'Peste 5.5 cornere total',prob:84,odd:1.17,rec:false,fix:false},
+    {id:id+'_c7',name:'Peste 7.5 cornere total',prob:74,odd:1.30,rec:false,fix:false},
+    {id:id+'_c9',name:'Peste 9.5 cornere total',prob:64,odd:1.50,rec:true,fix:false},
+    {id:id+'_c11',name:'Peste 11.5 cornere total',prob:48,odd:1.82,rec:false,fix:false},
+    {id:id+'_c13',name:'Peste 13.5 cornere total',prob:32,odd:2.50,rec:false,fix:false},
+    {id:id+'_ch3',name:'Peste 3.5 cornere '+hs,prob:76,odd:1.32,rec:false,fix:false},
+    {id:id+'_ch4',name:'Peste 4.5 cornere '+hs,prob:67,odd:1.42,rec:true,fix:false},
+    {id:id+'_ch5',name:'Peste 5.5 cornere '+hs,prob:51,odd:1.69,rec:false,fix:false},
+    {id:id+'_ca3',name:'Peste 3.5 cornere '+as,prob:70,odd:1.38,rec:false,fix:false},
+    {id:id+'_ca4',name:'Peste 4.5 cornere '+as,prob:56,odd:1.60,rec:false,fix:false}
+  ];
+  if(tr&&tr.p.indexOf('corners')>=0){
+    var tn2=tr.side==='home'?hs:as,cp2=Math.min(82,Math.round(tr.ac/10*100));
+    corn.push({id:id+'_tc',name:tn2+' Peste 3.5 cornere',prob:cp2,odd:+(100/cp2*0.88).toFixed(2),rec:true,fix:true});
+  }
+  cats['Cornere']=corn;
+
+  // FIX 2: Jucatori reali la suturi
+  var hPl=getPL(hn),aPl=getPL(an),sut=[];
+  hPl.slice(0,3).forEach(function(pl,i){
+    var pb=73-i*9;
+    if(pb>5){
+      sut.push({id:id+'_sh'+i+'_05',name:pl+' peste 0.5 suturi pe poarta',prob:pb,odd:+(100/pb*0.88).toFixed(2),rec:i===0,fix:false});
+      var pb15=Math.round(pb*0.48);
+      if(pb15>5)sut.push({id:id+'_sh'+i+'_15',name:pl+' peste 1.5 suturi pe poarta',prob:pb15,odd:+(100/pb15*0.88).toFixed(2),rec:false,fix:false});
+    }
+  });
+  aPl.slice(0,3).forEach(function(pl,i){
+    var pb=68-i*9;
+    if(pb>5){
+      sut.push({id:id+'_sa'+i+'_05',name:pl+' peste 0.5 suturi pe poarta',prob:pb,odd:+(100/pb*0.88).toFixed(2),rec:i===0,fix:false});
+      var pb15=Math.round(pb*0.48);
+      if(pb15>5)sut.push({id:id+'_sa'+i+'_15',name:pl+' peste 1.5 suturi pe poarta',prob:pb15,odd:+(100/pb15*0.88).toFixed(2),rec:false,fix:false});
+    }
+  });
+  cats['Suturi pe poarta']=sut;
+
+  return cats;
+}
+
+// FIX 3: toggle categorii
+function tgl(id,cat){
+  var key=id+'|'+cat;
+  catOp[key]=(catOp[key]===undefined)?false:!catOp[key];
+  rnd();
+}
+
+// FIX 1: ts salveaza dayLabel pentru persistenta bilet
+function ts(sId,fId,sN,sO,sP,sMn,sCat){
+  var i=bil.findIndex(function(b){return b.selId==sId;});
+  if(i>=0)bil.splice(i,1);
+  else{
+    if(bil.length>=8)return;
+    bil.push({selId:sId,fixId:fId,name:sN,odd:sO,prob:sP,mn:sMn,cat:sCat,dayLabel:gdl(dO)});
+  }
+  rnd();
+}
+
+function rs(id){bil=bil.filter(function(b){return b.selId!=id;});rnd();}
+function sm(v){miz=v;rb();}
+function cc(){return bil.reduce(function(a,b){return a*b.odd;},1);}
+function ce(){return bil.reduce(function(a,b){return a*(b.prob/100);},1)*100;}
+function ps(c){if(c<1.30)return{l:'Sub-profil',co:'#fbbf24',p:18};if(c<1.60)return{l:'Conservator',co:'#4ade80',p:42};if(c<2.50)return{l:'Echilibrat',co:'#4ade80',p:70};if(c<4.00)return{l:'Moderat agresiv',co:'#fbbf24',p:87};return{l:'Agresiv',co:'#f87171',p:100};}
+
+function rmc(){
+  var fl=aL==='all'?aF:aF.filter(function(f){return f.league.id.toString()===aL;});
+  if(!fl.length)return'<div class="es">Niciun meci pentru ziua selectata</div>';
+  return fl.map(function(fix){
+    var id=fix.fixture.id,tr=gt(fix.teams.home.name,fix.teams.away.name);
+    var prob=cp(fix.teams.home.form,fix.teams.away.form);
+    var cats=gs(fix,prob,tr);
+    var st=gst(fix);
+    var ad=bil.filter(function(b){return b.fixId==id;}).length;
+    var sc=fix.goals.home!==null?fix.goals.home+'-'+fix.goals.away:null;
+    var hn=fix.teams.home.name,an=fix.teams.away.name,mn=hn+' vs '+an;
+    var hl=fix.teams.home.logo?'<img class="tl" src="'+fix.teams.home.logo+'" onerror="this.outerHTML=\'<div class=tlf>'+hn.slice(0,2).toUpperCase()+'</div>\'">'
+      :'<div class="tlf">'+hn.slice(0,2).toUpperCase()+'</div>';
+    var al=fix.teams.away.logo?'<img class="tl" src="'+fix.teams.away.logo+'" onerror="this.outerHTML=\'<div class=tlf>'+an.slice(0,2).toUpperCase()+'</div>\'">'
+      :'<div class="tlf">'+an.slice(0,2).toUpperCase()+'</div>';
+
+    var catH='';
+    Object.keys(cats).forEach(function(cat){
+      var items=cats[cat];
+      var key=id+'|'+cat;
+      var open=catOp[key]===undefined||catOp[key]!==false;
+      var adInCat=items.filter(function(s){return bil.some(function(b){return b.selId==s.id;});}).length;
+      catH+='<div class="cat-grp">'
+        +'<div class="cat-hdr" onclick="tgl(\''+id+'\',\''+cat+'\')">'
+        +'<span class="cat-ttl">'+cat+(adInCat?' <span class="cat-cnt">&#10003;'+adInCat+'</span>':'')+'</span>'
+        +'<span class="cat-arr">'+(open?'&#9650;':'&#9660;')+'</span>'
+        +'</div>';
+      if(open){
+        catH+='<div class="sg">';
+        items.forEach(function(s){
+          var inB=bil.some(function(b){return b.selId==s.id;});
+          var sNe=s.name.replace(/'/g,"\\'");
+          var mNe=mn.replace(/'/g,"\\'");
+          catH+='<div class="si'+(inB?' ad':'')+' '+(s.fix&&!inB?'fx':'')+'" onclick="ts(\''+s.id+'\',\''+id+'\',\''+sNe+'\','+s.odd+','+s.prob+',\''+mNe+'\',\''+cat+'\')">'
+            +'<div class="sk">'+(inB?'&#10003;':'')+'</div>'
+            +'<div style="flex:1"><div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap">'
+            +'<span class="sn">'+s.name+'</span>'
+            +(s.fix?'<span style="font-size:9px;color:#4ade80;font-weight:600">&#9733;fix</span>':s.rec?'<span style="font-size:9px;color:#4ade80;font-weight:600">&#9733;</span>':'')
+            +'</div><div class="psm"><div class="pf" style="width:'+s.prob+'%;background:'+pc(s.prob)+'"></div></div></div>'
+            +'<div style="text-align:right;flex-shrink:0">'
+            +'<div style="font-size:10px;font-weight:500;color:'+pc(s.prob)+'">'+s.prob+'%</div>'
+            +'<div style="font-size:11px;font-weight:600;color:#60a5fa">'+s.odd.toFixed(2)+'</div>'
+            +'</div></div>';
+        });
+        catH+='</div>';
+      }
+      catH+='</div>';
+    });
+
+    return'<div class="mc'+(tr?' tr':'')+'">'
+      +'<div class="mh"><div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap">'
+      +'<span class="lg">'+fix.league.name+'</span>'
+      +'<span class="'+(fix._s==='fd'?'sfd':'saf')+'">'+(fix._s==='fd'?'FD':'AF')+'</span>'
+      +(st.live?'<span class="ld"></span><span style="font-size:10px;color:#ef4444;font-weight:500"> '+st.txt+'</span>':'<span style="font-size:10px;color:#444">'+st.txt+'</span>')
+      +(tr?'<span class="tb">&#9733; urmarit</span>':'')
+      +(ad?'<span style="font-size:10px;padding:1px 6px;border-radius:8px;background:#0a2e1a;color:#4ade80;font-weight:500">'+ad+' sel.</span>':'')
+      +(ad>=2?'<span class="bb">BB</span>':'')
       +'</div><span style="font-size:10px;color:#333">'+fix.league.country+'</span></div>'
-      +'<div class="teams">'+hl+'<span class="tn '+(tr&&tr.side==='home'?'tracked-team':'')+'">'+fix.teams.home.name+'</span>'
-      +(score?'<span class="score-b">'+score+'</span>':'<span class="vs">vs</span>')
-      +'<span class="tn '+(tr&&tr.side==='away'?'tracked-team':'')+'" style="text-align:right">'+fix.teams.away.name+'</span>'+al+'</div>'
-      +'<div class="prob-labels"><span>1 &middot; '+prob.h+'%</span><span>X &middot; '+prob.d+'%</span><span>2 &middot; '+prob.a+'%</span></div>'
-      +'<div class="pbar"><div class="ps ph" style="width:'+prob.h+'%"></div><div class="ps pd" style="width:'+prob.d+'%"></div><div class="ps pa" style="width:'+prob.a+'%"></div></div>'
-      +'<div class="mpills">'
-      +'<div class="mpill '+(tr&&tr.p.indexOf('over25')>=0?'hl':'')+'"><span class="ml">Over 2.5</span><span class="mv">'+(tr?Math.round(tr.o25*100):Math.round(prob.h*0.5+prob.a*0.42+18))+'%</span></div>'
-      +'<div class="mpill"><span class="ml">BTTS</span><span class="mv">'+Math.round(prob.h*0.44+prob.a*0.46+16)+'%</span></div>'
-      +'<div class="mpill '+(tr&&tr.p.indexOf('score')>=0?'hl':'')+'"><span class="ml">Marcheaza</span><span class="mv">'+(tr?Math.round(tr.sr*100):Math.round(prob.h*0.8+10))+'%</span></div>'
-      +'<div class="mpill '+(tr&&tr.p.indexOf('corners')>=0?'hl':'')+'"><span class="ml">Avg cornere</span><span class="mv">'+(tr?tr.ac.toFixed(1):'6.5')+'</span></div>'
+      +'<div class="tm">'+hl
+      +'<span class="tn'+(tr&&tr.side==='home'?' tt':'')+'">'+hn+'</span>'
+      +(sc?'<span class="sc">'+sc+'</span>':'<span class="vs">vs</span>')
+      +'<span class="tn'+(tr&&tr.side==='away'?' tt':'')+'" style="text-align:right">'+an+'</span>'+al+'</div>'
+      +'<div class="pl2"><span>1 \xb7 '+prob.h+'%</span><span>X \xb7 '+prob.d+'%</span><span>2 \xb7 '+prob.a+'%</span></div>'
+      +'<div class="pb"><div class="ps ph" style="width:'+prob.h+'%"></div><div class="ps pd" style="width:'+prob.d+'%"></div><div class="ps pa" style="width:'+prob.a+'%"></div></div>'
+      +'<div class="mp">'
+      +'<div class="pi'+(tr&&tr.p.indexOf('over25')>=0?' hl':'')+'"><span class="ml">Over 2.5</span><span class="mv">'+(tr?Math.round(tr.o25*100):Math.round(prob.h*0.5+prob.a*0.42+18))+'%</span></div>'
+      +'<div class="pi"><span class="ml">BTTS</span><span class="mv">'+Math.round(prob.h*0.44+prob.a*0.46+16)+'%</span></div>'
+      +'<div class="pi'+(tr&&tr.p.indexOf('score')>=0?' hl':'')+'"><span class="ml">Marcheaza</span><span class="mv">'+(tr?Math.round(tr.sr*100):Math.round(prob.h*0.8+10))+'%</span></div>'
+      +'<div class="pi'+(tr&&tr.p.indexOf('corners')>=0?' hl':'')+'"><span class="ml">Avg cornere</span><span class="mv">'+(tr?tr.ac.toFixed(1):'6.5')+'</span></div>'
       +'</div>'
-      +(tr?'<div class="fixuri-box"><div class="fixuri-title">Fixuri '+tr.team+'</div><div class="fixuri-tags">'
-        +(tr.p.indexOf('score')>=0?'<span class="ftag">Marcheaza '+Math.round(tr.sr*100)+'%</span>':'')
-        +(tr.p.indexOf('corners')>=0?'<span class="ftag">Avg '+tr.ac+' cornere</span>':'')
-        +(tr.p.indexOf('over25')>=0?'<span class="ftag">Over 2.5 &rarr; '+Math.round(tr.o25*100)+'%</span>':'')
-        +'</div></div>':'')
-      +'<div class="sel-hdr"><span style="font-size:11px;color:#555;font-weight:500">Selectii</span>'
-      +'<div class="cat-tabs">'+cats.map(function(c){return'<button class="ctab '+(cf===c?'active':'')+'" onclick="catFilter[\''+id+'\']=\''+(cf===c?'':c)+'\';render()">'+c+'</button>';}).join('')+'</div></div>'
-      +'<div class="sel-grid">'+vis.map(function(s){
-        var inB=bilet.some(function(b){return b.selId==s.id;});
-        return'<div class="sel-item '+(inB?'added':'')+' '+(s.fix&&!inB?'fix-sel':'')+'" onclick="toggleSel(\''+s.id+'\',\''+id+'\')">'
-          +'<div class="sel-check">'+(inB?'&#10003;':'')+'</div>'
-          +'<div style="flex:1"><div style="display:flex;align-items:center;gap:4px"><span class="sel-name">'+s.name+'</span>'
-          +(s.fix?'<span class="fix-star">&#9733; fix</span>':s.rec?'<span class="rec-star">&#9733;</span>':'')
-          +'</div><div class="pb-sm"><div class="pb-fill" style="width:'+s.prob+'%;background:'+pc(s.prob)+'"></div></div></div>'
-          +'<div style="text-align:right;flex-shrink:0"><div style="font-size:10px;font-weight:500;color:'+pc(s.prob)+'">'+s.prob+'%</div>'
-          +'<div style="font-size:11px;font-weight:600;color:#60a5fa">'+s.odd.toFixed(2)+'</div></div></div>';
-      }).join('')+'</div></div>';
+      +(tr?'<div class="fb"><div class="ft">Fixuri '+tr.team+'</div><div class="fg">'+(tr.p.indexOf('score')>=0?'<span class="fk">Marcheaza '+Math.round(tr.sr*100)+'%</span>':'')+(tr.p.indexOf('corners')>=0?'<span class="fk">Avg '+tr.ac+' cornere</span>':'')+(tr.p.indexOf('over25')>=0?'<span class="fk">Over 2.5 \u2192 '+Math.round(tr.o25*100)+'%</span>':'')+'</div></div>':'')
+      +'<div>'+catH+'</div>'
+      +'</div>';
   }).join('');
 }
 
-function renderBilet(){
-  var cota=calcCota(),prob=calcProbEst();var castig=(miza*cota).toFixed(2),profit=(miza*cota-miza).toFixed(2);
-  var ps=profileScore(cota),ready=bilet.length>=2;
-  var html='<div class="bilet-panel"><div class="bp-title">Biletul meu <span class="bp-cnt">'+bilet.length+'/8</span></div>';
-  if(!bilet.length){html+='<div class="bilet-empty">Adauga selectii din meciuri pentru a construi biletul</div>';}
-  else{
-    html+=bilet.map(function(b){return'<div class="bs"><div class="bs-match">'+b.matchName+'</div><div class="bs-row"><span class="bs-name">'+b.name+'</span><span class="bs-odd">'+b.odd.toFixed(2)+'</span><div class="bs-rm" onclick="removeSel(\''+b.selId+'\')">&#10005;</div></div></div>';}).join('');
-    html+='<div class="divider"></div>'
-      +'<div class="miza-row"><label>Miza</label><input class="miza-inp" type="number" min="1" value="'+miza+'" oninput="miza=+this.value;renderBilet()"><span style="font-size:11px;color:#555">RON</span></div>'
-      +'<div class="miza-btns">'+[25,50,100,150,200].map(function(v){return'<button class="mbtn" onclick="setMiza('+v+')">'+v+'</button>';}).join('')+'</div>'
-      +'<div class="cota-box">'
+function rb(){
+  var cota=cc(),prob=ce(),cas=(miz*cota).toFixed(2),prf=(miz*cota-miz).toFixed(2);
+  var p=ps(cota),rdy=bil.length>=2;
+  var h='<div class="bp"><div class="bpt">Biletul meu <span class="bpc">'+bil.length+'/8</span></div>';
+  if(!bil.length){
+    h+='<div class="be">Adauga selectii din meciuri<br><span style="font-size:11px;color:#333">Biletul ramane la schimbarea zilei</span></div>';
+  }else{
+    h+=bil.map(function(b){
+      return'<div class="bs">'
+        +'<div class="bsm"><span>'+b.mn+'</span><span class="bil-day">'+b.dayLabel+'</span></div>'
+        +'<div class="bsr"><span class="bsn">'+b.name+'</span><span class="bso">'+b.odd.toFixed(2)+'</span>'
+        +'<div class="brm" onclick="rs(\''+b.selId+'\')">&#10005;</div></div></div>';
+    }).join('');
+    h+='<div class="dv"></div>'
+      +'<div class="mr"><label>Miza</label><input class="mi" type="number" min="1" value="'+miz+'" oninput="miz=+this.value;rb()"><span style="font-size:11px;color:#555">RON</span></div>'
+      +'<div class="mbs">'+[25,50,100,150,200].map(function(v){return'<button class="mbt" onclick="sm('+v+')">'+v+'</button>';}).join('')+'</div>'
+      +'<div class="cb">'
       +'<div class="cr"><span class="cl">Cota totala</span><span class="cv big">'+cota.toFixed(2)+'</span></div>'
       +'<div class="cr"><span class="cl">Prob. estimata</span><span class="cv" style="color:'+pc(prob)+'">'+prob.toFixed(1)+'%</span></div>'
-      +'<div class="cr"><span class="cl">Castig potential</span><span class="cv green">'+castig+' RON</span></div>'
-      +'<div class="cr"><span class="cl">Profit net</span><span class="cv green">+'+profit+' RON</span></div>'
+      +'<div class="cr"><span class="cl">Castig potential</span><span class="cv gr">'+cas+' RON</span></div>'
+      +'<div class="cr"><span class="cl">Profit net</span><span class="cv gr">+'+prf+' RON</span></div>'
       +'</div>'
-      +'<div class="pz"><div style="font-size:11px;font-weight:500;color:#ccc;margin-bottom:4px">Profil &middot; <span style="color:'+ps.color+'">'+ps.lbl+'</span></div>'
-      +'<div class="pz-bar"><div class="pz-fill" style="width:'+ps.pct+'%;background:'+ps.color+'"></div></div>'
-      +'<div class="pz-lbl"><span>Conservator</span><span>Agresiv</span></div></div>';
+      +'<div class="pz"><div style="font-size:11px;font-weight:500;color:#ccc;margin-bottom:4px">Profil \xb7 <span style="color:'+p.co+'">'+p.l+'</span></div>'
+      +'<div class="pzb"><div class="pzf" style="width:'+p.p+'%;background:'+p.co+'"></div></div>'
+      +'<div class="pzl"><span>Conservator</span><span>Agresiv</span></div></div>';
   }
-  html+='<button class="place-btn '+(ready?'ready':'')+'" '+(ready?'':'disabled')+'>'+(bilet.length<2?'Adauga minim 2 selectii':'&#10003; Bilet gata &middot; '+cota.toFixed(2)+' &middot; '+castig+' RON')+'</button></div>';
-  document.getElementById('biletCol').innerHTML=html;
+  h+='<button class="plb'+(rdy?' rdy':'')+'" '+(rdy?'':'disabled')+'>'
+    +(bil.length<2?'Adauga minim 2 selectii':'&#10003; Bilet gata \xb7 '+cota.toFixed(2)+' \xb7 '+cas+' RON')
+    +'</button></div>';
+  document.getElementById('bC').innerHTML=h;
 }
 
-function render(){document.getElementById('matchCol').innerHTML=renderMatchCol();renderBilet();}
-buildDateRow();
-loadFixtures();
+function rnd(){document.getElementById('mC').innerHTML=rmc();rb();}
+bdr();load();
 </script>
 </body>
 </html>
