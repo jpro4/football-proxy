@@ -586,7 +586,7 @@ function applyFilter(list){
   if(state.filter==='LIVE')return list.filter(m=>['1H','2H','HT','LIVE'].includes(m.status?.code||m.status?.short||''));
   if(state.filter==='REC')return list.filter(m=>{const p=probs(m.homeTeam.name,m.awayTeam.name);return Math.max(p.hW,p.aW,p.o25,p.bt)>=65;});
   if(state.filter==='O25')return list.filter(m=>probs(m.homeTeam.name,m.awayTeam.name).o25>=58);
-  if(state.filter==='BTTS')return list.filter(m=>probs(m.homeTeam.name,m.awayTead.name).bt>=58);
+  if(state.filter==='BTTS')return list.filter(m=>probs(m.homeTeam.name,m.awayTeam.name).bt>=58);
   return list;
 }
 function renderMatchList(){
