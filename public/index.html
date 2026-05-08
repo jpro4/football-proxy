@@ -9,49 +9,40 @@
 :root{--bg:#080808;--bg2:#111;--bg3:#1a1a1a;--card:#141414;--green:#00E676;--blue:#2979FF;--red:#FF5252;--yellow:#FFD740;--text:#f0f0f0;--muted:#888;--border:#2a2a2a;--safe-bottom:env(safe-area-inset-bottom,0px)}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
 .app{max-width:1400px;margin:0 auto;padding:0 12px}
-
-/* HEADER */
 .hdr{background:linear-gradient(135deg,#0a0a0a,#141414);border-bottom:1px solid var(--border);padding:10px 14px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:100}
 .hdr h1{font-size:18px;font-weight:700;color:var(--green);letter-spacing:-0.5px}
 .hdr p{font-size:10px;color:var(--muted);margin-top:1px}
 .hdr-right{margin-left:auto;display:flex;align-items:center;gap:6px}
 .cache-badge{font-size:10px;color:var(--muted);background:var(--bg3);padding:3px 8px;border-radius:8px;border:1px solid var(--border)}
 .cache-badge.hit{color:var(--green);border-color:rgba(0,230,118,.3)}
+.news-badge{font-size:10px;padding:3px 8px;border-radius:8px;border:1px solid var(--border);cursor:pointer;background:var(--bg3);color:var(--muted);transition:all .2s}
+.news-badge.loading{color:var(--yellow);border-color:rgba(255,215,64,.3);animation:pulse-text 1s infinite}
+.news-badge.ready{color:var(--green);border-color:rgba(0,230,118,.3)}
+.news-badge.error{color:var(--red);border-color:rgba(255,82,82,.3)}
+@keyframes pulse-text{0%,100%{opacity:1}50%{opacity:.5}}
 @media(max-width:480px){.cache-badge{display:none}.hdr p{display:none}}
-
-/* NAV TABS */
 .nav-tabs{display:flex;gap:2px;padding:8px 0 0}
 .nav-tab{padding:8px 16px;border-radius:10px 10px 0 0;border:1px solid var(--border);border-bottom:none;background:var(--bg2);color:var(--muted);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;flex:1;text-align:center}
 .nav-tab.active{background:var(--card);color:var(--green)}
 .tab-content{display:none}
 .tab-content.active{display:block}
-
-/* DAY BAR */
 .days{display:flex;gap:6px;padding:12px 0 8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .days::-webkit-scrollbar{display:none}
 .day-btn{flex-shrink:0;padding:8px 14px;border-radius:20px;border:1px solid var(--border);background:var(--bg2);color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap;position:relative;min-height:36px}
 .day-btn.active{background:linear-gradient(135deg,#00E676,#00C853);color:#000;border-color:transparent;box-shadow:0 0 12px rgba(0,230,118,.3)}
 .day-btn.has-cache::after{content:'';position:absolute;top:4px;right:4px;width:5px;height:5px;border-radius:50%;background:var(--green)}
-
-/* LEAGUE BAR */
 .leagues{display:flex;gap:6px;flex-wrap:nowrap;padding:4px 0 8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .leagues::-webkit-scrollbar{display:none}
 .lg-btn{flex-shrink:0;padding:5px 10px;border-radius:14px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s;display:flex;align-items:center;gap:3px}
 .lg-btn.active{border-color:var(--green);color:var(--green);background:rgba(0,230,118,.08)}
 .lg-cnt{background:var(--border);color:var(--muted);border-radius:8px;padding:1px 4px;font-size:10px}
 .lg-btn.active .lg-cnt{background:rgba(0,230,118,.2);color:var(--green)}
-
-/* FILTERS */
 .filters{display:flex;gap:6px;flex-wrap:nowrap;padding:0 0 10px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .filters::-webkit-scrollbar{display:none}
 .filter-btn{flex-shrink:0;padding:5px 11px;border-radius:14px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s;min-height:32px}
 .filter-btn.active{border-color:var(--yellow);color:var(--yellow);background:rgba(255,215,64,.08)}
-
-/* LAYOUT */
 .main{display:flex;gap:14px;align-items:flex-start;padding-bottom:100px}
 .matches-col{flex:1;min-width:0}
-
-/* MATCH CARD */
 .match-card{background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:8px;overflow:hidden;transition:border-color .2s}
 .mc-hdr{padding:8px 12px;display:flex;align-items:center;gap:8px}
 .mc-league{font-size:10px;font-weight:700;letter-spacing:.4px;color:var(--muted);flex:1}
@@ -70,6 +61,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .form-dots{display:flex;gap:2px}
 .fd{width:13px;height:13px;border-radius:2px;font-size:8px;font-weight:700;display:flex;align-items:center;justify-content:center;color:#000}
 .fd.W{background:var(--green)}.fd.D{background:var(--yellow)}.fd.L{background:var(--red)}.fd.U{background:var(--border);color:var(--muted)}
+
+/* NEWS ALERT BANNER */
+.mc-news{padding:6px 12px;border-top:1px solid var(--border);background:rgba(255,82,82,.05)}
+.news-alert{display:flex;align-items:flex-start;gap:6px;padding:4px 0;border-bottom:1px solid rgba(255,82,82,.1);font-size:11px}
+.news-alert:last-child{border-bottom:none}
+.news-alert-icon{font-size:12px;flex-shrink:0;margin-top:1px}
+.news-alert-team{font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px}
+.news-alert-text{color:var(--text);line-height:1.4}
+.news-alert-src{font-size:9px;color:var(--muted);margin-top:2px}
+.news-tag{display:inline-block;font-size:9px;font-weight:700;padding:1px 5px;border-radius:4px;margin-right:3px}
+.news-tag.injured{background:rgba(255,82,82,.2);color:var(--red)}
+.news-tag.suspended{background:rgba(255,152,0,.2);color:#FF9800}
+.news-tag.doubt{background:rgba(255,215,64,.2);color:var(--yellow)}
+.news-tag.available{background:rgba(0,230,118,.2);color:var(--green)}
+
 .mc-cats{padding:0 12px 12px}
 .cat-section{margin-top:6px;border:1px solid var(--border);border-radius:8px;overflow:hidden}
 .cat-title{padding:8px 10px;background:var(--bg2);display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:11px;font-weight:700;color:var(--muted);user-select:none;min-height:36px}
@@ -78,6 +84,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .odds-grid{display:flex;flex-wrap:wrap;gap:5px}
 .odd-btn{flex:1;min-width:120px;padding:8px 9px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);cursor:pointer;transition:all .15s;text-align:left;position:relative;min-height:44px}
 .odd-btn.selected{border-color:var(--green);background:rgba(0,230,118,.1)}
+.odd-btn.player-absent{opacity:.4;pointer-events:none;border-style:dashed}
 .odd-label{font-size:10px;color:var(--muted);font-weight:600;margin-bottom:3px}
 .odd-val{font-size:15px;font-weight:700;color:var(--blue)}
 .odd-prob{font-size:10px;margin-top:2px}
@@ -85,12 +92,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .prob-fill{height:100%;border-radius:2px;transition:width .4s}
 .star{color:var(--yellow)}
 .bb-badge{position:absolute;top:3px;right:3px;background:var(--blue);color:#fff;font-size:9px;font-weight:700;padding:1px 3px;border-radius:3px}
-
-/* DESKTOP TICKET PANEL */
 .ticket-panel{width:300px;flex-shrink:0;position:sticky;top:68px}
 @media(max-width:768px){.ticket-panel{display:none}}
-
-/* MOBILE TICKET BOTTOM DRAWER */
 .mobile-ticket-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:150;background:var(--card);border-top:1px solid var(--border);padding:10px 14px calc(10px + var(--safe-bottom));box-shadow:0 -4px 20px rgba(0,0,0,.5)}
 .mobile-ticket-bar.has-selections{background:linear-gradient(135deg,#0d1f15,#0d1520)}
 @media(max-width:768px){.mobile-ticket-bar{display:flex;align-items:center;gap:10px}}
@@ -100,8 +103,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .mtb-btn{padding:10px 18px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--green),#00C853);color:#000;font-size:13px;font-weight:800;cursor:pointer;white-space:nowrap}
 .mtb-btn:disabled{background:var(--border);color:var(--muted)}
 .mtb-open{padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);font-size:12px;font-weight:600;cursor:pointer}
-
-/* TICKET DRAWER (mobile full screen) */
 .ticket-drawer{position:fixed;inset:0;z-index:200;display:flex;flex-direction:column;background:var(--bg);transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1)}
 .ticket-drawer.open{transform:translateY(0)}
 .td-hdr{padding:14px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);background:var(--bg2)}
@@ -109,8 +110,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .td-close{background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;padding:0 4px;line-height:1}
 .td-body{flex:1;overflow-y:auto;padding:0 16px;-webkit-overflow-scrolling:touch}
 .td-footer{padding:14px 16px calc(14px + var(--safe-bottom));border-top:1px solid var(--border);background:var(--bg2)}
-
-/* TICKET SHARED STYLES */
 .tp{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
 .tp-hdr{padding:12px 14px;background:linear-gradient(135deg,#141414,#1e1e1e);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
 .tp-hdr h2{font-size:14px;font-weight:700;flex:1}
@@ -145,8 +144,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .tp-btn-exp{flex:1;padding:12px;border-radius:10px;border:1px solid var(--blue);background:transparent;color:var(--blue);font-size:13px;font-weight:700;cursor:pointer;min-height:44px}
 .tp-btn-exp:disabled{border-color:var(--border);color:var(--muted);cursor:not-allowed}
 .tp-btn-clear{width:100%;margin-top:6px;padding:10px;border-radius:10px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;min-height:40px}
-
-/* LOADER */
 .loader{text-align:center;padding:40px;color:var(--muted)}
 .spinner{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 10px}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -156,16 +153,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .status-msg h3{font-size:14px;font-weight:700;margin-bottom:5px}
 .status-msg p{font-size:12px;color:var(--muted);line-height:1.5}
 .retry-btn{margin-top:10px;padding:8px 18px;border-radius:10px;border:1px solid var(--green);background:transparent;color:var(--green);font-size:12px;font-weight:600;cursor:pointer;min-height:40px}
-
-/* HISTORY */
 .hist-stats{display:flex;gap:6px;padding:12px 0 8px;flex-wrap:wrap}
-.stat-box{flex:1;min-width:80px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 10px;text-align:center}
+.stat-box{flex:1;min-width:80px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center}
 .stat-val{font-size:18px;font-weight:800;color:var(--green)}
 .stat-val.red{color:var(--red)}.stat-val.blue{color:var(--blue)}
 .stat-label{font-size:10px;color:var(--muted);margin-top:2px}
 .hist-empty{text-align:center;padding:40px;color:var(--muted)}
 .hist-card{background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:8px;overflow:hidden}
-.hist-hdr{padding:10px 14px;display:flex;align-items:center;gap:8px;background:var(--bg2);border-bottom:1px solid var(--border);flex-wrap:wrap;gap:6px}
+.hist-hdr{padding:10px 14px;display:flex;align-items:center;gap:8px;background:var(--bg2);border-bottom:1px solid var(--border);flex-wrap:wrap}
 .hist-date{font-size:11px;color:var(--muted)}
 .hist-odd{font-size:15px;font-weight:800;color:var(--blue);margin-left:auto}
 .hist-stake{font-size:11px;color:var(--muted)}
@@ -178,15 +173,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .hist-sel:last-child{border-bottom:none}
 .hist-sel-name{color:var(--muted);flex:1;margin-right:8px}
 .hist-sel-odd{color:var(--blue);font-weight:700}
-.hist-footer{padding:8px 14px;background:var(--bg3);display:flex;justify-content:space-between;align-items:center;font-size:12px}
+.hist-footer{padding:8px 14px;background:var(--bg3);display:flex;justify-content:space-between;font-size:12px}
 .hist-actions{display:flex;gap:5px;padding:8px 14px 10px;flex-wrap:wrap}
 .hist-btn{padding:7px 12px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:11px;font-weight:600;cursor:pointer;min-height:36px}
 .hist-btn.won-btn{border-color:rgba(0,230,118,.3);color:var(--green)}
 .hist-btn.lost-btn{border-color:rgba(255,82,82,.3);color:var(--red)}
 .hist-btn.del{border-color:rgba(255,82,82,.3);color:var(--red)}
 .hist-btn.export-btn{border-color:rgba(41,121,255,.3);color:var(--blue)}
-
-/* MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:300;align-items:center;justify-content:center;padding:16px}
 .modal-overlay.open{display:flex}
 .modal{background:var(--card);border:1px solid var(--border);border-radius:16px;width:360px;max-width:100%;overflow:hidden}
@@ -199,11 +192,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .modal-btn{flex:1;padding:10px;border-radius:10px;border:none;font-size:13px;font-weight:700;cursor:pointer;min-height:44px}
 .modal-btn.primary{background:linear-gradient(135deg,var(--green),#00C853);color:#000}
 .modal-btn.secondary{background:var(--bg3);border:1px solid var(--border);color:var(--muted)}
-
-/* SQUADS LOADING */
 .squad-loading{font-size:10px;color:var(--muted);padding:8px;text-align:center;font-style:italic}
-
-/* LEAGUE ACCENTS */
 .lc-PL{border-left:3px solid #3d195b}.lc-PD{border-left:3px solid #c8102e}.lc-BL1{border-left:3px solid #d20515}
 .lc-SA{border-left:3px solid #024494}.lc-FL1{border-left:3px solid #003189}.lc-PPL{border-left:3px solid #006600}
 .lc-CL{border-left:3px solid #1a56db}.lc-EC{border-left:3px solid #003399}
@@ -220,7 +209,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <circle cx="12" cy="12" r="3" fill="#00E676"/>
   </svg>
   <div><h1>Football Intelligence</h1><p>Predicții bazate pe statistici reale 2025-26</p></div>
-  <div class="hdr-right"><span class="cache-badge" id="cacheBadge">cache: 0 zile</span></div>
+  <div class="hdr-right">
+    <span class="news-badge" id="newsBadge" onclick="manualNewsRefresh()" title="Click pentru refresh știri">📰 știri</span>
+    <span class="cache-badge" id="cacheBadge">cache: 0 zile</span>
+  </div>
 </div>
 
 <div class="nav-tabs">
@@ -243,9 +235,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div id="histList"></div>
 </div>
 
-</div><!-- /app -->
+</div>
 
-<!-- MOBILE BOTTOM BAR -->
 <div class="mobile-ticket-bar" id="mobileBar">
   <div class="mtb-info">
     <div class="mtb-count" id="mtbCount">0 selecții</div>
@@ -255,7 +246,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <button class="mtb-btn" id="mtbSave" disabled onclick="saveTicket()">💾 Salvează</button>
 </div>
 
-<!-- MOBILE TICKET DRAWER -->
 <div class="ticket-drawer" id="ticketDrawer">
   <div class="td-hdr">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00E676" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
@@ -267,7 +257,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="td-footer" id="drawerFooter"></div>
 </div>
 
-<!-- EXPORT MODAL -->
 <div class="modal-overlay" id="exportModal">
   <div class="modal">
     <div class="modal-hdr"><h3>📤 Export Bilet</h3><button class="modal-close" onclick="closeModal()">✕</button></div>
@@ -285,8 +274,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 const PROXY='https://football-proxy-weld.vercel.app';
 const FD_LEAGUES=['PL','PD','BL1','SA','FL1','PPL','CL','EC'];
 const AF_LEAGUES=[{id:283,name:'Liga 1',code:'L1R'},{id:144,name:'Pro League',code:'BEL'}];
+
+// Ligile cu prioritate pentru știri
+const NEWS_PRIORITY_LEAGUES=['PL','PD','SA','BL1','FL1','PPL','L1R'];
+
 const CACHE_TTL=5*60*1000;
+const NEWS_TTL=8*60*60*1000; // 8 ore
 const LS_HISTORY='fi_history_v1';
+const LS_NEWS='fi_news_v1';
+const LS_NEWS_TS='fi_news_ts_v1';
+
 const AF_TEAM_IDS={
   'Arsenal':42,'Chelsea':49,'Liverpool':40,'Manchester City':50,'Manchester United':33,
   'Tottenham':47,'Newcastle':34,'Aston Villa':66,'West Ham':48,'Brighton':51,
@@ -311,7 +308,176 @@ function updateCacheBadge(){
   b.className='cache-badge hit';
 }
 
-/* ── SQUADS FROM API ── */
+/* ── NEWS SYSTEM ── */
+let newsData={}; // {teamName: [{type, player, text, source}]}
+
+function newsLoad(){
+  try{
+    const ts=parseInt(localStorage.getItem(LS_NEWS_TS)||'0');
+    if(Date.now()-ts<NEWS_TTL){
+      const d=JSON.parse(localStorage.getItem(LS_NEWS)||'{}');
+      if(Object.keys(d).length){newsData=d;return true;}
+    }
+  }catch(e){}
+  return false;
+}
+function newsSave(){
+  localStorage.setItem(LS_NEWS,JSON.stringify(newsData));
+  localStorage.setItem(LS_NEWS_TS,Date.now().toString());
+}
+function newsSetBadge(state){
+  const b=document.getElementById('newsBadge');
+  if(state==='loading'){b.className='news-badge loading';b.textContent='📰 se actualizează...';}
+  else if(state==='ready'){
+    const count=Object.values(newsData).flat().length;
+    b.className='news-badge ready';
+    b.textContent='📰 '+count+' alerte';
+  }
+  else if(state==='error'){b.className='news-badge error';b.textContent='📰 eroare';}
+  else{b.className='news-badge';b.textContent='📰 știri';}
+}
+
+async function fetchNewsForTeams(teams){
+  // Colectăm echipele unice din ligile prioritare
+  const priorityTeams=teams.filter((t,i,a)=>a.indexOf(t)===i).slice(0,12); // max 12 echipe per fetch
+  if(!priorityTeams.length)return;
+
+  newsSetBadge('loading');
+
+  // Construim query-ul pentru Claude
+  const query=`Analizează știrile de fotbal din ultimele 48 de ore pentru aceste echipe: ${priorityTeams.join(', ')}.
+
+Pentru fiecare jucător menționat ca accidentat, suspendat, în dubiu sau revenit, returnează JSON strict (fără alt text):
+{
+  "alerts": [
+    {
+      "team": "Numele exact al echipei",
+      "player": "Numele jucătorului",
+      "type": "injured|suspended|doubt|available",
+      "text": "Descriere scurtă max 60 caractere",
+      "source": "sursa (ex: BBC Sport, Sky Sports)"
+    }
+  ]
+}
+
+Răspunde DOAR cu JSON valid. Dacă nu ai informații recente, returnează {"alerts": []}.`;
+
+  try{
+    const resp=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        tools:[{type:'web_search_20250305',name:'web_search'}],
+        messages:[{role:'user',content:query}]
+      })
+    });
+
+    const data=await resp.json();
+
+    // Extragem textul din response (poate fi după tool_use)
+    let jsonText='';
+    for(const block of(data.content||[])){
+      if(block.type==='text'){jsonText=block.text;break;}
+    }
+
+    if(!jsonText){newsSetBadge('error');return;}
+
+    // Parse JSON
+    const clean=jsonText.replace(/```json|```/g,'').trim();
+    const parsed=JSON.parse(clean);
+
+    if(parsed.alerts&&Array.isArray(parsed.alerts)){
+      // Resetăm doar echipele din acest batch
+      priorityTeams.forEach(t=>delete newsData[t]);
+
+      parsed.alerts.forEach(alert=>{
+        if(!newsData[alert.team])newsData[alert.team]=[];
+        newsData[alert.team].push({
+          type:alert.type||'doubt',
+          player:alert.player||'',
+          text:alert.text||'',
+          source:alert.source||''
+        });
+      });
+
+      newsSave();
+      newsSetBadge('ready');
+      // Re-render meciurile pentru a afișa alertele
+      renderMatchList();
+    }
+  }catch(e){
+    console.warn('News fetch error:',e);
+    newsSetBadge('error');
+  }
+}
+
+async function initNews(){
+  // Verificăm dacă avem date recente în cache
+  if(newsLoad()){
+    newsSetBadge('ready');
+    return;
+  }
+  // Schedule fetch după ce meciurile s-au încărcat
+  // (va fi apelat din loadMatches după ce avem lista de echipe)
+}
+
+function scheduleNewsForMatches(matches){
+  if(newsLoad()){newsSetBadge('ready');return;} // already fresh
+
+  // Filtrăm echipele din ligile prioritare
+  const priorityLgs=new Set(NEWS_PRIORITY_LEAGUES);
+  const teams=[];
+  matches.forEach(m=>{
+    if(priorityLgs.has(m.leagueCode)){
+      if(m.homeTeam?.name)teams.push(m.homeTeam.name);
+      if(m.awayTeam?.name)teams.push(m.awayTeam.name);
+    }
+  });
+
+  if(teams.length){
+    // Fetch în background după 2s (nu blochează UI)
+    setTimeout(()=>fetchNewsForTeams(teams),2000);
+  }
+}
+
+async function manualNewsRefresh(){
+  if(document.getElementById('newsBadge').className.includes('loading'))return;
+  // Ștergem cache-ul de știri
+  localStorage.removeItem(LS_NEWS);
+  localStorage.removeItem(LS_NEWS_TS);
+  newsData={};
+  scheduleNewsForMatches(allMatches);
+}
+
+function getTeamNews(teamName){
+  return newsData[teamName]||[];
+}
+
+function buildNewsHTML(home,away){
+  const hNews=getTeamNews(home);
+  const aNews=getTeamNews(away);
+  const all=[...hNews.map(n=>({...n,teamLabel:home})),...aNews.map(n=>({...n,teamLabel:away}))];
+  if(!all.length)return '';
+  const typeIcon={injured:'🚑',suspended:'🟥',doubt:'⚠️',available:'✅'};
+  return `<div class="mc-news">${all.map(n=>`
+    <div class="news-alert">
+      <span class="news-alert-icon">${typeIcon[n.type]||'⚠️'}</span>
+      <div>
+        <div class="news-alert-team">${n.teamLabel}</div>
+        <div class="news-alert-text"><span class="news-tag ${n.type}">${n.type==='injured'?'Accidentat':n.type==='suspended'?'Suspendat':n.type==='doubt'?'Dubios':'Disponibil'}</span><strong>${n.player}</strong> — ${n.text}</div>
+        ${n.source?`<div class="news-alert-src">📡 ${n.source}</div>`:''}
+      </div>
+    </div>`).join('')}</div>`;
+}
+
+function getAbsentPlayers(teamName){
+  const news=getTeamNews(teamName);
+  return news.filter(n=>n.type==='injured'||n.type==='suspended').map(n=>n.player.toLowerCase());
+}
+
+/* ── SQUADS ── */
 async function fetchSquad(teamName){
   if(squadCache[teamName])return squadCache[teamName];
   const tid=AF_TEAM_IDS[teamName];
@@ -323,12 +489,9 @@ async function fetchSquad(teamName){
     if(d.response&&d.response[0]){
       const players=d.response[0].players
         .filter(p=>['Goalkeeper','Defender','Midfielder','Attacker'].includes(p.position))
-        .sort((a,b)=>{
-          const order={Goalkeeper:0,Defender:1,Midfielder:2,Attacker:3};
-          return order[a.position]-order[b.position];
-        })
+        .sort((a,b)=>({Goalkeeper:0,Defender:1,Midfielder:2,Attacker:3}[a.position]-{Goalkeeper:0,Defender:1,Midfielder:2,Attacker:3}[b.position]))
         .slice(0,15)
-        .map(p=>p.name.split(' ').pop()); // Last name
+        .map(p=>p.name.split(' ').pop());
       squadCache[teamName]=players;
       return players;
     }
@@ -425,7 +588,7 @@ function buildLgBar(){
 function buildFilterBar(){
   if(filterBarBuilt)return;
   const bar=document.getElementById('filterBar');bar.innerHTML='';
-  [{id:'ALL',label:'Toate'},{id:'REC',label:'★ Recomandate'},{id:'O25',label:'⚽ Over 2.5'},{id:'BTTS',label:'🔄 BTTS'},{id:'LIVE',label:'🔴 Live'}]
+  [{id:'ALL',label:'Toate'},{id:'REC',label:'★ Recomandate'},{id:'O25',label:'⚽ Over 2.5'},{id:'BTTS',label:'🔄 BTTS'},{id:'LIVE',label:'🔴 Live'},{id:'ALERTS',label:'⚠️ Cu alerte'}]
   .forEach(f=>{
     const btn=document.createElement('button');
     btn.className='filter-btn'+(state.filter===f.id?' active':'');
@@ -443,7 +606,12 @@ function updateFilterBar(){
 async function loadMatches(){
   const date=dayDate(state.day);
   const cached=cGet(date);
-  if(cached){allMatches=cached;renderMatches();return;}
+  if(cached){
+    allMatches=cached;
+    scheduleNewsForMatches(allMatches);
+    renderMatches();
+    return;
+  }
   const col=document.getElementById('matchesCol');
   const total=FD_LEAGUES.length+AF_LEAGUES.length;
   let loaded=0;
@@ -477,7 +645,10 @@ async function loadMatches(){
     const msg=document.getElementById('loaderMsg');
     if(msg)msg.textContent=loaded+' / '+total+' ligi procesate';
   }
-  cSet(date,list);allMatches=list;renderMatches();
+  cSet(date,list);
+  allMatches=list;
+  scheduleNewsForMatches(allMatches);
+  renderMatches();
 }
 
 /* ── CARD HELPERS ── */
@@ -499,11 +670,17 @@ function pColor(p){return p>=72?'var(--green)':p>=55?'var(--yellow)':'var(--red)
 function isSel(mid,lbl){return state.ticket.some(t=>t.matchId===mid&&t.label===lbl);}
 function mCnt(mid){return state.ticket.filter(t=>t.matchId===mid).length;}
 
-function oBtn(mid,home,away,label,prob){
+function oBtn(mid,home,away,label,prob,isAbsent=false){
   const odd=calcOdd(prob),sel=isSel(mid,label);
   const bb=sel&&mCnt(mid)>=2?'<span class="bb-badge">BB</span>':'';
   const star=prob>=68?'<span class="star">★</span> ':'';
   const col=pColor(prob);
+  if(isAbsent){
+    return `<button class="odd-btn player-absent" disabled title="Jucător posibil indisponibil">
+      <div class="odd-label">🚫 ${label}</div>
+      <div class="odd-val" style="color:var(--muted)">N/A</div>
+    </button>`;
+  }
   return `<button class="odd-btn${sel?' selected':''}" onclick="toggleSel('${mid}','${esc(home)}','${esc(away)}','${esc(label)}',${prob},${odd})">
     ${bb}<div class="odd-label">${star}${label}</div>
     <div class="odd-val">@${odd}</div>
@@ -517,18 +694,27 @@ function buildCard(m){
   const p=probs(home,away);
   const lgName=LG_NAMES[m.leagueCode]||m.leagueName||m.leagueCode;
   const hp=PLAYERS[home],ap=PLAYERS[away];
+  const hAbsent=getAbsentPlayers(home);
+  const aAbsent=getAbsentPlayers(away);
+  const newsHTML=buildNewsHTML(home,away);
 
   const s1=`<div class="cat-section"><div class="cat-title" onclick="toggleCat(this)">1X2 &amp; Șanse<span>▼</span></div><div class="cat-body"><div class="odds-grid">${oBtn(mid,home,away,'1 '+home,p.hW)}${oBtn(mid,home,away,'X Egal',p.dr)}${oBtn(mid,home,away,'2 '+away,p.aW)}${oBtn(mid,home,away,'1X',Math.min(94,p.hW+p.dr))}${oBtn(mid,home,away,'X2',Math.min(94,p.aW+p.dr))}</div></div></div>`;
   const s2=`<div class="cat-section"><div class="cat-title" onclick="toggleCat(this)">⚽ Goluri<span>▼</span></div><div class="cat-body"><div class="odds-grid">${oBtn(mid,home,away,'Peste 1.5',p.o15)}${oBtn(mid,home,away,'Peste 2.5',p.o25)}${oBtn(mid,home,away,'Peste 3.5',p.o35)}${oBtn(mid,home,away,'Peste 4.5',p.o45)}${oBtn(mid,home,away,'BTTS Da',p.bt)}${oBtn(mid,home,away,'BTTS Nu',p.nobt)}</div></div></div>`;
   const s3=`<div class="cat-section"><div class="cat-title" onclick="toggleCat(this)">📐 Cornere<span>▼</span></div><div class="cat-body"><div class="odds-grid">${oBtn(mid,home,away,'Total >7.5',p.totC>9?65:52)}${oBtn(mid,home,away,'Total >9.5',p.totC>10?56:43)}${oBtn(mid,home,away,'Total >11.5',p.totC>11?46:34)}${oBtn(mid,home,away,home+' >3.5',p.hC>5?62:48)}${oBtn(mid,home,away,away+' >3.5',p.aC>5?60:46)}</div></div></div>`;
 
-  // Shots section — async load squad if not in PLAYERS dict
-  const hasStaticPlayers=hp&&ap;
-  const hasApiId=AF_TEAM_IDS[home]||AF_TEAM_IDS[away];
+  // Shots cu absent check
   let s4='';
-  if(hasStaticPlayers){
-    s4=buildShotsSection(mid,home,away,hp,ap,p);
-  } else if(hasApiId){
+  if(hp&&ap){
+    const hBtns=hp.slice(0,4).map((pl,i)=>{
+      const absent=hAbsent.some(a=>pl.toLowerCase().includes(a)||a.includes(pl.toLowerCase()));
+      return oBtn(mid,home,away,pl+' suturi',28+((i*7+p.hW)%24),absent);
+    }).join('');
+    const aBtns=ap.slice(0,4).map((pl,i)=>{
+      const absent=aAbsent.some(a=>pl.toLowerCase().includes(a)||a.includes(pl.toLowerCase()));
+      return oBtn(mid,home,away,pl+' suturi',24+((i*7+p.aW)%24),absent);
+    }).join('');
+    s4=`<div class="cat-section"><div class="cat-title" onclick="toggleCat(this)">🎯 Suturi pe Poartă<span>▼</span></div><div class="cat-body"><div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:5px">${home}</div><div class="odds-grid">${hBtns}</div><div style="font-size:10px;color:var(--muted);font-weight:700;margin:7px 0 5px">${away}</div><div class="odds-grid">${aBtns}</div></div></div>`;
+  } else if(AF_TEAM_IDS[home]||AF_TEAM_IDS[away]){
     s4=`<div class="cat-section" id="shots-${mid}"><div class="cat-title" onclick="loadAndOpenShots('${mid}','${esc(home)}','${esc(away)}')">🎯 Suturi pe Poartă<span>▼</span></div><div class="cat-body"><div class="squad-loading">Apasă pentru a încărca jucătorii...</div></div></div>`;
   }
 
@@ -539,17 +725,14 @@ function buildCard(m){
       <div class="form-group"><div class="form-label">Formă ${home}</div><div class="form-dots">${formHTML(home)}</div></div>
       <div class="form-group" style="text-align:right"><div class="form-label">Formă ${away}</div><div class="form-dots" style="justify-content:flex-end">${formHTML(away)}</div></div>
     </div>
+    ${newsHTML}
     <div class="mc-cats">${s1}${s2}${s3}${s4}</div>
   </div>`;
 }
 
-function buildShotsSection(mid,home,away,hp,ap,p){
-  return `<div class="cat-section"><div class="cat-title" onclick="toggleCat(this)">🎯 Suturi pe Poartă<span>▼</span></div><div class="cat-body">
-    <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:5px">${home}</div>
-    <div class="odds-grid">${hp.slice(0,4).map((pl,i)=>oBtn(mid,home,away,pl+' suturi',28+((i*7+p.hW)%24))).join('')}</div>
-    <div style="font-size:10px;color:var(--muted);font-weight:700;margin:7px 0 5px">${away}</div>
-    <div class="odds-grid">${ap.slice(0,4).map((pl,i)=>oBtn(mid,home,away,pl+' suturi',24+((i*7+p.aW)%24))).join('')}</div>
-  </div></div>`;
+function toggleCat(title){
+  const body=title.nextElementSibling;
+  title.querySelector('span:last-child').textContent=body.classList.toggle('open')?'▲':'▼';
 }
 
 async function loadAndOpenShots(mid,home,away){
@@ -559,36 +742,37 @@ async function loadAndOpenShots(mid,home,away){
   const tog=section.querySelector('.cat-title span');
   body.innerHTML='<div class="squad-loading">Se încarcă jucătorii...</div>';
   body.classList.add('open');if(tog)tog.textContent='▲';
-  const m=allMatches.find(x=>String(x.id)===mid);
-  if(!m)return;
   const p=probs(home,away);
-  const [hp,ap]=await Promise.all([fetchSquad(home),fetchSquad(away)]);
+  const hAbsent=getAbsentPlayers(home);
+  const aAbsent=getAbsentPlayers(away);
+  const[hp,ap]=await Promise.all([fetchSquad(home),fetchSquad(away)]);
   if(hp&&ap){
-    body.innerHTML=`
-      <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:5px">${home}</div>
-      <div class="odds-grid">${hp.slice(0,4).map((pl,i)=>oBtn(mid,home,away,pl+' suturi',28+((i*7+p.hW)%24))).join('')}</div>
-      <div style="font-size:10px;color:var(--muted);font-weight:700;margin:7px 0 5px">${away}</div>
-      <div class="odds-grid">${ap.slice(0,4).map((pl,i)=>oBtn(mid,home,away,pl+' suturi',24+((i*7+p.aW)%24))).join('')}</div>`;
-    // Remove the id so future clicks use toggleCat
+    const hBtns=hp.slice(0,4).map((pl,i)=>{
+      const absent=hAbsent.some(a=>pl.toLowerCase().includes(a)||a.includes(pl.toLowerCase()));
+      return oBtn(mid,home,away,pl+' suturi',28+((i*7+p.hW)%24),absent);
+    }).join('');
+    const aBtns=ap.slice(0,4).map((pl,i)=>{
+      const absent=aAbsent.some(a=>pl.toLowerCase().includes(a)||a.includes(pl.toLowerCase()));
+      return oBtn(mid,home,away,pl+' suturi',24+((i*7+p.aW)%24),absent);
+    }).join('');
+    body.innerHTML=`<div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:5px">${home}</div><div class="odds-grid">${hBtns}</div><div style="font-size:10px;color:var(--muted);font-weight:700;margin:7px 0 5px">${away}</div><div class="odds-grid">${aBtns}</div>`;
     section.removeAttribute('id');
     section.querySelector('.cat-title').setAttribute('onclick','toggleCat(this)');
-  } else {
-    body.innerHTML='<div class="squad-loading">Jucători indisponibili pentru această echipă</div>';
+  }else{
+    body.innerHTML='<div class="squad-loading">Jucători indisponibili</div>';
   }
 }
 
-function toggleCat(title){
-  const body=title.nextElementSibling;
-  title.querySelector('span:last-child').textContent=body.classList.toggle('open')?'▲':'▼';
-}
 function applyFilter(list){
   if(state.filter==='ALL')return list;
   if(state.filter==='LIVE')return list.filter(m=>['1H','2H','HT','LIVE'].includes(m.status?.code||m.status?.short||''));
   if(state.filter==='REC')return list.filter(m=>{const p=probs(m.homeTeam.name,m.awayTeam.name);return Math.max(p.hW,p.aW,p.o25,p.bt)>=65;});
   if(state.filter==='O25')return list.filter(m=>probs(m.homeTeam.name,m.awayTeam.name).o25>=58);
   if(state.filter==='BTTS')return list.filter(m=>probs(m.homeTeam.name,m.awayTeam.name).bt>=58);
+  if(state.filter==='ALERTS')return list.filter(m=>getTeamNews(m.homeTeam.name).length||getTeamNews(m.awayTeam.name).length);
   return list;
 }
+
 function renderMatchList(){
   const col=document.getElementById('matchesCol');
   let list=state.league==='ALL'?allMatches:allMatches.filter(m=>m.leagueCode===state.league);
@@ -612,7 +796,7 @@ function toggleSel(mid,home,away,label,prob,odd){
   }
   const card=document.getElementById('mc-'+mid);
   if(card){
-    card.querySelectorAll('.odd-btn').forEach(btn=>{
+    card.querySelectorAll('.odd-btn:not(.player-absent)').forEach(btn=>{
       const lbl=btn.querySelector('.odd-label')?.textContent?.replace('★ ','').replace('★','').trim();
       if(!lbl)return;
       const sel=isSel(mid,lbl);
@@ -622,11 +806,10 @@ function toggleSel(mid,home,away,label,prob,odd){
       else if(bb)bb.remove();
     });
   }
-  renderTicket();
-  updateMobileBar();
+  renderTicket();updateMobileBar();
 }
 
-/* ── TICKET CONTENT (shared between desktop panel + mobile drawer) ── */
+/* ── TICKET ── */
 function ticketSelectionsHTML(){
   const t=state.ticket;
   if(!t.length)return '<div class="tp-empty">Selectează cote din meciuri</div>';
@@ -659,46 +842,30 @@ function ticketCalcHTML(tOdd,win,profit,eProb,rPct,sk){
     <button class="tp-btn-clear" ${state.ticket.length===0?'disabled':''} onclick="clearTicket()">🗑 Golește biletul</button>
   </div>`;
 }
-
 function renderTicket(){
   const t=state.ticket,sk=state.stake;
   const tOdd=t.length?+t.reduce((a,s)=>a*s.odd,1).toFixed(2):1;
-  const win=+(sk*tOdd).toFixed(2);
-  const profit=+(win-sk).toFixed(2);
+  const win=+(sk*tOdd).toFixed(2),profit=+(win-sk).toFixed(2);
   const eProb=t.length?+(t.reduce((a,s)=>a*(s.prob/100),1)*100).toFixed(1):0;
   const rPct=Math.min(100,Math.round((Math.log(Math.max(1.01,tOdd))/Math.log(50))*100));
-
-  // Desktop panel
   document.getElementById('ticketPanel').innerHTML=`<div class="tp">
-    <div class="tp-hdr">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00E676" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
-      <h2>Bilet de Pariuri</h2>
-      <div class="tp-cnt">Selecții: <span>${t.length}/8</span></div>
-    </div>
-    ${ticketSelectionsHTML()}
-    ${ticketCalcHTML(tOdd,win,profit,eProb,rPct,sk)}
-  </div>`;
-
-  // Mobile drawer
+    <div class="tp-hdr"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00E676" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+    <h2>Bilet de Pariuri</h2><div class="tp-cnt">Selecții: <span>${t.length}/8</span></div></div>
+    ${ticketSelectionsHTML()}${ticketCalcHTML(tOdd,win,profit,eProb,rPct,sk)}</div>`;
   document.getElementById('drawerCnt').textContent=t.length+'/8';
   document.getElementById('drawerBody').innerHTML=ticketSelectionsHTML();
   document.getElementById('drawerFooter').innerHTML=ticketCalcHTML(tOdd,win,profit,eProb,rPct,sk);
 }
-
-/* ── MOBILE BAR ── */
 function updateMobileBar(){
   const t=state.ticket;
   const tOdd=t.length?+t.reduce((a,s)=>a*s.odd,1).toFixed(2):1;
   document.getElementById('mtbCount').textContent=t.length+' selecț'+(t.length===1?'ie':'ii');
   document.getElementById('mtbOdd').textContent='@'+tOdd;
   document.getElementById('mtbSave').disabled=t.length<2;
-  const bar=document.getElementById('mobileBar');
-  bar.classList.toggle('has-selections',t.length>0);
+  document.getElementById('mobileBar').classList.toggle('has-selections',t.length>0);
 }
-
 function openDrawer(){document.getElementById('ticketDrawer').classList.add('open');document.body.style.overflow='hidden';}
 function closeDrawer(){document.getElementById('ticketDrawer').classList.remove('open');document.body.style.overflow='';}
-
 function setStake(v){state.stake=v;const i=document.getElementById('stakeInp');if(i)i.value=v;renderTicket();updateMobileBar();}
 function clearTicket(){
   if(!confirm('Golești biletul?'))return;
@@ -709,8 +876,7 @@ function forceReload(){delete cache[cKey(dayDate(state.day))];filterBarBuilt=fal
 function saveTicket(){
   const t=state.ticket;if(t.length<2)return;
   histAdd(t,state.stake,+t.reduce((a,s)=>a*s.odd,1).toFixed(2));
-  closeDrawer();
-  alert('Bilet salvat în Istoric! ✓');
+  closeDrawer();alert('Bilet salvat în Istoric! ✓');
 }
 
 /* ── EXPORT PNG ── */
@@ -754,8 +920,7 @@ function closeModal(){document.getElementById('exportModal').classList.remove('o
 /* ── HISTORY ── */
 function renderHistory(){
   const h=histLoad();
-  const won=h.filter(x=>x.result==='won').length;
-  const lost=h.filter(x=>x.result==='lost').length;
+  const won=h.filter(x=>x.result==='won').length,lost=h.filter(x=>x.result==='lost').length;
   const profit=h.filter(x=>x.result==='won').reduce((a,x)=>a+x.potential,0)-h.filter(x=>x.result!=='open').reduce((a,x)=>a+x.stake,0);
   const totalStake=h.reduce((a,x)=>a+x.stake,0);
   const roi=totalStake>0?((profit/totalStake)*100).toFixed(1):0;
@@ -771,8 +936,7 @@ function renderHistory(){
     <div class="hist-card">
       <div class="hist-hdr">
         <div><div style="font-size:12px;font-weight:700">${e.selections.length} selecții</div><div class="hist-date">${e.date}</div></div>
-        <span class="hist-odd">@${e.totalOdd}</span>
-        <span class="hist-stake">${e.stake} RON</span>
+        <span class="hist-odd">@${e.totalOdd}</span><span class="hist-stake">${e.stake} RON</span>
         <span class="hist-result ${e.result}">${e.result==='won'?'✓ CÂȘTIGAT':e.result==='lost'?'✗ PIERDUT':'⏳ DESCHIS'}</span>
       </div>
       <div class="hist-sels">${e.selections.map(s=>`<div class="hist-sel"><span class="hist-sel-name">${s.home} vs ${s.away} — ${s.label}</span><span class="hist-sel-odd">@${s.odd}</span></div>`).join('')}</div>
@@ -787,7 +951,7 @@ function renderHistory(){
 function markResult(id,result){histSetResult(id,result);renderHistory();}
 function deleteTicket(id){if(confirm('Ștergi biletul?')){histDelete(id);renderHistory();}}
 
-async function renderAll(){buildDayBar();renderTicket();updateMobileBar();await loadMatches();}
+async function renderAll(){buildDayBar();renderTicket();updateMobileBar();initNews();await loadMatches();}
 renderAll();
 </script>
 </body>
