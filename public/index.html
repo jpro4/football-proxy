@@ -9,21 +9,17 @@
 :root{--bg:#080808;--bg2:#111;--bg3:#1a1a1a;--card:#141414;--green:#00E676;--blue:#2979FF;--red:#FF5252;--yellow:#FFD740;--text:#f0f0f0;--muted:#888;--border:#2a2a2a}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
 .app{max-width:1400px;margin:0 auto;padding:0 12px}
-/* HEADER */
 .hdr{background:linear-gradient(135deg,#0a0a0a,#141414);border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100}
 .hdr h1{font-size:20px;font-weight:700;color:var(--green);letter-spacing:-0.5px}
 .hdr p{font-size:11px;color:var(--muted);margin-top:2px}
 .hdr-right{margin-left:auto;display:flex;align-items:center;gap:8px}
 .cache-badge{font-size:10px;color:var(--muted);background:var(--bg3);padding:3px 8px;border-radius:8px;border:1px solid var(--border)}
 .cache-badge.hit{color:var(--green);border-color:rgba(0,230,118,.3)}
-/* NAV TABS */
 .nav-tabs{display:flex;gap:2px;padding:10px 0 0}
 .nav-tab{padding:8px 18px;border-radius:10px 10px 0 0;border:1px solid var(--border);border-bottom:none;background:var(--bg2);color:var(--muted);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s}
-.nav-tab:hover{color:var(--text)}
-.nav-tab.active{background:var(--card);color:var(--green);border-color:var(--border)}
+.nav-tab.active{background:var(--card);color:var(--green)}
 .tab-content{display:none}
 .tab-content.active{display:block}
-/* DAY/LEAGUE/FILTER BARS */
 .days{display:flex;gap:6px;padding:14px 0 10px;overflow-x:auto;scrollbar-width:none}
 .days::-webkit-scrollbar{display:none}
 .day-btn{flex-shrink:0;padding:8px 16px;border-radius:20px;border:1px solid var(--border);background:var(--bg2);color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap;position:relative}
@@ -36,14 +32,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .lg-btn.active{border-color:var(--green);color:var(--green);background:rgba(0,230,118,.08)}
 .lg-cnt{background:var(--border);color:var(--muted);border-radius:10px;padding:1px 5px;font-size:10px}
 .lg-btn.active .lg-cnt{background:rgba(0,230,118,.2);color:var(--green)}
+/* FILTERS — fixed: built once, never re-appended */
 .filters{display:flex;gap:6px;flex-wrap:wrap;padding:0 0 12px}
 .filter-btn{padding:4px 11px;border-radius:14px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s}
 .filter-btn:hover{border-color:#555;color:var(--text)}
 .filter-btn.active{border-color:var(--yellow);color:var(--yellow);background:rgba(255,215,64,.08)}
-/* LAYOUT */
 .main{display:flex;gap:16px;align-items:flex-start;padding-bottom:40px}
 .matches-col{flex:1;min-width:0}
-/* MATCH CARD */
 .match-card{background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden;transition:border-color .2s}
 .match-card:hover{border-color:#333}
 .mc-hdr{padding:10px 14px;display:flex;align-items:center;gap:10px}
@@ -80,7 +75,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .prob-fill{height:100%;border-radius:2px;transition:width .4s}
 .star{color:var(--yellow)}
 .bb-badge{position:absolute;top:4px;right:4px;background:var(--blue);color:#fff;font-size:9px;font-weight:700;padding:1px 4px;border-radius:4px}
-/* TICKET PANEL */
+/* TICKET */
 .ticket-panel{width:310px;flex-shrink:0;position:sticky;top:72px}
 .tp{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
 .tp-hdr{padding:14px;background:linear-gradient(135deg,#141414,#1e1e1e);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
@@ -116,9 +111,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .tp-btn-save{flex:1;padding:12px;border-radius:10px;border:1px solid var(--blue);background:transparent;color:var(--blue);font-size:13px;font-weight:700;cursor:pointer;transition:all .2s}
 .tp-btn-save:disabled{border-color:var(--border);color:var(--muted);cursor:not-allowed}
 .tp-btn-save:not(:disabled):hover{background:rgba(41,121,255,.1)}
-.tp-btn-export{width:100%;margin-top:6px;padding:9px;border-radius:10px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px}
-.tp-btn-export:not(:disabled):hover{border-color:#555;color:var(--text)}
-.tp-btn-export:disabled{opacity:.4;cursor:not-allowed}
+.tp-btn-secondary{width:100%;margin-top:6px;padding:9px;border-radius:10px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s}
+.tp-btn-secondary:hover{border-color:#555;color:var(--text)}
+.tp-btn-secondary:disabled{opacity:.4;cursor:not-allowed}
 /* LOADER */
 .loader{text-align:center;padding:40px;color:var(--muted)}
 .spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 12px}
@@ -129,9 +124,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .status-msg h3{font-size:15px;font-weight:700;margin-bottom:6px}
 .status-msg p{font-size:12px;color:var(--muted);line-height:1.5}
 .retry-btn{margin-top:12px;padding:8px 20px;border-radius:10px;border:1px solid var(--green);background:transparent;color:var(--green);font-size:12px;font-weight:600;cursor:pointer}
-/* HISTORY TAB */
+/* HISTORY */
+.hist-stats{display:flex;gap:8px;padding:16px 0 8px;flex-wrap:wrap}
+.stat-box{flex:1;min-width:90px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 14px;text-align:center}
+.stat-val{font-size:20px;font-weight:800;color:var(--green)}
+.stat-val.red{color:var(--red)}.stat-val.blue{color:var(--blue)}
+.stat-label{font-size:10px;color:var(--muted);margin-top:2px}
 .hist-empty{text-align:center;padding:40px;color:var(--muted)}
-.hist-empty .icon{font-size:36px;margin-bottom:10px}
 .hist-card{background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden}
 .hist-hdr{padding:12px 16px;display:flex;align-items:center;gap:10px;background:var(--bg2);border-bottom:1px solid var(--border)}
 .hist-date{font-size:11px;color:var(--muted)}
@@ -146,40 +145,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .hist-sel:last-child{border-bottom:none}
 .hist-sel-name{color:var(--muted);flex:1}
 .hist-sel-odd{color:var(--blue);font-weight:700;margin:0 12px}
-.hist-sel-res{font-size:11px;font-weight:700}
-.hist-sel-res.won{color:var(--green)}
-.hist-sel-res.lost{color:var(--red)}
-.hist-sel-res.open{color:var(--yellow)}
 .hist-footer{padding:8px 16px;background:var(--bg3);display:flex;justify-content:space-between;align-items:center;font-size:12px}
-.hist-actions{display:flex;gap:6px;padding:8px 16px 12px}
+.hist-actions{display:flex;gap:6px;padding:8px 16px 12px;flex-wrap:wrap}
 .hist-btn{padding:5px 12px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s}
 .hist-btn:hover{border-color:#555;color:var(--text)}
 .hist-btn.del{border-color:rgba(255,82,82,.3);color:var(--red)}
-.hist-btn.del:hover{background:rgba(255,82,82,.1)}
 .hist-btn.won-btn{border-color:rgba(0,230,118,.3);color:var(--green)}
-.hist-btn.won-btn:hover{background:rgba(0,230,118,.1)}
 .hist-btn.lost-btn{border-color:rgba(255,82,82,.3);color:var(--red)}
 .hist-btn.export-btn{border-color:rgba(41,121,255,.3);color:var(--blue)}
-.hist-btn.export-btn:hover{background:rgba(41,121,255,.1)}
-/* STATS BAR */
-.hist-stats{display:flex;gap:8px;padding:16px 0 8px;flex-wrap:wrap}
-.stat-box{flex:1;min-width:100px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 14px;text-align:center}
-.stat-val{font-size:20px;font-weight:800;color:var(--green)}
-.stat-val.red{color:var(--red)}
-.stat-val.blue{color:var(--blue)}
-.stat-label{font-size:10px;color:var(--muted);margin-top:2px}
 /* EXPORT MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:200;align-items:center;justify-content:center}
 .modal-overlay.open{display:flex}
-.modal{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:0;width:360px;max-width:95vw;overflow:hidden}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:16px;width:360px;max-width:95vw;overflow:hidden}
 .modal-hdr{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
 .modal-hdr h3{font-size:15px;font-weight:700}
-.modal-close{background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;padding:0 4px}
+.modal-close{background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer}
 .modal-close:hover{color:var(--text)}
-/* TICKET IMAGE PREVIEW */
-#ticketCanvas{display:none}
 .ticket-preview{padding:16px 20px}
-.ticket-preview canvas{width:100%;border-radius:8px}
+.ticket-preview img{width:100%;border-radius:8px}
 .modal-footer{padding:12px 20px;border-top:1px solid var(--border);display:flex;gap:8px}
 .modal-btn{flex:1;padding:10px;border-radius:10px;border:none;font-size:13px;font-weight:700;cursor:pointer}
 .modal-btn.primary{background:linear-gradient(135deg,var(--green),#00C853);color:#000}
@@ -190,10 +173,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .lc-CL{border-left:3px solid #1a56db}.lc-EC{border-left:3px solid #003399}
 .lc-L1R{border-left:3px solid #ffcc00}.lc-BEL{border-left:3px solid #eb1c24}
 @media(max-width:768px){
-  .main{flex-direction:column}
-  .ticket-panel{width:100%;position:static}
-  .hist-stats{gap:6px}
-  .stat-box{min-width:80px;padding:8px 10px}
+  .main{flex-direction:column}.ticket-panel{width:100%;position:static}
+  .hist-stats{gap:6px}.stat-box{min-width:80px;padding:8px 10px}
 }
 </style>
 </head>
@@ -207,9 +188,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <circle cx="12" cy="12" r="3" fill="#00E676"/>
   </svg>
   <div><h1>Football Intelligence</h1><p>Predicții bazate pe statistici reale 2025-26</p></div>
-  <div class="hdr-right">
-    <span class="cache-badge" id="cacheBadge">cache: 0 zile</span>
-  </div>
+  <div class="hdr-right"><span class="cache-badge" id="cacheBadge">cache: 0 zile</span></div>
 </div>
 
 <div class="nav-tabs">
@@ -217,7 +196,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <button class="nav-tab" onclick="switchTab('history')">📋 Istoric Bilete</button>
 </div>
 
-<!-- MATCHES TAB -->
 <div class="tab-content active" id="tab-matches">
   <div class="days" id="dayBar"></div>
   <div class="leagues" id="lgBar"></div>
@@ -228,7 +206,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 </div>
 
-<!-- HISTORY TAB -->
 <div class="tab-content" id="tab-history">
   <div class="hist-stats" id="histStats"></div>
   <div id="histList"></div>
@@ -236,13 +213,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 </div>
 
-<!-- EXPORT MODAL -->
 <div class="modal-overlay" id="exportModal">
   <div class="modal">
-    <div class="modal-hdr">
-      <h3>📤 Export Bilet</h3>
-      <button class="modal-close" onclick="closeModal()">✕</button>
-    </div>
+    <div class="modal-hdr"><h3>📤 Export Bilet</h3><button class="modal-close" onclick="closeModal()">✕</button></div>
     <div class="ticket-preview" id="ticketPreview"></div>
     <div class="modal-footer">
       <button class="modal-btn secondary" onclick="closeModal()">Închide</button>
@@ -250,14 +223,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
   </div>
 </div>
+<canvas id="ticketCanvas" style="display:none"></canvas>
 
-<canvas id="ticketCanvas"></canvas>
-
+<script src="data.js"></script>
 <script>
 const PROXY='https://football-proxy-weld.vercel.app';
 const FD_LEAGUES=['PL','PD','BL1','SA','FL1','PPL','CL','EC'];
 const AF_LEAGUES=[{id:283,name:'Liga 1',code:'L1R'},{id:144,name:'Pro League',code:'BEL'}];
-const LG_NAMES={PL:'Premier League',PD:'La Liga',BL1:'Bundesliga',SA:'Serie A',FL1:'Ligue 1',PPL:'Primeira Liga',CL:'Champions League',EC:'European',L1R:'Liga 1 România',BEL:'Pro League Belgia'};
 const CACHE_TTL=5*60*1000;
 const LS_HISTORY='fi_history_v1';
 
@@ -279,133 +251,23 @@ function histLoad(){try{return JSON.parse(localStorage.getItem(LS_HISTORY)||'[]'
 function histSave(h){localStorage.setItem(LS_HISTORY,JSON.stringify(h));}
 function histAdd(ticket,stake,totalOdd){
   const h=histLoad();
-  const entry={
-    id:Date.now(),
-    date:new Date().toLocaleDateString('ro-RO',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}),
-    selections:ticket.map(s=>({...s})),
-    stake,totalOdd,
-    potential:+(stake*totalOdd).toFixed(2),
-    result:'open' // open | won | lost
-  };
-  h.unshift(entry);
+  h.unshift({id:Date.now(),date:new Date().toLocaleDateString('ro-RO',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}),selections:ticket.map(s=>({...s})),stake,totalOdd,potential:+(stake*totalOdd).toFixed(2),result:'open'});
   if(h.length>50)h.pop();
   histSave(h);
-  return entry;
 }
-function histSetResult(id,result){
-  const h=histLoad();
-  const e=h.find(x=>x.id===id);
-  if(e)e.result=result;
-  histSave(h);
-}
-function histDelete(id){
-  const h=histLoad().filter(x=>x.id!==id);
-  histSave(h);
-}
+function histSetResult(id,result){const h=histLoad();const e=h.find(x=>x.id===id);if(e)e.result=result;histSave(h);}
+function histDelete(id){histSave(histLoad().filter(x=>x.id!==id));}
 
-/* ── PLAYERS ── */
-const PLAYERS={
-  'Arsenal':['Raya','Saliba','Gabriel','White','Zinchenko','Rice','Ødegaard','Partey','Saka','Havertz','Martinelli'],
-  'Chelsea':['Sánchez','Colwill','Silva','Chalobah','Cucurella','Caicedo','Fernández','Palmer','Mudryk','Jackson','Sterling'],
-  'Liverpool':['Alisson','Alexander-Arnold','Konaté','Van Dijk','Robertson','Szoboszlai','Mac Allister','Salah','Núñez','Díaz','Gakpo'],
-  'Manchester City':['Ederson','Walker','Rúben Dias','Akanji','Gvardiol','Rodri','Bernardo','De Bruyne','Doku','Haaland','Foden'],
-  'Manchester United':['Onana','Wan-Bissaka','Maguire','Martínez','Shaw','Casemiro','Fernandes','Rashford','Antony','Højlund','Garnacho'],
-  'Tottenham':['Vicario','Porro','Romero','Van de Ven','Udogie','Bissouma','Maddison','Kulusevski','Son','Richarlison','Johnson'],
-  'Newcastle':['Pope','Trippier','Botman','Schär','Burn','Longstaff','Guimaraes','Joelinton','Almiron','Isak','Gordon'],
-  'Aston Villa':['Martínez','Cash','Konsa','Torres','Digne','Tielemans','McGinn','Bailey','Watkins','Diaby','Rogers'],
-  'West Ham':['Fabiański','Coufal','Zouma','Mavropanos','Emerson','Soucek','Ward-Prowse','Paquetá','Bowen','Antonio','Kudus'],
-  'Brighton':['Verbruggen','Veltman','Dunk','Webster','Estupiñán','Gross','Gilmour','Mitoma','Enciso','Welbeck','Pedro'],
-  'Fulham':['Leno','Tete','Ream','Andersen','Robinson','Lukic','Berge','Iwobi','Harrison','Jiménez','Muniz'],
-  'Brentford':['Flekken','Hickey','Collins','Pinnock','Henry','Nørgaard','Jensen','Mbeumo','Schade','Wissa','Toney'],
-  'Wolves':['Sa','Doherty','Dawson','Kilman','Ait-Nouri','João Gomes','Neves','Hwang','Sarabia','Cunha','Strand Larsen'],
-  'Crystal Palace':['Henderson','Clyne','Andersen','Guéhi','Mitchell','Doucoure','Hughes','Eze','Olise','Mateta','Schlupp'],
-  'Everton':['Pickford','Coleman','Tarkowski','Branthwaite','Mykolenko','Onana','Gueye','Doucoure','McNeil','Calvert-Lewin','Beto'],
-  'Nottingham Forest':['Turner','Aina','Murillo','Felipe','Williams','Yates','Anderson','Elanga','Hudson-Odoi','Wood','Awoniyi'],
-  'Nottm Forest':['Turner','Aina','Murillo','Felipe','Williams','Yates','Anderson','Elanga','Hudson-Odoi','Wood','Awoniyi'],
-  'Bournemouth':['Neto','Smith','Senesi','Zabarnyi','Kerkez','Cook','Christie','Semenyo','Sinisterra','Solanke','Kluivert'],
-  'Sunderland':['Patterson','Hume','Ballard','Kompany','Cirkin','Neil','Ba','Amad','Clarke','Mayenda','Roberts'],
-  'Leeds United':['Meslier','Kristensen','Cooper','Rodon','Firpo','Adams','Roca','Summerville','Gnonto','Bamford','James'],
-  'Real Madrid':['Courtois','Carvajal','Militão','Alaba','Mendy','Tchouaméni','Valverde','Bellingham','Vinicius','Rodrygo','Mbappé'],
-  'Barcelona':['ter Stegen','Kounde','Araújo','Christensen','Balde','Pedri','Gavi','De Jong','Yamal','Lewandowski','Ferran'],
-  'Atletico Madrid':['Oblak','Molina','Witsel','Gimenez','Reinildo','De Paul','Koke','Llorente','Félix','Griezmann','Correa'],
-  'Sevilla':['Dmitrović','Navas','Badé','Gudelj','Acuña','Rakitić','Jordán','Suso','Ocampos','En-Nesyri','Lamela'],
-  'Real Sociedad':['Remiro','Gorosabel','Zubeldia','Le Normand','Tierney','Zubimendi','Brais','Merino','Oyarzabal','Sørloth','Kubo'],
-  'Athletic Club':['Unai Simón','De Marcos','Yeray','Vivian','Berchiche','Vesga','Ruiz de Galarreta','Sancet','Williams I','Williams II','Berenguer'],
-  'Villarreal':['Pepe Reina','Foyth','Albiol','Torres','Pedraza','Baena','Parejo','Danjuma','Pino','Morales','Gerard'],
-  'Girona':['Gazzaniga','Yan Couto','Blind','López','Gutiérrez','Romeu','Aleix García','Tsygankov','Taty Castellanos','Sávio','Danjuma'],
-  'Real Betis':['Rui Silva','Sabaly','Bartra','Pezzella','Álex Moreno','Carvalho','Rodri','Canales','Fekir','Iglesias','Juanmi'],
-  'Bayern Munich':['Neuer','Mazraoui','Kim','Dier','Davies','Kimmich','Goretzka','Müller','Sané','Kane','Musiala'],
-  'Borussia Dortmund':['Kobel','Ryerson','Hummels','Schlotterbeck','Maatsen','Can','Brandt','Reus','Sancho','Fullkrug','Adeyemi'],
-  'RB Leipzig':['Blaswich','Simakan','Orbán','Lukeba','Raum','Kampl','Schlager','Simons','Openda','Sesko','Nusa'],
-  'Bayer Leverkusen':['Hradecky','Frimpong','Tah','Hincapié','Grimaldo','Andrich','Xhaka','Hofmann','Boniface','Wirtz','Terrier'],
-  'Eintracht Frankfurt':['Trapp','Tuta','Koch','Ndicka','Lenz','Sow','Knauff','Muani','Götze','Lindström','Kamada'],
-  'VfB Stuttgart':['Nübel','Vagnoman','Anton','Mavropanos','Mittelstädt','Karazor','Stiller','Millot','Führich','Guirassy','Undav'],
-  'Inter Milan':['Sommer','Pavard','Acerbi','Bastoni','Darmian','Barella','Çalhanoğlu','Mkhitaryan','Thuram','Lautaro','Dimarco'],
-  'AC Milan':['Maignan','Calabria','Thiaw','Tomori','Theo','Reijnders','Pobega','Pulisic','Leão','Giroud','Chukwueze'],
-  'Juventus':['Szczesny','Danilo','Bremer','Gatti','Cambiaso','Rabiot','Locatelli','Fagioli','Chiesa','Vlahović','Milik'],
-  'Napoli':['Meret','Di Lorenzo','Rrahmani','Juan Jesus','Olivera','Zambo','Anguissa','Zielinski','Politano','Osimhen','Kvaratskhelia'],
-  'Roma':['Rui Patricio','Mancini','Smalling','Ndicka','Spinazzola','Cristante','Pellegrini','Dybala','El Shaarawy','Lukaku','Aouar'],
-  'Lazio':['Provedel','Lazzari','Casale','Romagnoli','Marusic','Milinkovic','Cataldi','Luis Alberto','Zaccagni','Felipe Anderson','Immobile'],
-  'Atalanta':['Musso','Scalvini','Hien','Djimsiti','Zappacosta','Koopmeiners','De Roon','Éderson','Lookman','Scamacca','Pasalic'],
-  'PSG':['Donnarumma','Hakimi','Marquinhos','Skriniar','Nuno Mendes','Verratti','Zaire-Emery','Vitinha','Dembélé','Mbappé','Asensio'],
-  'Paris Saint-Germain':['Donnarumma','Hakimi','Marquinhos','Skriniar','Nuno Mendes','Verratti','Zaire-Emery','Vitinha','Dembélé','Mbappé','Asensio'],
-  'Marseille':['Pau López','Clauss','Balerdi','Mbemba','Touré','Guendouzi','Veretout','Sanchez','Sarr','Aubameyang','Ndiaye'],
-  'Lyon':['Lopes','Tagliafico','Lukeba','Lovren','Nicolas','Caqueret','Tolisso','Lacazette','Rayan','Cherki','Barcola'],
-  'Monaco':['Köhn','Vanderson','Kehrer','Maripán','Caio Henrique','Fofana','Camara','Golovin','Ben Yedder','Volland','Diatta'],
-  'Lille':['Chevalier','Tiago Santos','Alexsandro','Diakité','Gudmundsson','André','Xeka','David','Bayo','Yilmaz','Angel'],
-  'FCSB':['Târnovanu','Radaslavescu','Ngezana','Dawa','Radunovic','Bîrligea','Florinel Coman','Olaru','Edjouma','Octavian Popescu','Lixandru'],
-  'CFR Cluj':['Scuffet','Manea','Boateng','Bürki','Camora','Bordeianu','Deac','Muhar','Djokovic','Yeboah','Cléber'],
-  'Rapid':['Moldovan','Irtegov','Neicuțescu','Gavra','Săpunaru','Dobre','Sefer','Ivanovski','Burmaz','Papeau','Rrahmani'],
-  'Universitatea Craiova':['Pigliacelli','Vlădoiu','Ivanov','Bărbuț','Bancu','Baiaram','Cicâldău','Mitriță','Ivan','Costache','Nistor'],
-  'Farul Constanta':['Vlaicu','Ștefan','Mladen','Punoševac','Ganea','Artean','Cerniauskas','Popescu','Rivaldinho','Alibec','Houri'],
-  'Club Brugge':['Mignolet','Mata','Boyata','Mechele','Ferran','Onyedika','Vanaken','Skov Olsen','Jutgla','Nusa','Sowah'],
-  'Anderlecht':['Coosemans','Sardella','Debast','Vertonghen','Murillo','Raman','Stroeykens','Dreyer','Amuzu','Refaelov','Verschaeren'],
-  'Union Saint-Gilloise':['Moris','Van der Heyden','Burgess','Sykes','Kandouss','Teuma','Lynen','Vanzeir','Undav','Ekkelenkamp','Adingra'],
-  'Genk':['Vandevoordt','Arteaga','McKenzie','De Waegh','Munoz','Berge','Hrosovsky','Thorsteinsson','Trésor','Onuachu','Ito'],
-};
-
-const TEAM_STATS={
-  'Arsenal':{gf:2.4,ga:0.9,o25:68,btts:52,cf:6.1,ca:3.8,sf:71,form:'WWWDW'},
-  'Chelsea':{gf:2.0,ga:1.3,o25:65,btts:58,cf:5.8,ca:4.2,sf:62,form:'WDWLW'},
-  'Liverpool':{gf:2.6,ga:1.0,o25:72,btts:55,cf:6.4,ca:3.5,sf:74,form:'WWWWW'},
-  'Manchester City':{gf:2.5,ga:0.8,o25:70,btts:48,cf:6.8,ca:3.2,sf:78,form:'WDWWW'},
-  'Manchester United':{gf:1.5,ga:1.4,o25:52,btts:56,cf:5.2,ca:4.5,sf:52,form:'LDWDL'},
-  'Tottenham':{gf:1.9,ga:1.3,o25:60,btts:57,cf:5.5,ca:4.3,sf:60,form:'WDLWW'},
-  'Newcastle':{gf:1.8,ga:1.0,o25:58,btts:50,cf:5.4,ca:3.9,sf:63,form:'WWDWL'},
-  'Aston Villa':{gf:2.0,ga:1.1,o25:63,btts:55,cf:5.9,ca:4.0,sf:65,form:'WLWWW'},
-  'Nottingham Forest':{gf:1.7,ga:1.0,o25:54,btts:48,cf:5.2,ca:4.2,sf:60,form:'WWDWW'},
-  'Nottm Forest':{gf:1.7,ga:1.0,o25:54,btts:48,cf:5.2,ca:4.2,sf:60,form:'WWDWW'},
-  'Bournemouth':{gf:1.8,ga:1.3,o25:60,btts:56,cf:5.3,ca:4.4,sf:58,form:'WWLWW'},
-  'Sunderland':{gf:1.5,ga:1.4,o25:52,btts:54,cf:4.8,ca:4.8,sf:50,form:'DWLWL'},
-  'Real Madrid':{gf:2.7,ga:0.9,o25:74,btts:50,cf:7.0,ca:3.0,sf:80,form:'WWWWW'},
-  'Barcelona':{gf:2.8,ga:1.1,o25:76,btts:58,cf:7.2,ca:3.3,sf:77,form:'WWDWW'},
-  'Atletico Madrid':{gf:1.6,ga:0.8,o25:48,btts:40,cf:5.0,ca:4.5,sf:65,form:'WDWDW'},
-  'Bayern Munich':{gf:3.0,ga:1.2,o25:78,btts:62,cf:7.5,ca:3.0,sf:82,form:'WWWWW'},
-  'Borussia Dortmund':{gf:2.2,ga:1.5,o25:68,btts:65,cf:6.0,ca:4.5,sf:64,form:'WLWWL'},
-  'RB Leipzig':{gf:2.0,ga:1.2,o25:60,btts:55,cf:6.2,ca:4.2,sf:63,form:'WWDLW'},
-  'Bayer Leverkusen':{gf:2.4,ga:1.0,o25:68,btts:52,cf:6.3,ca:3.8,sf:72,form:'WWWDW'},
-  'Inter Milan':{gf:2.3,ga:0.8,o25:66,btts:46,cf:6.4,ca:3.5,sf:74,form:'WWWWW'},
-  'AC Milan':{gf:1.9,ga:1.1,o25:58,btts:52,cf:5.8,ca:4.2,sf:63,form:'WDWLW'},
-  'Juventus':{gf:1.7,ga:0.9,o25:52,btts:46,cf:5.5,ca:4.0,sf:65,form:'DWWDW'},
-  'Napoli':{gf:2.1,ga:1.0,o25:62,btts:50,cf:6.0,ca:3.8,sf:68,form:'WWWDL'},
-  'PSG':{gf:2.9,ga:0.9,o25:76,btts:52,cf:7.3,ca:3.0,sf:82,form:'WWWWW'},
-  'Paris Saint-Germain':{gf:2.9,ga:0.9,o25:76,btts:52,cf:7.3,ca:3.0,sf:82,form:'WWWWW'},
-  'FCSB':{gf:2.0,ga:1.1,o25:62,btts:52,cf:5.5,ca:4.0,sf:65,form:'WWLWW'},
-  'CFR Cluj':{gf:1.5,ga:0.9,o25:48,btts:44,cf:4.8,ca:4.2,sf:60,form:'WDWDW'},
-  'Club Brugge':{gf:2.2,ga:1.0,o25:64,btts:52,cf:6.0,ca:3.8,sf:70,form:'WWWDW'},
-};
-
+/* ── STATS / ODDS ── */
 function getS(t){return TEAM_STATS[t]||{gf:1.4,ga:1.2,o25:50,btts:48,cf:5.0,ca:4.5,sf:50,form:'UUUUU'};}
 function calcOdd(p,m=0.10){return Math.max(1.05,+((1/Math.max(0.05,Math.min(0.95,p/100)))*(1+m)).toFixed(2));}
-
 function probs(h,a){
   const hs=getS(h),as=getS(a);
   const hAtt=(hs.gf+as.ga)/2,aAtt=(as.gf+hs.ga)/2,tot=hAtt+aAtt;
   const fScore=s=>[...s].reduce((acc,c)=>acc+(c==='W'?1:c==='D'?0.4:0),0)/s.length;
   const hFm=fScore(hs.form||'UUU'),aFm=fScore(as.form||'UUU');
-  const homeAdv=0.07;
-  let hW=Math.round(Math.min(74,Math.max(18,((hAtt/tot)+homeAdv+(hFm-aFm)*0.05)*100)));
-  let aW=Math.round(Math.min(72,Math.max(10,((aAtt/tot)-homeAdv+(aFm-hFm)*0.05)*100)));
+  let hW=Math.round(Math.min(74,Math.max(18,((hAtt/tot)+0.07+(hFm-aFm)*0.05)*100)));
+  let aW=Math.round(Math.min(72,Math.max(10,((aAtt/tot)-0.07+(aFm-hFm)*0.05)*100)));
   let dr=Math.max(14,100-hW-aW);
   const s=hW+aW+dr; hW=Math.round(hW/s*100); aW=Math.round(aW/s*100); dr=100-hW-aW;
   const expG=hAtt+aAtt;
@@ -419,8 +281,10 @@ function probs(h,a){
   return {hW,aW,dr,o15,o25,o35,o45,bt,nobt:100-bt,hC,aC,totC:+(hC+aC).toFixed(1)};
 }
 
+/* ── STATE ── */
 const state={day:0,league:'ALL',filter:'ALL',ticket:[],stake:100};
 let allMatches=[];
+let filterBarBuilt=false; // FIX: build filter bar only once
 
 function dayLabel(off){
   const d=new Date();d.setDate(d.getDate()+off);
@@ -437,7 +301,7 @@ function switchTab(tab){
   if(tab==='history')renderHistory();
 }
 
-/* ── DAY / LEAGUE / FILTER BARS ── */
+/* ── BARS ── */
 function buildDayBar(){
   const bar=document.getElementById('dayBar');bar.innerHTML='';
   for(let i=0;i<7;i++){
@@ -445,11 +309,12 @@ function buildDayBar(){
     const date=dayDate(i);
     btn.className='day-btn'+(i===state.day?' active':'')+(cGet(date)?' has-cache':'');
     btn.textContent=dayLabel(i);
-    btn.onclick=()=>{state.day=i;state.league='ALL';state.filter='ALL';renderAll();};
+    btn.onclick=()=>{state.day=i;state.league='ALL';state.filter='ALL';filterBarBuilt=false;renderAll();};
     bar.appendChild(btn);
   }
   updateCacheBadge();
 }
+
 function buildLgBar(){
   const bar=document.getElementById('lgBar');bar.innerHTML='';
   const all=document.createElement('button');
@@ -468,15 +333,27 @@ function buildLgBar(){
     bar.appendChild(btn);
   });
 }
+
+/* FIX: filterBar built once, only active class updated on re-render */
 function buildFilterBar(){
+  if(filterBarBuilt)return;
   const bar=document.getElementById('filterBar');
+  bar.innerHTML='';
   [{id:'ALL',label:'Toate meciurile'},{id:'REC',label:'★ Recomandate'},{id:'O25',label:'⚽ Over 2.5'},{id:'BTTS',label:'🔄 BTTS'},{id:'LIVE',label:'🔴 Live'}]
   .forEach(f=>{
     const btn=document.createElement('button');
     btn.className='filter-btn'+(state.filter===f.id?' active':'');
     btn.textContent=f.label;
-    btn.onclick=()=>{state.filter=f.id;renderMatches();};
+    btn.dataset.filterId=f.id;
+    btn.onclick=()=>{state.filter=f.id;updateFilterBar();renderMatchList();};
     bar.appendChild(btn);
+  });
+  filterBarBuilt=true;
+}
+
+function updateFilterBar(){
+  document.querySelectorAll('.filter-btn').forEach(btn=>{
+    btn.classList.toggle('active',btn.dataset.filterId===state.filter);
   });
 }
 
@@ -521,6 +398,7 @@ async function loadMatches(){
   cSet(date,list);allMatches=list;renderMatches();
 }
 
+/* ── CARD HELPERS ── */
 function statusHTML(m){
   const s=m.status?.code||m.status?.short||'';
   if(['1H','2H','HT','LIVE'].includes(s))return `<span class="mc-status-live"><span class="live-dot"></span>LIVE${m.status?.elapsed?' '+m.status.elapsed+"'":''}</span>`;
@@ -538,13 +416,13 @@ function formHTML(t){return(getS(t).form||'UUUUU').split('').map(f=>`<span class
 function pColor(p){return p>=72?'var(--green)':p>=55?'var(--yellow)':'var(--red)';}
 function isSel(mid,lbl){return state.ticket.some(t=>t.matchId===mid&&t.label===lbl);}
 function mCnt(mid){return state.ticket.filter(t=>t.matchId===mid).length;}
+function esc(s){return s.replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;');}
 
 function oBtn(mid,home,away,label,prob){
   const odd=calcOdd(prob),sel=isSel(mid,label);
   const bb=sel&&mCnt(mid)>=2?'<span class="bb-badge">BB</span>':'';
   const star=prob>=68?'<span class="star">★</span> ':'';
   const col=pColor(prob);
-  const esc=s=>s.replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;');
   return `<button class="odd-btn${sel?' selected':''}" onclick="toggleSel('${mid}','${esc(home)}','${esc(away)}','${esc(label)}',${prob},${odd})">
     ${bb}<div class="odd-label">${star}${label}</div>
     <div class="odd-val">@${odd}</div>
@@ -587,8 +465,8 @@ function applyFilter(list){
   return list;
 }
 
-function renderMatches(){
-  buildDayBar();buildLgBar();buildFilterBar();
+/* FIX: renderMatchList renders only the cards, renderMatches does full rebuild */
+function renderMatchList(){
   const col=document.getElementById('matchesCol');
   let list=state.league==='ALL'?allMatches:allMatches.filter(m=>m.leagueCode===state.league);
   list=applyFilter(list);
@@ -600,6 +478,15 @@ function renderMatches(){
   col.innerHTML=list.map(buildCard).join('');
 }
 
+function renderMatches(){
+  buildDayBar();
+  buildLgBar();
+  buildFilterBar();
+  updateFilterBar();
+  renderMatchList();
+}
+
+/* ── TOGGLE SELECTION ── */
 function toggleSel(mid,home,away,label,prob,odd){
   const idx=state.ticket.findIndex(t=>t.matchId===mid&&t.label===label);
   if(idx>=0){state.ticket.splice(idx,1);}
@@ -630,7 +517,6 @@ function renderTicket(){
   const profit=+(win-sk).toFixed(2);
   const eProb=t.length?+(t.reduce((a,s)=>a*(s.prob/100),1)*100).toFixed(1):0;
   const rPct=Math.min(100,Math.round((Math.log(Math.max(1.01,tOdd))/Math.log(50))*100));
-  const esc=v=>v.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
   const sels=t.length===0?'<div class="tp-empty">Selectează cote din meciuri</div>':
     `<div class="tp-sel-list">${t.map(s=>`<div class="tp-sel">
       <div class="tp-sel-match"><span class="tp-day">${s.dayLabel}</span>${s.home} vs ${s.away}</div>
@@ -661,172 +547,98 @@ function renderTicket(){
         <div class="risk-bar"><div class="risk-pointer" style="left:${rPct}%"></div></div>
       </div>
       <div class="tp-actions">
-        <button class="tp-btn" ${t.length<2?'disabled':''} onclick="saveTicket()">
-          ${t.length<2?'Min. 2 selecții':'🎯 Salvează Bilet'}
-        </button>
+        <button class="tp-btn" ${t.length<2?'disabled':''} onclick="saveTicket()">🎯 Salvează Bilet</button>
         <button class="tp-btn-save" ${t.length<2?'disabled':''} onclick="exportTicket()">📤 Export</button>
       </div>
-      <button class="tp-btn-export" ${t.length===0?'disabled':''} onclick="clearTicket()">🗑 Golește biletul</button>
+      <button class="tp-btn-secondary" ${t.length===0?'disabled':''} onclick="clearTicket()">🗑 Golește biletul</button>
     </div>
   </div>`;
 }
 
 function setStake(v){state.stake=v;const i=document.getElementById('stakeInp');if(i)i.value=v;renderTicket();}
 function clearTicket(){if(confirm('Golești biletul?')){state.ticket=[];renderTicket();document.querySelectorAll('.odd-btn.selected').forEach(b=>{b.classList.remove('selected');const bb=b.querySelector('.bb-badge');if(bb)bb.remove();});}}
-function forceReload(){const d=dayDate(state.day);delete cache[cKey(d)];renderAll();}
-
-/* ── SAVE TICKET ── */
+function forceReload(){delete cache[cKey(dayDate(state.day))];filterBarBuilt=false;renderAll();}
 function saveTicket(){
-  const t=state.ticket;
-  if(t.length<2)return;
-  const tOdd=+t.reduce((a,s)=>a*s.odd,1).toFixed(2);
-  histAdd(t,state.stake,tOdd);
+  const t=state.ticket;if(t.length<2)return;
+  histAdd(t,state.stake,+t.reduce((a,s)=>a*s.odd,1).toFixed(2));
   alert('Bilet salvat în Istoric! ✓');
 }
 
-/* ── EXPORT TICKET PNG ── */
+/* ── EXPORT PNG ── */
 let exportDataURL=null;
 function exportTicket(entryId=null){
   let t=state.ticket,sk=state.stake,tOdd,date='';
-  if(entryId){
-    const h=histLoad();
-    const e=h.find(x=>x.id===entryId);
-    if(!e)return;
-    t=e.selections;sk=e.stake;tOdd=e.totalOdd;date=e.date;
-  } else {
-    if(t.length<1)return;
-    tOdd=+t.reduce((a,s)=>a*s.odd,1).toFixed(2);
-    date=new Date().toLocaleDateString('ro-RO');
-  }
+  if(entryId){const h=histLoad();const e=h.find(x=>x.id===entryId);if(!e)return;t=e.selections;sk=e.stake;tOdd=e.totalOdd;date=e.date;}
+  else{if(!t.length)return;tOdd=+t.reduce((a,s)=>a*s.odd,1).toFixed(2);date=new Date().toLocaleDateString('ro-RO');}
   const win=+(sk*tOdd).toFixed(2);
   const canvas=document.getElementById('ticketCanvas');
   const ctx=canvas.getContext('2d');
-  const W=520, rowH=44, headerH=110, footerH=100, padding=24;
-  const H=headerH+t.length*rowH+footerH+padding*2;
-  canvas.width=W;canvas.height=H;
-
-  // Background
-  ctx.fillStyle='#0f0f0f';ctx.fillRect(0,0,W,H);
-  // Header gradient
+  const W=520,rowH=44,headerH=110,footerH=100,pad=24;
+  canvas.width=W;canvas.height=headerH+t.length*rowH+footerH+pad*2;
+  ctx.fillStyle='#0f0f0f';ctx.fillRect(0,0,W,canvas.height);
   const grad=ctx.createLinearGradient(0,0,W,0);
   grad.addColorStop(0,'#00E676');grad.addColorStop(1,'#00C853');
   ctx.fillStyle=grad;ctx.fillRect(0,0,W,headerH);
-  ctx.fillStyle='#000';ctx.font='bold 22px -apple-system,sans-serif';ctx.fillText('⚽ Football Intelligence',padding,40);
-  ctx.font='13px -apple-system,sans-serif';ctx.fillText('Bilet Pariuri — '+date,padding,62);
-  ctx.font='bold 18px -apple-system,sans-serif';ctx.fillText('Cotă totală: @'+tOdd,padding,90);
-
-  // Divider
-  ctx.fillStyle='#1a1a1a';ctx.fillRect(0,headerH,W,2);
-
-  // Selections
+  ctx.fillStyle='#000';ctx.font='bold 22px sans-serif';ctx.fillText('⚽ Football Intelligence',pad,40);
+  ctx.font='13px sans-serif';ctx.fillText('Bilet Pariuri — '+date,pad,62);
+  ctx.font='bold 18px sans-serif';ctx.fillText('Cotă totală: @'+tOdd,pad,90);
   t.forEach((s,i)=>{
     const y=headerH+i*rowH;
-    ctx.fillStyle=i%2===0?'#141414':'#111';
-    ctx.fillRect(0,y,W,rowH);
-    ctx.fillStyle='#f0f0f0';ctx.font='bold 12px -apple-system,sans-serif';
-    ctx.fillText(s.home+' vs '+s.away,padding,y+16);
-    ctx.fillStyle='#888';ctx.font='11px -apple-system,sans-serif';
-    ctx.fillText(s.label,padding,y+30);
-    ctx.fillStyle='#2979FF';ctx.font='bold 15px -apple-system,sans-serif';
-    ctx.fillText('@'+s.odd,W-padding-40,y+24);
+    ctx.fillStyle=i%2===0?'#141414':'#111';ctx.fillRect(0,y,W,rowH);
+    ctx.fillStyle='#f0f0f0';ctx.font='bold 12px sans-serif';ctx.fillText(s.home+' vs '+s.away,pad,y+16);
+    ctx.fillStyle='#888';ctx.font='11px sans-serif';ctx.fillText(s.label,pad,y+30);
+    ctx.fillStyle='#2979FF';ctx.font='bold 15px sans-serif';ctx.fillText('@'+s.odd,W-pad-40,y+24);
   });
-
-  // Footer
-  const fY=headerH+t.length*rowH+padding;
-  ctx.fillStyle='#1a1a1a';ctx.fillRect(0,fY-padding,W,footerH+padding);
-  ctx.fillStyle='#888';ctx.font='12px -apple-system,sans-serif';
-  ctx.fillText('Miză: '+sk+' RON',padding,fY+14);
-  ctx.fillStyle='#00E676';ctx.font='bold 18px -apple-system,sans-serif';
-  ctx.fillText('Câștig potențial: '+win.toLocaleString('ro-RO')+' RON',padding,fY+42);
-  ctx.fillStyle='#333';ctx.font='10px -apple-system,sans-serif';
-  ctx.fillText('football-proxy-weld.vercel.app',padding,fY+65);
-
+  const fY=headerH+t.length*rowH+pad;
+  ctx.fillStyle='#1a1a1a';ctx.fillRect(0,fY-pad,W,footerH+pad);
+  ctx.fillStyle='#888';ctx.font='12px sans-serif';ctx.fillText('Miză: '+sk+' RON',pad,fY+14);
+  ctx.fillStyle='#00E676';ctx.font='bold 18px sans-serif';ctx.fillText('Câștig potențial: '+win.toLocaleString('ro-RO')+' RON',pad,fY+42);
+  ctx.fillStyle='#333';ctx.font='10px sans-serif';ctx.fillText('football-proxy-weld.vercel.app',pad,fY+65);
   exportDataURL=canvas.toDataURL('image/png');
-  const img=document.createElement('img');
-  img.src=exportDataURL;img.style.width='100%';img.style.borderRadius='8px';
-  const prev=document.getElementById('ticketPreview');
-  prev.innerHTML='';prev.appendChild(img);
+  const img=document.createElement('img');img.src=exportDataURL;
+  const prev=document.getElementById('ticketPreview');prev.innerHTML='';prev.appendChild(img);
   document.getElementById('exportModal').classList.add('open');
 }
-
-function downloadTicket(){
-  if(!exportDataURL)return;
-  const a=document.createElement('a');
-  a.href=exportDataURL;
-  a.download='bilet-fi-'+Date.now()+'.png';
-  a.click();
-  closeModal();
-}
+function downloadTicket(){if(!exportDataURL)return;const a=document.createElement('a');a.href=exportDataURL;a.download='bilet-fi-'+Date.now()+'.png';a.click();closeModal();}
 function closeModal(){document.getElementById('exportModal').classList.remove('open');exportDataURL=null;}
 
 /* ── RENDER HISTORY ── */
 function renderHistory(){
   const h=histLoad();
-  const stats=document.getElementById('histStats');
-  const list=document.getElementById('histList');
-
-  // Stats
-  const total=h.length;
   const won=h.filter(x=>x.result==='won').length;
   const lost=h.filter(x=>x.result==='lost').length;
-  const open=h.filter(x=>x.result==='open').length;
+  const profit=h.filter(x=>x.result==='won').reduce((a,x)=>a+x.potential,0)-h.filter(x=>x.result!=='open').reduce((a,x)=>a+x.stake,0);
   const totalStake=h.reduce((a,x)=>a+x.stake,0);
-  const totalWon=h.filter(x=>x.result==='won').reduce((a,x)=>a+x.potential,0);
-  const profit=totalWon-h.filter(x=>x.result!=='open').reduce((a,x)=>a+x.stake,0);
   const roi=totalStake>0?((profit/totalStake)*100).toFixed(1):0;
-
-  stats.innerHTML=`
-    <div class="stat-box"><div class="stat-val">${total}</div><div class="stat-label">Bilete salvate</div></div>
+  document.getElementById('histStats').innerHTML=`
+    <div class="stat-box"><div class="stat-val">${h.length}</div><div class="stat-label">Bilete</div></div>
     <div class="stat-box"><div class="stat-val">${won}</div><div class="stat-label">Câștigate</div></div>
     <div class="stat-box"><div class="stat-val red">${lost}</div><div class="stat-label">Pierdute</div></div>
-    <div class="stat-box"><div class="stat-val blue">${open}</div><div class="stat-label">În așteptare</div></div>
-    <div class="stat-box"><div class="stat-val ${profit>=0?'':'red'}">${profit>=0?'+':''}${profit.toFixed(0)} RON</div><div class="stat-label">Profit net</div></div>
-    <div class="stat-box"><div class="stat-val ${roi>=0?'':'red'}">${roi}%</div><div class="stat-label">ROI</div></div>
-  `;
-
-  if(!h.length){
-    list.innerHTML=`<div class="hist-empty"><div class="icon">📋</div><p>Niciun bilet salvat încă.<br>Construiește un bilet și apasă "Salvează Bilet".</p></div>`;
-    return;
-  }
-
-  list.innerHTML=h.map(e=>`
+    <div class="stat-box"><div class="stat-val blue">${h.filter(x=>x.result==='open').length}</div><div class="stat-label">Deschise</div></div>
+    <div class="stat-box"><div class="stat-val ${profit>=0?'':'red'}">${profit>=0?'+':''}${profit.toFixed(0)} RON</div><div class="stat-label">Profit</div></div>
+    <div class="stat-box"><div class="stat-val ${roi>=0?'':'red'}">${roi}%</div><div class="stat-label">ROI</div></div>`;
+  if(!h.length){document.getElementById('histList').innerHTML=`<div class="hist-empty"><div style="font-size:36px">📋</div><p>Niciun bilet salvat încă.</p></div>`;return;}
+  document.getElementById('histList').innerHTML=h.map(e=>`
     <div class="hist-card">
       <div class="hist-hdr">
-        <div>
-          <div style="font-size:12px;font-weight:700">${e.selections.length} selecții</div>
-          <div class="hist-date">${e.date}</div>
-        </div>
+        <div><div style="font-size:12px;font-weight:700">${e.selections.length} selecții</div><div class="hist-date">${e.date}</div></div>
         <span class="hist-odd">@${e.totalOdd}</span>
         <span class="hist-stake">${e.stake} RON</span>
         <span class="hist-result ${e.result}">${e.result==='won'?'✓ CÂȘTIGAT':e.result==='lost'?'✗ PIERDUT':'⏳ DESCHIS'}</span>
       </div>
-      <div class="hist-sels">
-        ${e.selections.map(s=>`<div class="hist-sel">
-          <span class="hist-sel-name">${s.home} vs ${s.away} — ${s.label}</span>
-          <span class="hist-sel-odd">@${s.odd}</span>
-        </div>`).join('')}
-      </div>
-      <div class="hist-footer">
-        <span>Câștig potențial: <strong style="color:var(--green)">${e.potential.toLocaleString('ro-RO')} RON</strong></span>
-        <span style="color:var(--muted)">Miză: ${e.stake} RON</span>
-      </div>
+      <div class="hist-sels">${e.selections.map(s=>`<div class="hist-sel"><span class="hist-sel-name">${s.home} vs ${s.away} — ${s.label}</span><span class="hist-sel-odd">@${s.odd}</span></div>`).join('')}</div>
+      <div class="hist-footer"><span>Câștig: <strong style="color:var(--green)">${e.potential.toLocaleString('ro-RO')} RON</strong></span><span style="color:var(--muted)">Miză: ${e.stake} RON</span></div>
       <div class="hist-actions">
-        ${e.result==='open'?`
-          <button class="hist-btn won-btn" onclick="markResult(${e.id},'won')">✓ Câștigat</button>
-          <button class="hist-btn lost-btn" onclick="markResult(${e.id},'lost')">✗ Pierdut</button>
-        `:'<button class="hist-btn" onclick="markResult('+e.id+',\'open\')">↺ Resetează</button>'}
-        <button class="hist-btn export-btn" onclick="exportTicket(${e.id})">📤 Export PNG</button>
+        ${e.result==='open'?`<button class="hist-btn won-btn" onclick="markResult(${e.id},'won')">✓ Câștigat</button><button class="hist-btn lost-btn" onclick="markResult(${e.id},'lost')">✗ Pierdut</button>`:`<button class="hist-btn" onclick="markResult(${e.id},'open')">↺ Resetează</button>`}
+        <button class="hist-btn export-btn" onclick="exportTicket(${e.id})">📤 PNG</button>
         <button class="hist-btn del" onclick="deleteTicket(${e.id})">🗑 Șterge</button>
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
-
 function markResult(id,result){histSetResult(id,result);renderHistory();}
 function deleteTicket(id){if(confirm('Ștergi biletul?')){histDelete(id);renderHistory();}}
 
 async function renderAll(){buildDayBar();renderTicket();await loadMatches();}
-
 renderAll();
 </script>
 </body>
