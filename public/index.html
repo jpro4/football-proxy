@@ -370,7 +370,7 @@ async function loadMatches(){
   const list=[];
   for(const lg of FD_LEAGUES){
     try{
-      const r=await fetch(PROXY+'/api/fd/v4/matches?competitions='+lg+'&dateFrom='+date+'&dateTo='+date);
+      const r=await fetch(PROPROXY+'/api/fd?path=matches&competitions='+lg+XY+'/api/fd/v4/matches?competitions='+lg+'&dateFrom='+date+'&dateTo='+date);
       const d=await r.json();
       if(d.matches)list.push(...d.matches.map(m=>({...m,leagueCode:lg})));
       await new Promise(r=>setTimeout(r,700));
