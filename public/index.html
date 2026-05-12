@@ -24,8 +24,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .nav-tabs{display:flex;gap:2px;padding:8px 0 0}
 .nav-tab{padding:8px 16px;border-radius:10px 10px 0 0;border:1px solid var(--border);border-bottom:none;background:var(--bg2);color:var(--muted);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;flex:1;text-align:center}
 .nav-tab.active{background:var(--card);color:var(--green)}
-.tab-content{display:none}
-.tab-content.active{display:block}
+.tab-content{display:none}.tab-content.active{display:block}
 .days{display:flex;gap:6px;padding:12px 0 8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .days::-webkit-scrollbar{display:none}
 .day-btn{flex-shrink:0;padding:8px 14px;border-radius:20px;border:1px solid var(--border);background:var(--bg2);color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap;position:relative;min-height:36px}
@@ -50,7 +49,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .mc-status-live{font-size:10px;font-weight:700;color:var(--red);display:flex;align-items:center;gap:3px}
 .live-dot{width:6px;height:6px;border-radius:50%;background:var(--red);animation:pulse 1.2s infinite;display:inline-block}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
-/* H2H BUTTON */
 .h2h-btn{font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);cursor:pointer;transition:all .2s;white-space:nowrap}
 .h2h-btn:hover{border-color:var(--blue);color:var(--blue);background:rgba(41,121,255,.08)}
 .mc-teams{padding:10px 12px 6px;display:flex;align-items:center;gap:6px}
@@ -79,8 +77,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .mc-cats{padding:0 12px 12px}
 .cat-section{margin-top:6px;border:1px solid var(--border);border-radius:8px;overflow:hidden}
 .cat-title{padding:8px 10px;background:var(--bg2);display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:11px;font-weight:700;color:var(--muted);user-select:none;min-height:36px}
-.cat-body{padding:8px;display:none}
-.cat-body.open{display:block}
+.cat-body{padding:8px;display:none}.cat-body.open{display:block}
 .odds-grid{display:flex;flex-wrap:wrap;gap:5px}
 .odd-btn{flex:1;min-width:120px;padding:8px 9px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);cursor:pointer;transition:all .15s;text-align:left;position:relative;min-height:44px}
 .odd-btn.selected{border-color:var(--green);background:rgba(0,230,118,.1)}
@@ -97,9 +94,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .mobile-ticket-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:150;background:var(--card);border-top:1px solid var(--border);padding:10px 14px calc(10px + var(--safe-bottom));box-shadow:0 -4px 20px rgba(0,0,0,.5)}
 .mobile-ticket-bar.has-selections{background:linear-gradient(135deg,#0d1f15,#0d1520)}
 @media(max-width:768px){.mobile-ticket-bar{display:flex;align-items:center;gap:10px}}
-.mtb-info{flex:1}
-.mtb-count{font-size:11px;color:var(--muted)}
-.mtb-odd{font-size:18px;font-weight:800;color:var(--green)}
+.mtb-info{flex:1}.mtb-count{font-size:11px;color:var(--muted)}.mtb-odd{font-size:18px;font-weight:800;color:var(--green)}
 .mtb-btn{padding:10px 18px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--green),#00C853);color:#000;font-size:13px;font-weight:800;cursor:pointer;white-space:nowrap}
 .mtb-btn:disabled{background:var(--border);color:var(--muted)}
 .mtb-open{padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);font-size:12px;font-weight:600;cursor:pointer}
@@ -113,8 +108,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .tp{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
 .tp-hdr{padding:12px 14px;background:linear-gradient(135deg,#141414,#1e1e1e);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
 .tp-hdr h2{font-size:14px;font-weight:700;flex:1}
-.tp-cnt{font-size:11px;color:var(--muted)}
-.tp-cnt span{color:var(--green);font-weight:700}
+.tp-cnt{font-size:11px;color:var(--muted)}.tp-cnt span{color:var(--green);font-weight:700}
 .tp-empty{padding:20px;text-align:center;color:var(--muted);font-size:12px}
 .tp-sel-list{max-height:260px;overflow-y:auto}
 @media(max-width:768px){.tp-sel-list{max-height:none}}
@@ -132,8 +126,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .stake-input{width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:16px;font-weight:600;margin-bottom:10px;outline:none}
 .stake-input:focus{border-color:var(--green)}
 .calc-row{display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px}
-.calc-row span:first-child{color:var(--muted)}
-.calc-row span:last-child{font-weight:600}
+.calc-row span:first-child{color:var(--muted)}.calc-row span:last-child{font-weight:600}
 .risk-bar-wrap{margin:8px 0;padding:8px 10px;background:var(--bg3);border-radius:8px}
 .risk-label{font-size:10px;color:var(--muted);margin-bottom:5px;display:flex;justify-content:space-between}
 .risk-bar{height:6px;border-radius:3px;background:linear-gradient(to right,var(--green),var(--yellow),var(--red));position:relative}
@@ -180,7 +173,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .hist-btn.lost-btn{border-color:rgba(255,82,82,.3);color:var(--red)}
 .hist-btn.del{border-color:rgba(255,82,82,.3);color:var(--red)}
 .hist-btn.export-btn{border-color:rgba(41,121,255,.3);color:var(--blue)}
-/* MODALS */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:300;align-items:center;justify-content:center;padding:16px}
 .modal-overlay.open{display:flex}
 .modal{background:var(--card);border:1px solid var(--border);border-radius:16px;width:420px;max-width:100%;overflow:hidden;max-height:90vh;display:flex;flex-direction:column}
@@ -194,29 +186,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .modal-btn{flex:1;padding:10px;border-radius:10px;border:none;font-size:13px;font-weight:700;cursor:pointer;min-height:44px}
 .modal-btn.primary{background:linear-gradient(135deg,var(--green),#00C853);color:#000}
 .modal-btn.secondary{background:var(--bg3);border:1px solid var(--border);color:var(--muted)}
-/* H2H MODAL CONTENT */
 .h2h-loading{text-align:center;padding:30px;color:var(--muted)}
 .h2h-summary{display:flex;gap:8px;padding:14px 18px;border-bottom:1px solid var(--border)}
 .h2h-sum-box{flex:1;text-align:center;padding:10px 8px;border-radius:10px;background:var(--bg2)}
 .h2h-sum-val{font-size:22px;font-weight:800}
-.h2h-sum-val.home{color:var(--green)}
-.h2h-sum-val.draw{color:var(--yellow)}
-.h2h-sum-val.away{color:var(--blue)}
+.h2h-sum-val.home{color:var(--green)}.h2h-sum-val.draw{color:var(--yellow)}.h2h-sum-val.away{color:var(--blue)}
 .h2h-sum-label{font-size:10px;color:var(--muted);margin-top:3px}
 .h2h-stats{display:flex;gap:6px;padding:10px 18px;border-bottom:1px solid var(--border);flex-wrap:wrap}
-.h2h-stat{flex:1;min-width:100px;background:var(--bg3);border-radius:8px;padding:8px 10px;text-align:center}
+.h2h-stat{flex:1;min-width:80px;background:var(--bg3);border-radius:8px;padding:8px 10px;text-align:center}
 .h2h-stat-val{font-size:15px;font-weight:700;color:var(--text)}
 .h2h-stat-label{font-size:10px;color:var(--muted);margin-top:2px}
 .h2h-matches{padding:10px 18px 18px}
 .h2h-matches-title{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.5px;margin-bottom:8px}
 .h2h-match{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;background:var(--bg2);margin-bottom:5px;font-size:12px}
-.h2h-match-date{font-size:10px;color:var(--muted);width:60px;flex-shrink:0}
-.h2h-match-teams{flex:1;text-align:center;font-weight:600}
-.h2h-match-score{font-size:14px;font-weight:800;width:50px;text-align:center}
-.h2h-match-score.home-win{color:var(--green)}
-.h2h-match-score.away-win{color:var(--blue)}
-.h2h-match-score.draw{color:var(--yellow)}
-.h2h-match-league{font-size:9px;color:var(--muted);width:70px;text-align:right;flex-shrink:0}
+.h2h-match-date{font-size:10px;color:var(--muted);width:54px;flex-shrink:0}
+.h2h-match-teams{flex:1;text-align:center;font-weight:600;font-size:11px}
+.h2h-match-score{font-size:14px;font-weight:800;width:46px;text-align:center}
+.h2h-match-score.home-win{color:var(--green)}.h2h-match-score.away-win{color:var(--blue)}.h2h-match-score.draw{color:var(--yellow)}
+.h2h-match-league{font-size:9px;color:var(--muted);width:65px;text-align:right;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .h2h-empty{text-align:center;padding:24px;color:var(--muted);font-size:13px}
 .squad-loading{font-size:10px;color:var(--muted);padding:8px;text-align:center;font-style:italic}
 .lc-PL{border-left:3px solid #3d195b}.lc-PD{border-left:3px solid #c8102e}.lc-BL1{border-left:3px solid #d20515}
@@ -239,12 +226,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <span class="cache-badge" id="cacheBadge">cache: 0 zile</span>
   </div>
 </div>
-
 <div class="nav-tabs">
   <button class="nav-tab active" onclick="switchTab('matches')">⚽ Meciuri</button>
   <button class="nav-tab" onclick="switchTab('history')">📋 Istoric</button>
 </div>
-
 <div class="tab-content active" id="tab-matches">
   <div class="days" id="dayBar"></div>
   <div class="leagues" id="lgBar"></div>
@@ -254,7 +239,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="ticket-panel" id="ticketPanel"></div>
   </div>
 </div>
-
 <div class="tab-content" id="tab-history">
   <div class="hist-stats" id="histStats"></div>
   <div id="histList"></div>
@@ -284,13 +268,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <!-- H2H MODAL -->
 <div class="modal-overlay" id="h2hModal">
   <div class="modal">
-    <div class="modal-hdr">
-      <h3 id="h2hTitle">Head to Head</h3>
-      <button class="modal-close" onclick="closeH2H()">✕</button>
-    </div>
-    <div class="modal-body" id="h2hBody">
-      <div class="h2h-loading"><div class="spinner" style="margin-bottom:10px"></div>Se încarcă istoricul...</div>
-    </div>
+    <div class="modal-hdr"><h3 id="h2hTitle">Head to Head</h3><button class="modal-close" onclick="closeH2H()">✕</button></div>
+    <div class="modal-body" id="h2hBody"><div class="h2h-loading"><div class="spinner"></div></div></div>
   </div>
 </div>
 
@@ -323,12 +302,19 @@ const AF_TEAM_IDS={
   'Arsenal':42,'Chelsea':49,'Liverpool':40,'Manchester City':50,'Manchester United':33,
   'Tottenham':47,'Newcastle':34,'Aston Villa':66,'West Ham':48,'Brighton':51,
   'Fulham':36,'Brentford':55,'Nottingham Forest':65,'Nottm Forest':65,'Bournemouth':35,
-  'Real Madrid':541,'Barcelona':529,'Atletico Madrid':530,'Bayern Munich':157,
-  'Borussia Dortmund':165,'Inter Milan':505,'AC Milan':489,'Juventus':496,
-  'Napoli':492,'PSG':85,'Paris Saint-Germain':85,'FCSB':462,'CFR Cluj':460,
-  'Club Brugge':556,'Anderlecht':566,'RB Leipzig':173,'Bayer Leverkusen':168,
-  'Sevilla':536,'Villarreal':533,'Athletic Club':531,'Real Sociedad':548,
-  'Roma':497,'Lazio':487,'Atalanta':499,'Fiorentina':502
+  'Crystal Palace':52,'Everton':45,'Burnley':44,'Wolves':39,'Sunderland':71,
+  'Leeds United':63,'Sheffield United':62,
+  'Real Madrid':541,'Barcelona':529,'Atletico Madrid':530,'Sevilla':536,
+  'Real Betis':543,'Villarreal':533,'Athletic Club':531,'Real Sociedad':548,
+  'Celta Vigo':538,'Mallorca':539,'Getafe':546,'Girona':547,
+  'Bayern Munich':157,'Borussia Dortmund':165,'RB Leipzig':173,'Bayer Leverkusen':168,
+  'Eintracht Frankfurt':169,'VfB Stuttgart':172,'SC Freiburg':160,'Werder Bremen':162,
+  'Union Berlin':164,
+  'Inter Milan':505,'AC Milan':489,'Juventus':496,'Napoli':492,
+  'Roma':497,'Lazio':487,'Atalanta':499,'Fiorentina':502,'Bologna':500,'Torino':503,
+  'PSG':85,'Marseille':81,'Lyon':80,'Monaco':91,
+  'Lille':79,'Lens':116,'Nice':84,'Rennes':94,'Brest':130,
+  'FCSB':462,'CFR Cluj':460,'Club Brugge':556,'Anderlecht':566,
 };
 
 /* ── CACHE ── */
@@ -347,40 +333,26 @@ function updateCacheBadge(){
 }
 
 /* ── H2H ── */
-async function openH2H(home, away, homeId, awayId){
+async function openH2H(home,away,homeId,awayId){
   document.getElementById('h2hTitle').textContent=home+' vs '+away;
   document.getElementById('h2hBody').innerHTML='<div class="h2h-loading"><div class="spinner" style="margin-bottom:10px"></div>Se încarcă istoricul...</div>';
   document.getElementById('h2hModal').classList.add('open');
-
   const cacheKey=homeId+'_'+awayId;
   if(h2hCache[cacheKey]){renderH2H(h2hCache[cacheKey],home,away);return;}
-
   try{
     const r=await fetch(PROXY+'/api/proxy?path=fixtures/headtohead&h2h='+homeId+'-'+awayId+'&last=10');
     const d=await r.json();
-    if(d.response){
-      h2hCache[cacheKey]=d.response;
-      renderH2H(d.response,home,away);
-    } else {
-      document.getElementById('h2hBody').innerHTML='<div class="h2h-empty">Nu au fost găsite date H2H pentru aceste echipe.</div>';
-    }
-  }catch(e){
-    document.getElementById('h2hBody').innerHTML='<div class="h2h-empty">Eroare la încărcarea datelor H2H.</div>';
-  }
+    if(d.response&&d.response.length>=0){h2hCache[cacheKey]=d.response;renderH2H(d.response,home,away);}
+    else document.getElementById('h2hBody').innerHTML='<div class="h2h-empty">Date H2H indisponibile.</div>';
+  }catch(e){document.getElementById('h2hBody').innerHTML='<div class="h2h-empty">Eroare la încărcarea datelor H2H.</div>';}
 }
 
-function renderH2H(matches, home, away){
-  if(!matches.length){
-    document.getElementById('h2hBody').innerHTML='<div class="h2h-empty">🏟 Nu există meciuri directe recente în baza de date.</div>';
-    return;
-  }
-
-  // Calculăm statistici
-  let homeWins=0, draws=0, awayWins=0;
-  let totalGoals=0, over25=0, bttsCount=0;
+function renderH2H(matches,home,away){
+  if(!matches.length){document.getElementById('h2hBody').innerHTML='<div class="h2h-empty">🏟 Nu există meciuri directe în baza de date.</div>';return;}
+  let homeWins=0,draws=0,awayWins=0,totalGoals=0,over25=0,bttsCount=0;
   matches.forEach(m=>{
-    const hg=m.goals.home??0, ag=m.goals.away??0;
-    const isHome=m.teams.home.name===home;
+    const hg=m.goals.home??0,ag=m.goals.away??0;
+    const isHome=m.teams.home.name===home||normalizeName(m.teams.home.name)===home;
     totalGoals+=hg+ag;
     if(hg+ag>2.5)over25++;
     if(hg>0&&ag>0)bttsCount++;
@@ -388,99 +360,65 @@ function renderH2H(matches, home, away){
     else if(hg<ag){isHome?awayWins++:homeWins++;}
     else draws++;
   });
-
   const n=matches.length;
-  const avgGoals=(totalGoals/n).toFixed(1);
-  const over25pct=Math.round(over25/n*100);
-  const bttsPct=Math.round(bttsCount/n*100);
-
-  // Construim HTML
   const summaryHTML=`<div class="h2h-summary">
-    <div class="h2h-sum-box">
-      <div class="h2h-sum-val home">${homeWins}</div>
-      <div class="h2h-sum-label">${home.split(' ').pop()}</div>
-    </div>
-    <div class="h2h-sum-box">
-      <div class="h2h-sum-val draw">${draws}</div>
-      <div class="h2h-sum-label">Egal</div>
-    </div>
-    <div class="h2h-sum-box">
-      <div class="h2h-sum-val away">${awayWins}</div>
-      <div class="h2h-sum-label">${away.split(' ').pop()}</div>
-    </div>
+    <div class="h2h-sum-box"><div class="h2h-sum-val home">${homeWins}</div><div class="h2h-sum-label">${home.split(' ').slice(-1)[0]}</div></div>
+    <div class="h2h-sum-box"><div class="h2h-sum-val draw">${draws}</div><div class="h2h-sum-label">Egal</div></div>
+    <div class="h2h-sum-box"><div class="h2h-sum-val away">${awayWins}</div><div class="h2h-sum-label">${away.split(' ').slice(-1)[0]}</div></div>
   </div>`;
-
   const statsHTML=`<div class="h2h-stats">
-    <div class="h2h-stat"><div class="h2h-stat-val">${avgGoals}</div><div class="h2h-stat-label">Goluri/meci</div></div>
-    <div class="h2h-stat"><div class="h2h-stat-val">${over25pct}%</div><div class="h2h-stat-label">Over 2.5</div></div>
-    <div class="h2h-stat"><div class="h2h-stat-val">${bttsPct}%</div><div class="h2h-stat-label">BTTS</div></div>
+    <div class="h2h-stat"><div class="h2h-stat-val">${(totalGoals/n).toFixed(1)}</div><div class="h2h-stat-label">Goluri/meci</div></div>
+    <div class="h2h-stat"><div class="h2h-stat-val">${Math.round(over25/n*100)}%</div><div class="h2h-stat-label">Over 2.5</div></div>
+    <div class="h2h-stat"><div class="h2h-stat-val">${Math.round(bttsCount/n*100)}%</div><div class="h2h-stat-label">BTTS</div></div>
     <div class="h2h-stat"><div class="h2h-stat-val">${n}</div><div class="h2h-stat-label">Meciuri</div></div>
   </div>`;
-
   const matchesHTML=matches.map(m=>{
-    const hg=m.goals.home??'-', ag=m.goals.away??'-';
-    const isHome=m.teams.home.name===home;
-    const hScore=isHome?hg:ag, aScore=isHome?ag:hg;
-    let scoreClass='draw';
-    if(hScore>aScore)scoreClass='home-win';
-    else if(hScore<aScore)scoreClass='away-win';
+    const hg=m.goals.home??'-',ag=m.goals.away??'-';
+    const isHome=m.teams.home.name===home||normalizeName(m.teams.home.name)===home;
+    const hScore=isHome?hg:ag,aScore=isHome?ag:hg;
+    let sc='draw';
+    if(typeof hScore==='number'&&typeof aScore==='number'){if(hScore>aScore)sc='home-win';else if(hScore<aScore)sc='away-win';}
     const date=new Date(m.fixture.date).toLocaleDateString('ro-RO',{day:'2-digit',month:'2-digit',year:'2-digit'});
-    const league=m.league.name.length>12?m.league.name.slice(0,12)+'..':m.league.name;
     return `<div class="h2h-match">
       <span class="h2h-match-date">${date}</span>
-      <span class="h2h-match-teams">${m.teams.home.name.split(' ').pop()} vs ${m.teams.away.name.split(' ').pop()}</span>
-      <span class="h2h-match-score ${scoreClass}">${m.goals.home??'-'} - ${m.goals.away??'-'}</span>
-      <span class="h2h-match-league">${league}</span>
+      <span class="h2h-match-teams">${m.teams.home.name.split(' ').slice(-1)[0]} vs ${m.teams.away.name.split(' ').slice(-1)[0]}</span>
+      <span class="h2h-match-score ${sc}">${m.goals.home??'-'} - ${m.goals.away??'-'}</span>
+      <span class="h2h-match-league">${m.league.name}</span>
     </div>`;
   }).join('');
-
-  document.getElementById('h2hBody').innerHTML=`
-    ${summaryHTML}
-    ${statsHTML}
-    <div class="h2h-matches">
-      <div class="h2h-matches-title">ULTIMELE ${n} MECIURI DIRECTE</div>
-      ${matchesHTML}
-    </div>`;
+  document.getElementById('h2hBody').innerHTML=`${summaryHTML}${statsHTML}<div class="h2h-matches"><div class="h2h-matches-title">ULTIMELE ${n} MECIURI DIRECTE</div>${matchesHTML}</div>`;
 }
-
 function closeH2H(){document.getElementById('h2hModal').classList.remove('open');}
 
-/* ── NEWS SYSTEM ── */
+/* ── NEWS ── */
 let newsData={};
 function newsLoad(){
-  try{
-    const ts=parseInt(localStorage.getItem(LS_NEWS_TS)||'0');
-    if(Date.now()-ts<NEWS_TTL){
-      const d=JSON.parse(localStorage.getItem(LS_NEWS)||'{}');
-      if(Object.keys(d).length){newsData=d;return true;}
-    }
-  }catch(e){}
-  return false;
+  try{const ts=parseInt(localStorage.getItem(LS_NEWS_TS)||'0');
+    if(Date.now()-ts<NEWS_TTL){const d=JSON.parse(localStorage.getItem(LS_NEWS)||'{}');if(Object.keys(d).length){newsData=d;return true;}}
+  }catch(e){}return false;
 }
-function newsSave(){
-  localStorage.setItem(LS_NEWS,JSON.stringify(newsData));
-  localStorage.setItem(LS_NEWS_TS,Date.now().toString());
-}
-function newsSetBadge(state){
+function newsSave(){localStorage.setItem(LS_NEWS,JSON.stringify(newsData));localStorage.setItem(LS_NEWS_TS,Date.now().toString());}
+function newsSetBadge(st){
   const b=document.getElementById('newsBadge');
-  if(state==='loading'){b.className='news-badge loading';b.textContent='📰 se actualizează...';}
-  else if(state==='ready'){const count=Object.values(newsData).flat().length;b.className='news-badge ready';b.textContent='📰 '+count+' alerte';}
-  else if(state==='error'){b.className='news-badge error';b.textContent='📰 eroare';}
+  if(st==='loading'){b.className='news-badge loading';b.textContent='📰 se actualizează...';}
+  else if(st==='ready'){const c=Object.values(newsData).flat().length;b.className='news-badge ready';b.textContent='📰 '+(c?c+' alerte':'ok');}
+  else if(st==='error'){b.className='news-badge error';b.textContent='📰 eroare';}
   else{b.className='news-badge';b.textContent='📰 știri';}
 }
 async function fetchNewsForTeams(teams){
-  const priorityTeams=teams.filter((t,i,a)=>a.indexOf(t)===i).slice(0,12);
-  if(!priorityTeams.length)return;
+  const pt=teams.filter((t,i,a)=>a.indexOf(t)===i).slice(0,12);
+  if(!pt.length)return;
   newsSetBadge('loading');
-  const query=`Analizează știrile de fotbal din ultimele 48 de ore pentru aceste echipe: ${priorityTeams.join(', ')}.
-Pentru fiecare jucător menționat ca accidentat, suspendat, în dubiu sau revenit, returnează JSON strict (fără alt text):
-{"alerts":[{"team":"Numele exact al echipei","player":"Numele jucătorului","type":"injured|suspended|doubt|available","text":"Descriere scurtă max 60 caractere","source":"sursa"}]}
-Răspunde DOAR cu JSON valid. Dacă nu ai informații recente, returnează {"alerts":[]}.`;
+  const query=`Analizează știrile de fotbal din ultimele 48h pentru: ${pt.join(', ')}.
+Returnează DOAR JSON valid (fără alt text):
+{"alerts":[{"team":"Numele exact","player":"Jucătorul","type":"injured|suspended|doubt|available","text":"Max 60 caractere","source":"sursa"}]}
+Dacă nu ai info recente: {"alerts":[]}`;
   try{
     const resp=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,tools:[{type:'web_search_20250305',name:'web_search'}],messages:[{role:'user',content:query}]})
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,
+        tools:[{type:'web_search_20250305',name:'web_search'}],
+        messages:[{role:'user',content:query}]})
     });
     const data=await resp.json();
     let jsonText='';
@@ -488,23 +426,20 @@ Răspunde DOAR cu JSON valid. Dacă nu ai informații recente, returnează {"ale
     if(!jsonText){newsSetBadge('error');return;}
     const parsed=JSON.parse(jsonText.replace(/```json|```/g,'').trim());
     if(parsed.alerts&&Array.isArray(parsed.alerts)){
-      priorityTeams.forEach(t=>delete newsData[t]);
-      parsed.alerts.forEach(alert=>{
-        if(!newsData[alert.team])newsData[alert.team]=[];
-        newsData[alert.team].push({type:alert.type||'doubt',player:alert.player||'',text:alert.text||'',source:alert.source||''});
-      });
+      pt.forEach(t=>delete newsData[t]);
+      parsed.alerts.forEach(a=>{if(!newsData[a.team])newsData[a.team]=[];newsData[a.team].push({type:a.type||'doubt',player:a.player||'',text:a.text||'',source:a.source||''});});
       newsSave();newsSetBadge('ready');renderMatchList();
     }
-  }catch(e){console.warn('News fetch error:',e);newsSetBadge('error');}
+  }catch(e){console.warn('News error:',e);newsSetBadge('error');}
 }
 function scheduleNewsForMatches(matches){
   if(newsLoad()){newsSetBadge('ready');return;}
-  const priorityLgs=new Set(NEWS_PRIORITY_LEAGUES);
+  const pLgs=new Set(NEWS_PRIORITY_LEAGUES);
   const teams=[];
   matches.forEach(m=>{
-    if(priorityLgs.has(m.leagueCode)){
-      if(m.homeTeam?.name)teams.push(m.homeTeam.name);
-      if(m.awayTeam?.name)teams.push(m.awayTeam.name);
+    if(pLgs.has(m.leagueCode)){
+      if(m.homeTeam?.name)teams.push(normalizeName(m.homeTeam.name));
+      if(m.awayTeam?.name)teams.push(normalizeName(m.awayTeam.name));
     }
   });
   if(teams.length)setTimeout(()=>fetchNewsForTeams(teams),2000);
@@ -514,14 +449,14 @@ async function manualNewsRefresh(){
   localStorage.removeItem(LS_NEWS);localStorage.removeItem(LS_NEWS_TS);newsData={};
   scheduleNewsForMatches(allMatches);
 }
-function getTeamNews(t){return newsData[t]||[];}
+function getTeamNews(t){return newsData[t]||newsData[normalizeName(t)]||[];}
 function buildNewsHTML(home,away){
-  const all=[...getTeamNews(home).map(n=>({...n,teamLabel:home})),...getTeamNews(away).map(n=>({...n,teamLabel:away}))];
+  const all=[...getTeamNews(home).map(n=>({...n,tl:home})),...getTeamNews(away).map(n=>({...n,tl:away}))];
   if(!all.length)return '';
-  const typeIcon={injured:'🚑',suspended:'🟥',doubt:'⚠️',available:'✅'};
+  const ti={injured:'🚑',suspended:'🟥',doubt:'⚠️',available:'✅'};
   return `<div class="mc-news">${all.map(n=>`<div class="news-alert">
-    <span class="news-alert-icon">${typeIcon[n.type]||'⚠️'}</span>
-    <div><div class="news-alert-team">${n.teamLabel}</div>
+    <span class="news-alert-icon">${ti[n.type]||'⚠️'}</span>
+    <div><div class="news-alert-team">${n.tl}</div>
     <div class="news-alert-text"><span class="news-tag ${n.type}">${n.type==='injured'?'Accidentat':n.type==='suspended'?'Suspendat':n.type==='doubt'?'Dubios':'Disponibil'}</span><strong>${n.player}</strong> — ${n.text}</div>
     ${n.source?`<div class="news-alert-src">📡 ${n.source}</div>`:''}</div>
   </div>`).join('')}</div>`;
@@ -530,9 +465,10 @@ function getAbsentPlayers(t){return getTeamNews(t).filter(n=>n.type==='injured'|
 
 /* ── SQUADS ── */
 async function fetchSquad(teamName){
-  if(squadCache[teamName])return squadCache[teamName];
-  const tid=AF_TEAM_IDS[teamName];
-  if(!tid)return PLAYERS[teamName]||null;
+  const nName=normalizeName(teamName);
+  if(squadCache[nName])return squadCache[nName];
+  const tid=AF_TEAM_IDS[nName];
+  if(!tid)return PLAYERS[nName]||PLAYERS[teamName]||null;
   try{
     const r=await fetch(PROXY+'/api/proxy?path=players/squads&team='+tid+'&season='+getAFSeason());
     const d=await r.json();
@@ -541,10 +477,10 @@ async function fetchSquad(teamName){
         .filter(p=>['Goalkeeper','Defender','Midfielder','Attacker'].includes(p.position))
         .sort((a,b)=>({Goalkeeper:0,Defender:1,Midfielder:2,Attacker:3}[a.position]-{Goalkeeper:0,Defender:1,Midfielder:2,Attacker:3}[b.position]))
         .slice(0,15).map(p=>p.name.split(' ').pop());
-      squadCache[teamName]=players;return players;
+      squadCache[nName]=players;return players;
     }
-  }catch(e){console.warn('Squad fetch failed',teamName,e);}
-  return PLAYERS[teamName]||null;
+  }catch(e){console.warn('Squad fail',teamName,e);}
+  return PLAYERS[nName]||PLAYERS[teamName]||null;
 }
 
 /* ── HISTORY ── */
@@ -559,7 +495,7 @@ function histSetResult(id,result){const h=histLoad();const e=h.find(x=>x.id===id
 function histDelete(id){histSave(histLoad().filter(x=>x.id!==id));}
 
 /* ── STATS / ODDS ── */
-function getS(t){return TEAM_STATS[t]||{gf:1.4,ga:1.2,o25:50,btts:48,cf:5.0,ca:4.5,sf:50,form:'UUUUU'};}
+function getS(t){const n=normalizeName(t);return TEAM_STATS[n]||TEAM_STATS[t]||{gf:1.4,ga:1.2,o25:50,btts:48,cf:5.0,ca:4.5,sf:50,form:'UUUUU'};}
 function calcOdd(p,m=0.10){return Math.max(1.05,+((1/Math.max(0.05,Math.min(0.95,p/100)))*(1+m)).toFixed(2));}
 function probs(h,a){
   const hs=getS(h),as=getS(a);
@@ -653,7 +589,8 @@ async function loadMatches(){
   const cached=cGet(date);
   if(cached){allMatches=cached;scheduleNewsForMatches(allMatches);renderMatches();return;}
   const col=document.getElementById('matchesCol');
-  const total=FD_LEAGUES.length+AF_LEAGUES.length;let loaded=0;
+  const total=FD_LEAGUES.length+AF_LEAGUES.length;
+  let loaded=0;
   col.innerHTML=`<div class="loader"><div class="spinner"></div><p>Se încarcă meciurile...</p><div class="loader-msg" id="loaderMsg">0 / ${total} ligi</div></div>`;
   const list=[];
   for(const lg of FD_LEAGUES){
@@ -701,7 +638,10 @@ function scoreHTML(m){
   const t=new Date(m.utcDate);
   return `<span class="mc-score ns">${t.toLocaleTimeString('ro-RO',{hour:'2-digit',minute:'2-digit'})}</span>`;
 }
-function formHTML(t){return(getS(t).form||'UUUUU').split('').map(f=>`<span class="fd ${f}">${f}</span>`).join('');}
+function formHTML(t){
+  const s=getS(t);
+  return (s.form||'UUUUU').split('').map(f=>`<span class="fd ${f}">${f}</span>`).join('');
+}
 function pColor(p){return p>=72?'var(--green)':p>=55?'var(--yellow)':'var(--red)';}
 function isSel(mid,lbl){return state.ticket.some(t=>t.matchId===mid&&t.label===lbl);}
 function mCnt(mid){return state.ticket.filter(t=>t.matchId===mid).length;}
@@ -711,7 +651,7 @@ function oBtn(mid,home,away,label,prob,isAbsent=false){
   const bb=sel&&mCnt(mid)>=2?'<span class="bb-badge">BB</span>':'';
   const star=prob>=68?'<span class="star">★</span> ':'';
   const col=pColor(prob);
-  if(isAbsent)return `<button class="odd-btn player-absent" disabled title="Jucător posibil indisponibil"><div class="odd-label">🚫 ${label}</div><div class="odd-val" style="color:var(--muted)">N/A</div></button>`;
+  if(isAbsent)return `<button class="odd-btn player-absent" disabled title="Posibil indisponibil"><div class="odd-label">🚫 ${label}</div><div class="odd-val" style="color:var(--muted)">N/A</div></button>`;
   return `<button class="odd-btn${sel?' selected':''}" onclick="toggleSel('${mid}','${esc(home)}','${esc(away)}','${esc(label)}',${prob},${odd})">
     ${bb}<div class="odd-label">${star}${label}</div>
     <div class="odd-val">@${odd}</div>
@@ -721,16 +661,17 @@ function oBtn(mid,home,away,label,prob,isAbsent=false){
 }
 
 function buildCard(m){
-  const home=m.homeTeam.name,away=m.awayTeam.name,mid=String(m.id);
+  const homeRaw=m.homeTeam.name,awayRaw=m.awayTeam.name;
+  const home=normalizeName(homeRaw),away=normalizeName(awayRaw);
+  const mid=String(m.id);
   const p=probs(home,away);
   const lgName=LG_NAMES[m.leagueCode]||m.leagueName||m.leagueCode;
   const hp=PLAYERS[home],ap=PLAYERS[away];
   const hAbsent=getAbsentPlayers(home),aAbsent=getAbsentPlayers(away);
   const newsHTML=buildNewsHTML(home,away);
   const homeId=AF_TEAM_IDS[home],awayId=AF_TEAM_IDS[away];
-  const h2hBtnHTML=homeId&&awayId
-    ?`<button class="h2h-btn" onclick="openH2H('${esc(home)}','${esc(away)}',${homeId},${awayId})">📊 H2H</button>`
-    :'';
+  const h2hBtn=homeId&&awayId
+    ?`<button class="h2h-btn" onclick="openH2H('${esc(home)}','${esc(away)}',${homeId},${awayId})">📊 H2H</button>`:'';
 
   const s1=`<div class="cat-section"><div class="cat-title" onclick="toggleCat(this)">1X2 &amp; Șanse<span>▼</span></div><div class="cat-body"><div class="odds-grid">${oBtn(mid,home,away,'1 '+home,p.hW)}${oBtn(mid,home,away,'X Egal',p.dr)}${oBtn(mid,home,away,'2 '+away,p.aW)}${oBtn(mid,home,away,'1X',Math.min(94,p.hW+p.dr))}${oBtn(mid,home,away,'X2',Math.min(94,p.aW+p.dr))}</div></div></div>`;
   const s2=`<div class="cat-section"><div class="cat-title" onclick="toggleCat(this)">⚽ Goluri<span>▼</span></div><div class="cat-body"><div class="odds-grid">${oBtn(mid,home,away,'Peste 1.5',p.o15)}${oBtn(mid,home,away,'Peste 2.5',p.o25)}${oBtn(mid,home,away,'Peste 3.5',p.o35)}${oBtn(mid,home,away,'Peste 4.5',p.o45)}${oBtn(mid,home,away,'BTTS Da',p.bt)}${oBtn(mid,home,away,'BTTS Nu',p.nobt)}</div></div></div>`;
@@ -738,15 +679,15 @@ function buildCard(m){
 
   let s4='';
   if(hp&&ap){
-    const hBtns=hp.slice(0,4).map((pl,i)=>{const absent=hAbsent.some(a=>pl.toLowerCase().includes(a)||a.includes(pl.toLowerCase()));return oBtn(mid,home,away,pl+' suturi',28+((i*7+p.hW)%24),absent);}).join('');
-    const aBtns=ap.slice(0,4).map((pl,i)=>{const absent=aAbsent.some(a=>pl.toLowerCase().includes(a)||a.includes(pl.toLowerCase()));return oBtn(mid,home,away,pl+' suturi',24+((i*7+p.aW)%24),absent);}).join('');
+    const hBtns=hp.slice(0,4).map((pl,i)=>{const ab=hAbsent.some(a=>pl.toLowerCase().includes(a)||a.includes(pl.toLowerCase()));return oBtn(mid,home,away,pl+' suturi',28+((i*7+p.hW)%24),ab);}).join('');
+    const aBtns=ap.slice(0,4).map((pl,i)=>{const ab=aAbsent.some(a=>pl.toLowerCase().includes(a)||a.includes(pl.toLowerCase()));return oBtn(mid,home,away,pl+' suturi',24+((i*7+p.aW)%24),ab);}).join('');
     s4=`<div class="cat-section"><div class="cat-title" onclick="toggleCat(this)">🎯 Suturi pe Poartă<span>▼</span></div><div class="cat-body"><div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:5px">${home}</div><div class="odds-grid">${hBtns}</div><div style="font-size:10px;color:var(--muted);font-weight:700;margin:7px 0 5px">${away}</div><div class="odds-grid">${aBtns}</div></div></div>`;
-  }else if(homeId||awayId){
+  } else if(homeId||awayId){
     s4=`<div class="cat-section" id="shots-${mid}"><div class="cat-title" onclick="loadAndOpenShots('${mid}','${esc(home)}','${esc(away)}')">🎯 Suturi pe Poartă<span>▼</span></div><div class="cat-body"><div class="squad-loading">Apasă pentru a încărca jucătorii...</div></div></div>`;
   }
 
   return `<div class="match-card lc-${m.leagueCode}" id="mc-${mid}">
-    <div class="mc-hdr"><span class="mc-league">${lgName.toUpperCase()}</span>${statusHTML(m)}${h2hBtnHTML}</div>
+    <div class="mc-hdr"><span class="mc-league">${lgName.toUpperCase()}</span>${statusHTML(m)}${h2hBtn}</div>
     <div class="mc-teams"><div class="mc-team">${home}</div>${scoreHTML(m)}<div class="mc-team away">${away}</div></div>
     <div class="mc-form">
       <div class="form-group"><div class="form-label">Formă ${home}</div><div class="form-dots">${formHTML(home)}</div></div>
@@ -771,8 +712,8 @@ async function loadAndOpenShots(mid,home,away){
   const hAbsent=getAbsentPlayers(home),aAbsent=getAbsentPlayers(away);
   const[hp,ap]=await Promise.all([fetchSquad(home),fetchSquad(away)]);
   if(hp&&ap){
-    const hBtns=hp.slice(0,4).map((pl,i)=>{const absent=hAbsent.some(a=>pl.toLowerCase().includes(a)||a.includes(pl.toLowerCase()));return oBtn(mid,home,away,pl+' suturi',28+((i*7+p.hW)%24),absent);}).join('');
-    const aBtns=ap.slice(0,4).map((pl,i)=>{const absent=aAbsent.some(a=>pl.toLowerCase().includes(a)||a.includes(pl.toLowerCase()));return oBtn(mid,home,away,pl+' suturi',24+((i*7+p.aW)%24),absent);}).join('');
+    const hBtns=hp.slice(0,4).map((pl,i)=>{const ab=hAbsent.some(a=>pl.toLowerCase().includes(a)||a.includes(pl.toLowerCase()));return oBtn(mid,home,away,pl+' suturi',28+((i*7+p.hW)%24),ab);}).join('');
+    const aBtns=ap.slice(0,4).map((pl,i)=>{const ab=aAbsent.some(a=>pl.toLowerCase().includes(a)||a.includes(pl.toLowerCase()));return oBtn(mid,home,away,pl+' suturi',24+((i*7+p.aW)%24),ab);}).join('');
     body.innerHTML=`<div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:5px">${home}</div><div class="odds-grid">${hBtns}</div><div style="font-size:10px;color:var(--muted);font-weight:700;margin:7px 0 5px">${away}</div><div class="odds-grid">${aBtns}</div>`;
     section.removeAttribute('id');section.querySelector('.cat-title').setAttribute('onclick','toggleCat(this)');
   }else{body.innerHTML='<div class="squad-loading">Jucători indisponibili</div>';}
@@ -781,10 +722,10 @@ async function loadAndOpenShots(mid,home,away){
 function applyFilter(list){
   if(state.filter==='ALL')return list;
   if(state.filter==='LIVE')return list.filter(m=>['1H','2H','HT','LIVE'].includes(m.status?.code||m.status?.short||''));
-  if(state.filter==='REC')return list.filter(m=>{const p=probs(m.homeTeam.name,m.awayTeam.name);return Math.max(p.hW,p.aW,p.o25,p.bt)>=65;});
-  if(state.filter==='O25')return list.filter(m=>probs(m.homeTeam.name,m.awayTeam.name).o25>=58);
-  if(state.filter==='BTTS')return list.filter(m=>probs(m.homeTeam.name,m.awayTeam.name).bt>=58);
-  if(state.filter==='ALERTS')return list.filter(m=>getTeamNews(m.homeTeam.name).length||getTeamNews(m.awayTeam.name).length);
+  if(state.filter==='REC')return list.filter(m=>{const p=probs(normalizeName(m.homeTeam.name),normalizeName(m.awayTeam.name));return Math.max(p.hW,p.aW,p.o25,p.bt)>=65;});
+  if(state.filter==='O25')return list.filter(m=>probs(normalizeName(m.homeTeam.name),normalizeName(m.awayTeam.name)).o25>=58);
+  if(state.filter==='BTTS')return list.filter(m=>probs(normalizeName(m.homeTeam.name),normalizeName(m.awayTeam.name)).bt>=58);
+  if(state.filter==='ALERTS')return list.filter(m=>getTeamNews(normalizeName(m.homeTeam.name)).length||getTeamNews(normalizeName(m.awayTeam.name)).length);
   return list;
 }
 
