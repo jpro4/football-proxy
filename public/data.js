@@ -1,11 +1,88 @@
 /* ── Football Intelligence — data.js ── */
 
+/* ── NORMALIZARE NUME ── */
+const TEAM_NAME_MAP = {
+  // Premier League
+  'Arsenal FC':'Arsenal','Chelsea FC':'Chelsea','Liverpool FC':'Liverpool',
+  'Manchester City FC':'Manchester City','Manchester United FC':'Manchester United',
+  'Tottenham Hotspur FC':'Tottenham','Newcastle United FC':'Newcastle',
+  'Aston Villa FC':'Aston Villa','West Ham United FC':'West Ham',
+  'Brighton & Hove Albion FC':'Brighton','Fulham FC':'Fulham',
+  'Brentford FC':'Brentford','Wolverhampton Wanderers FC':'Wolves',
+  'AFC Bournemouth':'Bournemouth','Crystal Palace FC':'Crystal Palace',
+  'Everton FC':'Everton','Nottingham Forest FC':'Nottingham Forest',
+  'Burnley FC':'Burnley','Sheffield United FC':'Sheffield United',
+  'Luton Town FC':'Luton Town','Sunderland AFC':'Sunderland',
+  'Leeds United FC':'Leeds United',
+  // La Liga
+  'FC Barcelona':'Barcelona','Real Madrid CF':'Real Madrid',
+  'Club Atlético de Madrid':'Atletico Madrid','Sevilla FC':'Sevilla',
+  'Real Betis Balompié':'Real Betis','Villarreal CF':'Villarreal',
+  'Athletic Club':'Athletic Club','Real Sociedad de Fútbol':'Real Sociedad',
+  'RC Celta de Vigo':'Celta Vigo','RCD Mallorca':'Mallorca',
+  'Getafe CF':'Getafe','Girona FC':'Girona',
+  'UD Las Palmas':'Celta Vigo','Rayo Vallecano de Madrid':'Celta Vigo',
+  'CA Osasuna':'Osasuna','Deportivo Alavés':'Celta Vigo',
+  'UD Almería':'Celta Vigo','Cádiz CF':'Celta Vigo',
+  'Granada CF':'Celta Vigo','Valencia CF':'Celta Vigo',
+  'Levante UD':'Celta Vigo','Elche CF':'Celta Vigo',
+  'Real Oviedo':'Celta Vigo','Club Atlético de Madrid':'Atletico Madrid',
+  // Bundesliga
+  'FC Bayern München':'Bayern Munich','Borussia Dortmund':'Borussia Dortmund',
+  'RB Leipzig':'RB Leipzig','Bayer 04 Leverkusen':'Bayer Leverkusen',
+  'Eintracht Frankfurt':'Eintracht Frankfurt','VfB Stuttgart':'VfB Stuttgart',
+  'SC Freiburg':'SC Freiburg','SV Werder Bremen':'Werder Bremen',
+  '1. FC Union Berlin':'Union Berlin','1. FSV Mainz 05':'Eintracht Frankfurt',
+  'Hamburger SV':'Werder Bremen','1. FC Heidenheim 1846':'SC Freiburg',
+  '1. FC Köln':'Union Berlin','Borussia Mönchengladbach':'Borussia Dortmund',
+  'TSG 1899 Hoffenheim':'Eintracht Frankfurt','FC Augsburg':'SC Freiburg',
+  'VfL Wolfsburg':'Werder Bremen','VfL Bochum 1848':'Union Berlin',
+  'SV Darmstadt 98':'Union Berlin','1. FC Heidenheim':'SC Freiburg',
+  // Serie A
+  'AC Milan':'AC Milan','FC Internazionale Milano':'Inter Milan',
+  'Juventus FC':'Juventus','SSC Napoli':'Napoli',
+  'AS Roma':'Roma','SS Lazio':'Lazio',
+  'Atalanta BC':'Atalanta','ACF Fiorentina':'Fiorentina',
+  'Bologna FC 1909':'Bologna','Torino FC':'Torino',
+  'Parma Calcio 1913':'Torino','Hellas Verona FC':'Torino',
+  'Genoa CFC':'Torino','US Cremonese':'Torino','AC Pisa 1909':'Torino',
+  'Udinese Calcio':'Torino','US Sassuolo Calcio':'Torino',
+  'Empoli FC':'Torino','US Lecce':'Torino','Cagliari Calcio':'Torino',
+  'Frosinone Calcio':'Torino','Como 1907':'Torino','Venezia FC':'Torino',
+  'US Salernitana 1919':'Torino','Monza':'Torino',
+  // Ligue 1
+  'Paris Saint-Germain FC':'PSG','Olympique de Marseille':'Marseille',
+  'Olympique Lyonnais':'Lyon','AS Monaco FC':'Monaco',
+  'LOSC Lille':'Lille','RC Lens':'Lens',
+  'OGC Nice':'Nice','Stade Rennais FC 1901':'Rennes',
+  'Stade Brestois 29':'Brest','Toulouse FC':'Rennes',
+  'AJ Auxerre':'Rennes','FC Metz':'Rennes',
+  'FC Lorient':'Rennes','Angers SCO':'Rennes',
+  'RC Strasbourg Alsace':'Rennes','Stade Rennais 1901':'Rennes',
+  'Paris FC':'PSG','Clermont Foot 63':'Rennes',
+  'Montpellier HSC':'Monaco','Stade de Reims':'Rennes',
+  'Le Havre AC':'Brest',
+  // Primeira Liga
+  'SL Benfica':'Club Brugge','FC Porto':'Club Brugge',
+  'Sporting CP':'Club Brugge','SC Braga':'Club Brugge',
+  // Romania
+  'FC FCSB':'FCSB','CFR 1907 Cluj':'CFR Cluj',
+  'FC Rapid 1923':'Rapid','FC Universitatea Craiova':'Universitatea Craiova',
+  'FC Farul Constanța':'Farul Constanta','FC Petrolul Ploiești':'Petrolul',
+};
+
+function normalizeName(name) {
+  return TEAM_NAME_MAP[name] || name;
+}
+
+/* ── LEAGUE NAMES ── */
 const LG_NAMES = {
   PL:'Premier League', PD:'La Liga', BL1:'Bundesliga', SA:'Serie A',
   FL1:'Ligue 1', PPL:'Primeira Liga', CL:'Champions League', EC:'European',
   L1R:'Liga 1 România', BEL:'Pro League Belgia'
 };
 
+/* ── PLAYERS ── */
 const PLAYERS = {
   'Arsenal':['Raya','Saliba','Gabriel','White','Zinchenko','Rice','Ødegaard','Partey','Saka','Havertz','Martinelli'],
   'Chelsea':['Sánchez','Colwill','Silva','Chalobah','Cucurella','Caicedo','Fernández','Palmer','Mudryk','Jackson','Sterling'],
@@ -27,6 +104,7 @@ const PLAYERS = {
   'Bournemouth':['Neto','Smith','Senesi','Zabarnyi','Kerkez','Cook','Christie','Semenyo','Sinisterra','Solanke','Kluivert'],
   'Sunderland':['Patterson','Hume','Ballard','Kompany','Cirkin','Neil','Ba','Amad','Clarke','Mayenda','Roberts'],
   'Leeds United':['Meslier','Kristensen','Cooper','Rodon','Firpo','Adams','Roca','Summerville','Gnonto','Bamford','James'],
+  'Burnley':['Flekken','Roberts','Beyer','Harwood-Bellis','Vitinho','Cullen','Cork','Ramsey','Brownhill','Rodriguez','Odobert'],
   'Real Madrid':['Courtois','Carvajal','Militão','Alaba','Mendy','Tchouaméni','Valverde','Bellingham','Vinicius','Rodrygo','Mbappé'],
   'Barcelona':['ter Stegen','Kounde','Araújo','Christensen','Balde','Pedri','Gavi','De Jong','Yamal','Lewandowski','Ferran'],
   'Atletico Madrid':['Oblak','Molina','Witsel','Gimenez','Reinildo','De Paul','Koke','Llorente','Félix','Griezmann','Correa'],
@@ -75,8 +153,6 @@ const PLAYERS = {
   'Universitatea Craiova':['Pigliacelli','Vlădoiu','Ivanov','Bărbuț','Bancu','Baiaram','Cicâldău','Mitriță','Ivan','Costache','Nistor'],
   'Farul Constanta':['Vlaicu','Ștefan','Mladen','Punoševac','Ganea','Artean','Cerniauskas','Popescu','Rivaldinho','Alibec','Houri'],
   'Petrolul':['Pleșca','Calcan','Joosten','Nedelcearu','Pitu','Briceag','Ciobanu','Hamza','Băluță','Mustacă','Achim'],
-  'U Cluj':['Popa','Ursu','Nica','Toma','Szepe','Fortes','Sénéchal','Costache','Debeljuh','Culio','Miculescu'],
-  'Poli Iași':['Pîrvulescu','Babunski','Manolache','Patache','Cristea','Malaj','Gheorghe','Itu','Fruntelată','Muhar','Buș'],
   'Club Brugge':['Mignolet','Mata','Boyata','Mechele','Ferran','Onyedika','Vanaken','Skov Olsen','Jutgla','Nusa','Sowah'],
   'Anderlecht':['Coosemans','Sardella','Debast','Vertonghen','Murillo','Raman','Stroeykens','Dreyer','Amuzu','Refaelov','Verschaeren'],
   'Union Saint-Gilloise':['Moris','Van der Heyden','Burgess','Sykes','Kandouss','Teuma','Lynen','Vanzeir','Undav','Ekkelenkamp','Adingra'],
@@ -86,6 +162,7 @@ const PLAYERS = {
   'Standard Liège':['Bodart','Laifis','Ngoy','Siquet','Selim','Calut','Price','Raskin','Fossey','Klauss','Dragus'],
 };
 
+/* ── TEAM STATS ── */
 const TEAM_STATS = {
   'Arsenal':{gf:2.4,ga:0.9,o25:68,btts:52,cf:6.1,ca:3.8,sf:71,form:'WWWDW'},
   'Chelsea':{gf:2.0,ga:1.3,o25:65,btts:58,cf:5.8,ca:4.2,sf:62,form:'WDWLW'},
@@ -106,6 +183,7 @@ const TEAM_STATS = {
   'Nottm Forest':{gf:1.7,ga:1.0,o25:54,btts:48,cf:5.2,ca:4.2,sf:60,form:'WWDWW'},
   'Bournemouth':{gf:1.8,ga:1.3,o25:60,btts:56,cf:5.3,ca:4.4,sf:58,form:'WWLWW'},
   'Sunderland':{gf:1.5,ga:1.4,o25:52,btts:54,cf:4.8,ca:4.8,sf:50,form:'DWLWL'},
+  'Burnley':{gf:1.2,ga:1.8,o25:58,btts:56,cf:4.6,ca:5.2,sf:42,form:'LLLLL'},
   'Leeds United':{gf:1.8,ga:1.3,o25:58,btts:55,cf:5.3,ca:4.5,sf:55,form:'WDWLW'},
   'Real Madrid':{gf:2.7,ga:0.9,o25:74,btts:50,cf:7.0,ca:3.0,sf:80,form:'WWWWW'},
   'Barcelona':{gf:2.8,ga:1.1,o25:76,btts:58,cf:7.2,ca:3.3,sf:77,form:'WWDWW'},
@@ -118,6 +196,8 @@ const TEAM_STATS = {
   'Girona':{gf:2.0,ga:1.3,o25:62,btts:56,cf:5.8,ca:4.3,sf:62,form:'WWLWW'},
   'Getafe':{gf:1.2,ga:1.3,o25:44,btts:48,cf:4.5,ca:5.0,sf:45,form:'LLDLD'},
   'Celta Vigo':{gf:1.5,ga:1.4,o25:52,btts:55,cf:5.0,ca:4.8,sf:52,form:'DWLWL'},
+  'Osasuna':{gf:1.4,ga:1.2,o25:48,btts:50,cf:4.8,ca:4.6,sf:50,form:'DWDWL'},
+  'Mallorca':{gf:1.3,ga:1.1,o25:46,btts:48,cf:4.6,ca:4.8,sf:48,form:'DWDLD'},
   'Bayern Munich':{gf:3.0,ga:1.2,o25:78,btts:62,cf:7.5,ca:3.0,sf:82,form:'WWWWW'},
   'Borussia Dortmund':{gf:2.2,ga:1.5,o25:68,btts:65,cf:6.0,ca:4.5,sf:64,form:'WLWWL'},
   'RB Leipzig':{gf:2.0,ga:1.2,o25:60,btts:55,cf:6.2,ca:4.2,sf:63,form:'WWDLW'},
